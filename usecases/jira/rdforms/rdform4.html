@@ -1,0 +1,248 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:xsd ="http://www.w3.org/2001/XMLSchema#"
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"  
+  xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+  xmlns:owl="http://www.w3.org/2002/07/owl#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:pb="http://ld2sd.deri.org/pb/ns#"
+  
+>
+<head>
+	<title>RDForms Demo</title>
+
+	<style type="text/css" media="all">
+  		@import url("css/combined.css");
+ 	</style>
+
+	<script type="text/javascript" src="calendar/calendar.js"></script>
+	<script type="text/javascript" src="calendar/calendar-setup.js"></script>
+	<script type="text/javascript" src="calendar/calendar-en.js"></script>
+	<link media="all" href="calendar/calendar.css" rel="stylesheet" type="text/css" />
+	
+	<script type="text/javascript" src="jquery/jquery-1.3.1.js"></script>
+	<script type="text/javascript" src="jquery/jquery.json-1.3.min.js"></script>
+	<script type="text/javascript" src="jquery/jquery.selectboxes.min.js"></script>
+	<script type="text/javascript" src="rdfquery/jquery.uri.js"></script>
+	<script type="text/javascript" src="rdfquery/jquery.xmlns.js"></script>
+	<script type="text/javascript" src="rdfquery/jquery.curie.js"></script>
+	<script type="text/javascript" src="rdfquery/jquery.datatype.js"></script>
+	<script type="text/javascript" src="rdfquery/jquery.rdf.js"></script>
+	<script type="text/javascript" src="rdfquery/jquery.rdfa.js"></script>
+	<script type="text/javascript" src="commons.js"></script>
+	<script type="text/javascript" src="rdf-parser.js"></script>	
+	
+	<script type="text/javascript" src="interface4.js"></script>
+	<script type="text/javascript">
+		var rdfdoc = new RDF();	
+	</script>
+</head>
+<body>
+<div>
+<label for="debug">how debug messages</label>
+<input id="debug" type="checkbox" checked="checked"/>
+</div>
+<div>
+	<!-- 
+	<input type="text" id="page2scan" value="http://ld2sd.deri.org/pushback/data/jira-dump-1.rdf" />
+	 -->
+	<input type="text" id="page2scan" value="http://localhost/pushback/RDFDump.rdf" />
+	<span style="padding:2px; border:1px green solid;" id="get-bugs-from-jira" >get bugs from jira</span>
+	<span style="padding:2px; border:1px green solid;" id="clear-bugs" >clear bugs list</span>
+	<img id="ajax-indicator" style="display:none" src="images/icons/ajax-indicator.gif" />
+</div>
+<div style="float:left; width:345px;">
+<form id="f_jira-form" action="" about="http://localhost/pushback/rdforms/rdform4.html#fo1" typeof="pb:RDForm">
+		 
+		<div rel="pb:operation" style="margin:10px">
+			<div about="http://ld2sd.deri.org/pb/demo#crud-op1" typeof="pb:CRUDOperationUPDATE">
+				<span rel="pb:onField" resource="http://ld2sd.deri.org/pb/demo#fo1.f1" />
+			</div>
+		</div>
+		<div rel="pb:operation" style="margin:10px">
+			<div about="http://ld2sd.deri.org/pb/demo#crud-op1" typeof="pb:CRUDOperationUPDATE">
+				<span rel="pb:onField" resource="http://ld2sd.deri.org/pb/demo#fo1.f2" />
+			</div>
+		</div>
+		<div rel="pb:operation" style="margin:10px">
+			<div about="http://ld2sd.deri.org/pb/demo#crud-op1" typeof="pb:CRUDOperationUPDATE">
+				<span rel="pb:onField" resource="http://ld2sd.deri.org/pb/demo#fo1.f3" />
+			</div>
+		</div>
+		<div rel="pb:operation" style="margin:10px">
+			<div about="http://ld2sd.deri.org/pb/demo#crud-op1" typeof="pb:CRUDOperationUPDATE">
+				<span rel="pb:onField" resource="http://ld2sd.deri.org/pb/demo#fo1.f4" />
+			</div>
+		</div>
+		<div rel="pb:operation" style="margin:10px">
+			<div about="http://ld2sd.deri.org/pb/demo#crud-op1" typeof="pb:CRUDOperationUPDATE">
+				<span rel="pb:onField" resource="http://ld2sd.deri.org/pb/demo#fo1.f5" />
+			</div>
+		</div>
+		<div rel="pb:operation" style="margin:10px">
+			<div about="http://ld2sd.deri.org/pb/demo#crud-op1" typeof="pb:CRUDOperationUPDATE">
+				<span rel="pb:onField" resource="http://ld2sd.deri.org/pb/demo#fo1.f6" />
+			</div>
+		</div>
+		<div rel="pb:operation" style="margin:10px">
+			<div about="http://ld2sd.deri.org/pb/demo#crud-op1" typeof="pb:CRUDOperationUPDATE">
+				<span rel="pb:onField" resource="http://ld2sd.deri.org/pb/demo#fo1.f7" />
+			</div>
+		</div>
+		
+
+		
+		<fieldset>
+			<legend>RDFForm - update issue on JIRA</legend>
+			
+			<div rel="pb:field" style="margin:10px">
+				<!-- 
+				<div typeof="pb:ImmutableField" about="http://ld2sd.deri.org/pb/demo#fo1.f1" >
+				 -->
+				<div typeof="pb:UpdateableField" about="http://ld2sd.deri.org/pb/demo#fo1.f1" >
+					
+					<label for="f_bug-id" rel="pb:key" resource="http://ld2sd.deri.org/pb/demo#bug-id" property="dcterms:title" >Bug ID*</label>:
+					<div rel="pb:value">
+						<div about="http://ld2sd.deri.org/pb/demo#fo1.f1.val" typeof="pb:FieldValue">
+							<input id="f_bug-id" type="text" property="rdf:value" content="" value="" size="40" /><br />
+						</div>	
+					</div>
+				</div>
+			</div>
+			
+			<div rel="pb:field" style="margin:10px">
+				<div typeof="pb:UpdateableField" about="http://ld2sd.deri.org/pb/demo#fo1.f2" >
+					<label for="f_bug-summary" rel="pb:key" resource="http://ld2sd.deri.org/pb/demo#bug-summary" property="dcterms:title" >Summary*</label>:
+					<div rel="pb:value">
+						<div about="http://ld2sd.deri.org/pb/demo#fo1.f2.val" typeof="pb:FieldValue">
+							<input id="f_bug-summary" type="text" property="rdf:value" content="" value="" size="40" /><br />
+						</div>	
+					</div>
+				</div>
+			</div>
+			
+	
+			<div rel="pb:field" style="margin: 10px;" >
+				<div typeof="pb:UpdateableField" about="http://ld2sd.deri.org/pb/demo#fo1.f3">
+					<label for="f_bug-type" property="dcterms:title" resource="http://ld2sd.deri.org/pb/demo#bug-type" rel="pb:key"> Issue Type</label>:
+					<div rel="pb:value">
+							<select id="f_bug-type" class="imagebacked" name="f_bug-type" typeof="pb:FieldValue"  about="http://ld2sd.deri.org/pb/demo#fo1.f3.val">
+								<option selected="selected"
+									style="background-image: url(images/icons/bug.gif);" 
+									value="1" content="1" property="rdf:value"
+									class="10000" id="issuetype100001">Bug</option>
+								<option style="background-image: url(images/icons/newfeature.gif);"
+									value="2" content="2" property="rdf:value" 
+									class="10000" id="issuetype100002">New Feature</option>
+								<option style="background-image: url(images/icons/task.gif);"
+									value="3" content="3" property="rdf:value" 
+									class="10000" id="issuetype100003">Task</option>
+								<option
+									style="background-image: url(images/icons/improvement.gif);"
+									value="4" content="4" property="rdf:value" 
+									class="10000" id="issuetype100004">Improvement</option>
+							</select>
+						
+					</div>
+				</div>
+			</div>
+	
+			<div rel="pb:field" style="margin: 10px;" >
+				<div typeof="pb:UpdateableField" about="http://ld2sd.deri.org/pb/demo#fo1.f4">
+					<label for="f_bug-priority" property="dcterms:title" resource="http://ld2sd.deri.org/pb/demo#bug-priority" rel="pb:key">Priority</label>:
+					<div rel="pb:value">
+							<select  id="f_bug-priority" name="f_bug-priority" typeof="pb:FieldValue" about="http://ld2sd.deri.org/pb/demo#fo1.f4.val">
+								<option
+									style="background-image: url(images/icons/priority_blocker.gif);"
+									class="imagebacked" content="1" property="rdf:value" value="1">Blocker</option>
+								<option
+									style="background-image: url(images/icons/priority_critical.gif);"
+									class="imagebacked" content="2" property="rdf:value" value="2">Critical</option>
+								<option selected="selected"
+									style="background-image: url(images/icons/priority_major.gif);"
+									class="imagebacked" content="3" property="rdf:value" value="3">Major</option>
+								<option
+									style="background-image: url(images/icons/priority_minor.gif);"
+									class="imagebacked" content="4" property="rdf:value" value="4">Minor</option>
+								<option
+									style="background-image: url(images/icons/priority_trivial.gif);"
+									class="imagebacked" content="5" property="rdf:value" value="5">Trivial</option>
+							</select>
+					</div>
+				</div>
+			</div>
+			
+			<div rel="pb:field" style="margin: 10px;" >
+				<div typeof="pb:UpdateableField" about="http://ld2sd.deri.org/pb/demo#fo1.f5">
+					<label for="f_bug-assignee" property="dcterms:title" resource="http://ld2sd.deri.org/pb/demo#bug-assignee" rel="pb:key">Assignee</label>:
+					<div rel="pb:value">
+							<select id="f_bug-assignee" name="f_bug-assignee" typeof="pb:FieldValue" about="http://ld2sd.deri.org/pb/demo#fo1.f5.val">
+								<option value="-1" content="-1" property="rdf:value">- Automatic -</option>
+								<option  value="admin" content="admin" property="rdf:value">Szymon Danielczyk</option>
+								<optgroup label="---------------">
+								<option value="admin" content="admin" property="rdf:value">Szymon Danielczyk</option>
+								</optgroup>
+							</select>
+					</div>
+				</div>
+			</div>
+			
+			
+			<div rel="pb:field" style="margin:10px">
+				<div about="http://ld2sd.deri.org/pb/demo#fo1.f6" typeof="pb:UpdateableField">
+					<label for="f_bug-reporter" rel="pb:key" resource="http://ld2sd.deri.org/pb/demo#bug-reporter" property="dcterms:title" >Reporter*</label>:
+					<div rel="pb:value">
+						<div about="http://ld2sd.deri.org/pb/demo#fo1.f6.val" typeof="pb:FieldValue">
+							<input id="f_bug-reporter" type="text" property="rdf:value" content="" value="" size="40" /><br />
+						</div>	
+					</div>
+				</div>
+			</div>
+			
+			<div rel="pb:field" style="margin:10px">
+				<div about="http://ld2sd.deri.org/pb/demo#fo1.f7" typeof="pb:UpdateableField">
+					<label for="f_bug-duedate" rel="pb:key" resource="http://ld2sd.deri.org/pb/demo#bug-duedate" property="dcterms:title" >Due date</label>:
+					<div rel="pb:value">
+						<div about="http://ld2sd.deri.org/pb/demo#fo1.f7.val" typeof="pb:FieldValue">
+							<input type="text" size="10" property="rdf:value" value="" content="" id="f_bug-duedate" name="f_bug-duedate" />
+							<img height="16" style="border:none;" width="16" title="Select a date" alt="Select a date" src="images/icons/cal.gif" id="duedate_trigger_c" />
+						</div>	
+					</div>
+				</div>
+			</div>		
+							<script type="text/javascript">
+						    Calendar.setup({
+						        firstDay    : 0,              // first day of the week
+						        inputField  : "f_bug-duedate",  // id of the input field
+						        button      : "duedate_trigger_c", // trigger for the calendar (button ID)
+						        align       : "Tl",           // alignment (defaults to "Bl")
+						        singleClick : true,
+						        ifFormat    : "%e/%b/%y"      // our date only format
+						    });
+							</script>
+					
+		<div>
+			<input type="button" value="Submit RDForm to RDF wrapper" onclick="pushback();" />
+		</div>	
+			
+
+	</fieldset>
+</form>
+</div>
+
+<div  style="float:left; margin-top:10px;">
+<fieldset>
+<legend>Bugs from Jira</legend>
+<div id="bugs"></div>
+</fieldset>
+</div>
+
+<div style="clear:both;" ></div>
+<div id="result" style=" margin-top: 20px; border:1px red solid; "></div>
+
+
+
+</body>
+</html>

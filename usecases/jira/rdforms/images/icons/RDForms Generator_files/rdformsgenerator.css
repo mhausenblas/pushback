@@ -1,0 +1,110 @@
+body {
+	font-family: Verdana;
+	font-size: 10px;
+}
+h1 {
+	font-size: 20px;
+}
+
+h2 {
+	font-size: 16px;
+}
+
+h3 {
+	font-size: 14px;
+}
+
+fieldset {
+	font-size: 14px;
+	font-weight: bold;
+	margin: 10px;
+	padding: 5px;
+	background: #f0f0f0;
+}
+.leftnext {
+	padding: 0px;
+	float: left;
+}
+#mappingfield {
+	padding: 3px;
+	clear: left;
+}
+#htmlformtemplatefield {
+	padding: 3px;
+	float: left;			
+}
+#inputHTMLfield, #rdfinstanceURIfield{
+	padding: 5px;
+	font-size: 12px;
+	font-weight: normal;
+}
+.btn {
+	font-size: 12px;
+	border: solid 1px lightgray;
+	padding: 2px;
+	padding-left: 5px;
+	padding-right: 5px;
+    background: black;
+    color: white;
+    opacity: .70;    
+    filter: alpha(opacity="70");    
+    border: solid 1px lightgray;
+}
+#status {
+	font-size: 10px;
+    position: fixed;
+    bottom: 5px;
+    left: 0px;
+    right: 0px;
+    height: 15px;    
+    padding: 2px;
+    background: black;
+    color: white;
+    opacity: .70;    
+    filter: alpha(opacity="90");    
+    border: solid 1px lightgray;
+    z-index: 200;
+    overflow: hidden;
+    overflow-y: auto; 
+}
+#dumpwindow {
+	display:none;
+    position: fixed;
+    bottom: 25px;
+    left: 0px;
+    height: 400px; 
+    width: 1000px;   
+    padding: 5px;
+    background: black;
+    color: white;
+    opacity: .70;    
+    filter: alpha(opacity="70");    
+    border: solid 1px lightgray;
+    z-index: 300;
+    overflow: hidden;
+    overflow-y: auto; 
+    overflow-x: auto; 
+}
+#dump{
+    padding: 20px;	
+}
+#previewwindow {
+	display:none;
+    position: fixed;
+    bottom: 25px;
+    left: 0px;
+    height: 600px; 
+    width: 1000px;   
+    padding: 5px;
+    background: black;
+    color: white;
+    border: solid 1px lightgray;
+    z-index: 300;
+    overflow: hidden;
+    overflow-y: auto; 
+}
+#preview{
+    padding: 20px;	
+    background: white;
+    color: black;
+}

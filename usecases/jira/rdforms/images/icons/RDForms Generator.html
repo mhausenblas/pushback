@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns:pb="http://ld2sd.deri.org/pb/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:vcard="http://www.w3.org/2006/vcard/ns#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+
+	<title>RDForms Generator</title>
+	<link type="text/css" href="RDForms%20Generator_files/rdformsgenerator.css" rel="stylesheet">
+	<script type="text/javascript" src="RDForms%20Generator_files/jquery-1.js"></script>
+	<script type="text/javascript" src="RDForms%20Generator_files/ui.js"></script>
+	<script type="text/javascript" src="RDForms%20Generator_files/php.js"></script>
+	<script type="text/javascript" src="RDForms%20Generator_files/rdf-parser.js"></script>
+	<script type="text/javascript" src="RDForms%20Generator_files/fusion.js"></script>
+	<script type="text/javascript">
+		var instanceDefaultURI = "http://ld2sd.deri.org/pushback/data/jira-dump-1.rdf";
+		var rdfdoc = new RDF();	
+			
+		$(document).ready(function() {	
+			rdfinstanceURI = $("#rdfinstanceURI").val(instanceDefaultURI);
+			$("#generateRDForms").click(function() {
+				showStatus("Starting fusion ... ");
+				startFusion(true);
+			});	
+			// dump actions
+			$("#viewinstancedata").click(function() {
+				showStatus("Performing preview ... ");
+				viewInstanceData();
+				$("#dumpwindow").fadeIn("slow");
+			});
+			$("#mapinstancedata").click(function() {
+				showStatus("Performing mapping ... ");
+				mapInstanceData(true);//show dump
+			});
+			$("#dumpwindowclose").click(function() {
+				showStatus(">");
+				$("#dumpwindow").fadeOut("slow");
+			});
+			// HTML form actions
+			$("#loadHTMLform").click(function() {
+				showStatus("Loading HTML form ... ");
+				loadHTMLForm();
+			});			
+			// RDForms actions
+			$("#rdformhtmlview").click(function() {
+				showStatus("HTML View active");
+				//alert($("#rdform").val());
+				$("#preview").html($("#rdform").val());
+				$("#previewwindow").fadeIn("slow");
+			});
+			$("#previewwindowclose").click(function() {
+				showStatus(">");
+				$("#previewwindow").fadeOut("slow");
+			});
+		});
+	</script>
+</head><div FirebugVersion="1.3.3" style="display: none;" id="_firebugConsole"></div><body>
+	<div id="menu"><a href="http://esw.w3.org/topic/PushBackDataToLegacySourcesRDForms"><img src="RDForms%20Generator_files/pb-logo.png" border="0"></a> <a href="">reset</a></div>
+	<h1>RDForms Generator</h1>
+		<form id="generatorForm" action="">
+			<div><span id="generateRDForms" class="btn">Generate RDForm</span></div>
+			<fieldset>
+				<legend>Fusion</legend>
+					<div class="leftnext">
+						<fieldset id="htmlformtemplatefield">
+							<legend>HTML Form Template</legend>
+							<textarea cols="60" rows="10" id="inputHTMLForm">&lt;form action="http://twitter.com/status/update" id="doingForm" method="post"&gt;
+&lt;fieldset class="common-form standard-form"&gt;
+ &lt;div class="bar"&gt;
+  &lt;h3&gt;&lt;label for="status" class="doing"&gt;What are you doing?&lt;/label&gt;&lt;/h3&gt;
+   &lt;span id="chars_left_notice" class="numeric"&gt;
+    &lt;strong id="status-field-char-counter" class="char-counter"&gt;&lt;/strong&gt;
+   &lt;/span&gt;
+ &lt;/div&gt;
+ &lt;div class="info"&gt;
+  &lt;textarea cols="40" rows="2" id="status" name="status" accesskey="u"&gt;&lt;/textarea&gt;
+  &lt;div class="status-btn"&gt;
+   &lt;input type="submit" name="update" value="update" id="update-submit" class="status-btn round-btn"/&gt;
+  &lt;/div&gt;
+ &lt;/div&gt;
+&lt;/fieldset&gt;
+&lt;/form&gt;
+							</textarea>
+							<div id="inputHTMLfield">
+								HTML Form URI: <input id="inputHTMLfieldURI" size="30" value="http://www.google.ie" type="text"> <span id="loadHTMLform" class="btn">Load</span>
+							</div>
+						</fieldset>
+						<fieldset id="mappingfield">
+							<legend>Mapping</legend>
+							<textarea cols="60" rows="15" id="mapping">PREFIX pb:    &lt;http://ld2sd.deri.org/pb/ns#&gt; 
+PREFIX sioc: &lt;http://rdfs.org/sioc/ns#&gt;
+PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+PREFIX : &lt;http://localhost:8888/pushback/rdforms/test.html#&gt;
+PREFIX  b: &lt;http://baetle.googlecode.com/svn/ns/#&gt;
+
+
+CONSTRUCT { 
+:doingForm a pb:RDForm ;
+       pb:field :field1 .
+:field1 rdf:type pb:UpdateableField ;
+        pb:key ?summary .
+}
+WHERE {
+   ?bug  rdf:type  b:Issue;
+         b:project ?project;
+         b:summary ?summary;
+         b:assigned_to ?assignto;
+         b:reporter ?reporter;
+         b:type ?issuetype.
+      
+}
+
+</textarea>
+							<div id="rdfinstanceURIfield">
+								Instance Data URI: <input id="rdfinstanceURI" size="30" value="" type="text"> <span id="viewinstancedata" class="btn">View</span> <span id="mapinstancedata" class="btn">Map</span>
+							</div>	
+						</fieldset> 
+					</div>
+					<fieldset>
+						<legend>RDForm</legend>
+						<textarea cols="90" rows="30" id="rdform"></textarea>
+						<span id="rdformhtmlview" class="btn">preview</span>
+					</fieldset>
+			</fieldset>
+			<fieldset>
+				<legend>Options</legend>
+				<div>
+				Authentication method:<br>
+				Deployment base URI:
+				</div>
+			</fieldset>
+		</form>	
+		<div id="status">&gt;</div>
+		<div id="previewwindow">
+			<h3 id="previewwindowclose" class="btn">Preview</h3>
+			<div id="preview">
+				...
+			</div>
+		</div>
+		<div style="display: none;" id="dumpwindow">
+			<h3 id="dumpwindowclose" class="btn">Dump</h3>
+			<div id="dump"><pre>&lt;?xml version=&amp;quot;1.0&amp;quot;?&gt;
+&lt;rdf:RDF
+    xmlns:map=&amp;quot;file://d2rqmapping.n3#&amp;quot;
+    xmlns:sioc=&amp;quot;http://rdfs.org/sioc/ns#&amp;quot;
+    xmlns:daml=&amp;quot;http://www.daml.org/2001/03/daml+oil#&amp;quot;
+    xmlns:rdf=&amp;quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&amp;quot;
+    xmlns:foaf=&amp;quot;http://xmlns.com/foaf/0.1/&amp;quot;
+    xmlns:b=&amp;quot;http://baetle.googlecode.com/svn/ns/#&amp;quot;
+    xmlns=&amp;quot;http://localhost:8888/pushback/rdforms/test.html#&amp;quot;
+    xmlns:pb=&amp;quot;http://ld2sd.deri.org/pb/ns#&amp;quot;
+    xmlns:owl=&amp;quot;http://www.w3.org/2002/07/owl#&amp;quot;
+    xmlns:dct=&amp;quot;http://purl.org/dc/terms/&amp;quot;
+    xmlns:xsd=&amp;quot;http://www.w3.org/2001/XMLSchema#&amp;quot;
+    xmlns:vocab=&amp;quot;http://www.sindice.com/baetle/ext/&amp;quot;
+    xmlns:rdfs=&amp;quot;http://www.w3.org/2000/01/rdf-schema#&amp;quot;
+    xmlns:wf=&amp;quot;http://www.w3.org/2005/01/wf/flow#&amp;quot;&gt;
+  &lt;pb:RDForm rdf:about=&amp;quot;http://localhost:8888/pushback/rdforms/test.html#doingForm&amp;quot;&gt;
+    &lt;pb:field&gt;
+      &lt;pb:UpdateableField rdf:about=&amp;quot;http://localhost:8888/pushback/rdforms/test.html#field2&amp;quot;&gt;
+        &lt;pb:value&gt;
+          &lt;rdf:Description rdf:about=&amp;quot;http://localhost:8888/pushback/rdforms/test.html#val2&amp;quot;&gt;
+            &lt;rdf:value&gt;new changes&lt;/rdf:value&gt;
+            &lt;rdf:value&gt;new issue created by soap&lt;/rdf:value&gt;
+            &lt;rdf:value&gt;222 new issue created by soap  1236683840&lt;/rdf:value&gt;
+            &lt;rdf:value&gt;222 new issue created by soap  1236683839&lt;/rdf:value&gt;
+            &lt;rdf:value&gt;222 new issue created by soap  1236684543&lt;/rdf:value&gt;
+          &lt;/rdf:Description&gt;
+        &lt;/pb:value&gt;
+        &lt;pb:key rdf:resource=&amp;quot;http://localhost:8888/pushback/rdforms/test.html#key2&amp;quot;/&gt;
+      &lt;/pb:UpdateableField&gt;
+    &lt;/pb:field&gt;
+    &lt;pb:field&gt;
+      &lt;pb:UpdateableField rdf:about=&amp;quot;http://localhost:8888/pushback/rdforms/test.html#field1&amp;quot;&gt;
+        &lt;pb:key rdf:resource=&amp;quot;http://localhost:8080/browse/DERIPUSHBACK-1&amp;quot;/&gt;
+        &lt;pb:key rdf:resource=&amp;quot;http://localhost:8080/browse/DERIPUSHBACK-3&amp;quot;/&gt;
+        &lt;pb:key rdf:resource=&amp;quot;http://localhost:8080/browse/DERIPUSHBACK-2&amp;quot;/&gt;
+        &lt;pb:key rdf:resource=&amp;quot;http://localhost:8080/browse/DERIPUSHBACK-17&amp;quot;/&gt;
+        &lt;pb:key rdf:resource=&amp;quot;http://localhost:8080/browse/DERIPUSHBACK-16&amp;quot;/&gt;
+        &lt;pb:key rdf:resource=&amp;quot;http://localhost:8080/browse/DERIPUSHBACK-18&amp;quot;/&gt;
+        &lt;pb:key rdf:resource=&amp;quot;http://localhost:8080/browse/DERIPUSHBACK-19&amp;quot;/&gt;
+      &lt;/pb:UpdateableField&gt;
+    &lt;/pb:field&gt;
+  &lt;/pb:RDForm&gt;
+&lt;/rdf:RDF&gt;
+</pre></div>
+		</div>		
+</body></html>

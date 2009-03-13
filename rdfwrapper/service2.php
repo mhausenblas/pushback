@@ -2,8 +2,8 @@
               
 $DEBUG = true;
 $TWITTER_SERVICE_URI = "http://twitter.com/statuses/update.xml?status=";
-$USER = "pushback_demo";
-$PWD = "123pushback";
+$USER = "contact mhausenblas in case you wanna know";
+$PWD = "contact mhausenblas in case you wanna know";
 
 if(isset($_GET['cmd'])){ 
         $cmd = $_GET['cmd'];

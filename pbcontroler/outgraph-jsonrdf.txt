@@ -1,0 +1,50 @@
+array(3) { 
+	["http://localhost:8888/pushback/rdforms/rdform2.html#fo1"]=>
+		array(2) { ["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"]=>  
+			array(1) { [0]=>
+				array(2) { 
+					["type"]=>  string(3) "uri" 
+					["value"]=>  string(34) "http://ld2sd.deri.org/pb/ns#RDForm"
+				}
+			} 
+			["http://ld2sd.deri.org/pb/ns#field"]=>
+			array(1) { [0]=>
+				array(2) {
+					["type"]=>  string(3) "uri"
+					["value"]=>  string(58) "http://localhost:8888/pushback/rdforms/rdform2.html#fo1.f1"
+				}
+			} 
+		}
+	["http://localhost:8888/pushback/rdforms/rdform2.html#fo1.f1"]=>
+		array(3) { ["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"]=>
+			array(1) { [0]=>
+				array(2) { 
+					["type"]=>  string(3) "uri"
+					["value"]=>  string(42) "http://ld2sd.deri.org/pb/ns#UpateableField"
+				}
+			} 
+			["http://ld2sd.deri.org/pb/ns#key"]=>  
+				array(1) { [0]=>
+					array(2) { 
+						["type"]=>  string(3) "uri" 
+						["value"]=>  string(59) "http://localhost:8888/pushback/rdforms/rdform2.html#twitmsg"
+					}
+				} 
+			["http://ld2sd.deri.org/pb/ns#value"]=>
+				array(1) { [0]=>
+					array(2) {
+						["type"]=>  string(3) "uri"
+						["value"]=>  string(62) "http://localhost:8888/pushback/rdforms/rdform2.html#fo1.f1.val"
+					} 
+				}
+			} 
+	["http://localhost:8888/pushback/rdforms/rdform2.html#fo1.f1.val"]=> 
+		array(1) { ["http://www.w3.org/1999/02/22-rdf-syntax-ns#value"]=>
+			array(1) { [0]=>
+				array(2) {
+					["type"]=>  string(7) "literal"
+					["value"]=>  string(3) "sdf"
+				} 
+			} 
+		} 
+	} 

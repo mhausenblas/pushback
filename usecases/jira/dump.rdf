@@ -1,0 +1,198 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:map="file://d2rqmapping.n3#"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:baetle="http://baetle.googlecode.com/svn/ns/#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:dct="http://purl.org/dc/terms/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:vocab="http://www.sindice.com/baetle/ext/"
+    xmlns:sioc="http://rdfs.org/sioc/ns#"
+    xmlns:daml="http://www.daml.org/2001/03/daml+oil#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:wf="http://www.w3.org/2005/01/wf/flow#"
+  xml:base="http://localhost:8080/" > 
+  <rdf:Description rdf:about="/browse/DERIPUSHBACK-1">
+    <baetle:project rdf:resource="project/deri-pushback"/>
+    <baetle:assigned_to rdf:resource="/secure/ViewProfile.jspa?name=admin"/>
+    <baetle:reporter rdf:resource="/secure/ViewProfile.jspa?name=simon"/>
+    <baetle:votes rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0</baetle:votes>
+    <baetle:summary>new changes</baetle:summary>
+    <baetle:description>description of first test bug created manually </baetle:description>
+    <baetle:priority>Major</baetle:priority>
+    <vocab:issue_ID rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">10000</vocab:issue_ID>
+    <rdf:type rdf:resource="http://baetle.googlecode.com/svn/ns/#Issue"/>
+    <baetle:type rdf:resource="Bug"/>
+    <wf:state rdf:resource="inProgress"/>
+    <baetle:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-10T00:23:44Z</baetle:created>
+    <baetle:updated rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-12T10:33:41Z</baetle:updated>
+    <baetle:due_date rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-30T23:00:00Z</baetle:due_date>
+  </rdf:Description>
+  <rdf:Description rdf:about="comments/10003">
+    <sioc:has_creator rdf:resource="/secure/ViewProfile.jspa?name=admin"/>
+    <sioc:has_creator rdf:resource="/secure/ViewProfile.jspa?name=admin"/>
+    <sioc:content>comment message</sioc:content>
+    <rdf:type rdf:resource="http://rdfs.org/sioc/ns#Post"/>
+    <baetle:updated rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-10T01:14:03Z</baetle:updated>
+    <dct:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-10T01:14:03Z</dct:created>
+  </rdf:Description>
+  <rdf:Description rdf:about="comments/10001">
+    <sioc:has_creator rdf:resource="/secure/ViewProfile.jspa?name=admin"/>
+    <sioc:has_creator rdf:resource="/secure/ViewProfile.jspa?name=admin"/>
+    <sioc:content>comment message</sioc:content>
+    <rdf:type rdf:resource="http://rdfs.org/sioc/ns#Post"/>
+    <baetle:updated rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-10T01:13:39Z</baetle:updated>
+    <dct:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-10T01:13:39Z</dct:created>
+  </rdf:Description>
+  <rdf:Description rdf:about="comments/10002">
+    <sioc:has_creator rdf:resource="/secure/ViewProfile.jspa?name=admin"/>
+    <sioc:has_creator rdf:resource="/secure/ViewProfile.jspa?name=admin"/>
+    <sioc:content>comment message</sioc:content>
+    <rdf:type rdf:resource="http://rdfs.org/sioc/ns#Post"/>
+    <baetle:updated rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-10T01:13:39Z</baetle:updated>
+    <dct:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-10T01:13:39Z</dct:created>
+  </rdf:Description>
+  <rdf:Description rdf:about="/browse/DERIPUSHBACK-3">
+    <baetle:project rdf:resource="project/deri-pushback"/>
+    <baetle:assigned_to rdf:resource="/secure/ViewProfile.jspa?name=admin"/>
+    <baetle:reporter rdf:resource="/secure/ViewProfile.jspa?name=admin"/>
+    <baetle:votes rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0</baetle:votes>
+    <baetle:summary>new issue created by soap</baetle:summary>
+    <vocab:issue_ID rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">10002</vocab:issue_ID>
+    <rdf:type rdf:resource="http://baetle.googlecode.com/svn/ns/#Issue"/>
+    <baetle:type rdf:resource="Bug"/>
+    <wf:state rdf:resource="Open"/>
+    <baetle:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-10T02:28:37Z</baetle:created>
+    <baetle:updated rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-10T02:28:37Z</baetle:updated>
+  </rdf:Description>
+  <rdf:Description rdf:about="Bug">
+    <rdf:type rdf:resource="http://baetle.googlecode.com/svn/ns/#type"/>
+    <rdf:type rdf:resource="http://baetle.googlecode.com/svn/ns/#type"/>
+    <rdf:type rdf:resource="http://baetle.googlecode.com/svn/ns/#type"/>
+    <rdf:type rdf:resource="http://baetle.googlecode.com/svn/ns/#type"/>
+    <rdf:type rdf:resource="http://baetle.googlecode.com/svn/ns/#type"/>
+    <rdf:type rdf:resource="http://baetle.googlecode.com/svn/ns/#type"/>
+    <rdf:type rdf:resource="http://baetle.googlecode.com/svn/ns/#type"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="/browse/DERIPUSHBACK-2">
+    <baetle:project rdf:resource="project/deri-pushback"/>
+    <baetle:assigned_to rdf:resource="/secure/ViewProfile.jspa?name=admin"/>
+    <baetle:reporter rdf:resource="/secure/ViewProfile.jspa?name=admin"/>
+    <baetle:votes rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0</baetle:votes>
+    <baetle:summary>new issue created by soap</baetle:summary>
+    <vocab:issue_ID rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">10001</vocab:issue_ID>
+    <rdf:type rdf:resource="http://baetle.googlecode.com/svn/ns/#Issue"/>
+    <baetle:type rdf:resource="Bug"/>
+    <wf:state rdf:resource="Open"/>
+    <baetle:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-10T02:28:36Z</baetle:created>
+    <baetle:updated rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-10T02:28:36Z</baetle:updated>
+  </rdf:Description>
+  <rdf:Description rdf:about="/browse/DERIPUSHBACK-17">
+    <baetle:project rdf:resource="project/deri-pushback"/>
+    <baetle:assigned_to rdf:resource="/secure/ViewProfile.jspa?name=admin"/>
+    <baetle:reporter rdf:resource="/secure/ViewProfile.jspa?name=admin"/>
+    <baetle:votes rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0</baetle:votes>
+    <baetle:summary>222 new issue created by soap  1236683840</baetle:summary>
+    <vocab:issue_ID rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">10021</vocab:issue_ID>
+    <rdf:type rdf:resource="http://baetle.googlecode.com/svn/ns/#Issue"/>
+    <baetle:type rdf:resource="Bug"/>
+    <wf:state rdf:resource="Open"/>
+    <baetle:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-10T11:17:20Z</baetle:created>
+    <baetle:updated rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-10T11:17:20Z</baetle:updated>
+  </rdf:Description>
+  <rdf:Description rdf:about="/browse/DERIPUSHBACK-16">
+    <baetle:project rdf:resource="project/deri-pushback"/>
+    <baetle:assigned_to rdf:resource="/secure/ViewProfile.jspa?name=admin"/>
+    <baetle:reporter rdf:resource="/secure/ViewProfile.jspa?name=admin"/>
+    <baetle:votes rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0</baetle:votes>
+    <baetle:summary>222 new issue created by soap  1236683839</baetle:summary>
+    <vocab:issue_ID rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">10020</vocab:issue_ID>
+    <rdf:type rdf:resource="http://baetle.googlecode.com/svn/ns/#Issue"/>
+    <baetle:type rdf:resource="Bug"/>
+    <wf:state rdf:resource="Open"/>
+    <baetle:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-10T11:17:19Z</baetle:created>
+    <baetle:updated rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-10T11:17:19Z</baetle:updated>
+  </rdf:Description>
+  <rdf:Description rdf:about="Open">
+    <rdfs:label>Open</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2005/01/wf/flow#State"/>
+    <rdfs:label>Open</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2005/01/wf/flow#State"/>
+    <rdfs:label>Open</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2005/01/wf/flow#State"/>
+    <rdfs:label>Open</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2005/01/wf/flow#State"/>
+    <rdfs:label>Open</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2005/01/wf/flow#State"/>
+    <rdfs:label>Open</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2005/01/wf/flow#State"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="/secure/ViewProfile.jspa?name=admin">
+    <foaf:mbox>danielczyk.szymon@gmail.com</foaf:mbox>
+    <rdf:type rdf:resource="http://rdfs.org/sioc/ns#User"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="inProgress">
+    <rdfs:label>inProgress</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2005/01/wf/flow#State"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="project/deri-pushback">
+    <vocab:project_DESCRIPTION></vocab:project_DESCRIPTION>
+    <vocab:project_pname>deri-pushback</vocab:project_pname>
+    <vocab:project_URL></vocab:project_URL>
+    <vocab:project_LEAD>admin</vocab:project_LEAD>
+    <rdf:type rdf:resource="http://baetle.googlecode.com/svn/ns/#project"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="/secure/ViewProfile.jspa?name=simon1">
+    <foaf:mbox>simon1@wp.pl</foaf:mbox>
+    <rdf:type rdf:resource="http://rdfs.org/sioc/ns#User"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="/secure/ViewProfile.jspa?name=simon">
+    <foaf:mbox>si_mo_n@wp.pl</foaf:mbox>
+    <rdf:type rdf:resource="http://rdfs.org/sioc/ns#User"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="Major">
+    <rdf:type rdf:resource="http://baetle.googlecode.com/svn/ns/#Priority"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="/browse/DERIPUSHBACK-18">
+    <baetle:project rdf:resource="project/deri-pushback"/>
+    <baetle:assigned_to rdf:resource="/secure/ViewProfile.jspa?name=admin"/>
+    <baetle:reporter rdf:resource="/secure/ViewProfile.jspa?name=admin"/>
+    <baetle:votes rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0</baetle:votes>
+    <baetle:summary>222 new issue created by soap  1236684543</baetle:summary>
+    <vocab:issue_ID rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">10022</vocab:issue_ID>
+    <rdf:type rdf:resource="http://baetle.googlecode.com/svn/ns/#Issue"/>
+    <baetle:type rdf:resource="Bug"/>
+    <wf:state rdf:resource="Open"/>
+    <baetle:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-10T11:29:03Z</baetle:created>
+    <baetle:updated rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-10T11:29:03Z</baetle:updated>
+  </rdf:Description>
+  <rdf:Description rdf:about="comments/10005">
+    <sioc:has_creator rdf:resource="/secure/ViewProfile.jspa?name=admin"/>
+    <sioc:has_creator rdf:resource="/secure/ViewProfile.jspa?name=admin"/>
+    <sioc:content>comment message</sioc:content>
+    <rdf:type rdf:resource="http://rdfs.org/sioc/ns#Post"/>
+    <baetle:updated rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-10T01:14:46Z</baetle:updated>
+    <dct:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-10T01:14:46Z</dct:created>
+  </rdf:Description>
+  <rdf:Description rdf:about="/browse/DERIPUSHBACK-19">
+    <baetle:project rdf:resource="project/deri-pushback"/>
+    <baetle:assigned_to rdf:resource="/secure/ViewProfile.jspa?name=admin"/>
+    <baetle:reporter rdf:resource="/secure/ViewProfile.jspa?name=admin"/>
+    <baetle:votes rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0</baetle:votes>
+    <baetle:summary>222 new issue created by soap  1236684543</baetle:summary>
+    <vocab:issue_ID rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">10023</vocab:issue_ID>
+    <rdf:type rdf:resource="http://baetle.googlecode.com/svn/ns/#Issue"/>
+    <baetle:type rdf:resource="Bug"/>
+    <wf:state rdf:resource="Open"/>
+    <baetle:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-10T11:29:03Z</baetle:created>
+    <baetle:updated rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-10T11:29:03Z</baetle:updated>
+  </rdf:Description>
+  <rdf:Description rdf:about="comments/10000">
+    <sioc:has_creator rdf:resource="/secure/ViewProfile.jspa?name=admin"/>
+    <sioc:has_creator rdf:resource="/secure/ViewProfile.jspa?name=admin"/>
+    <sioc:content>first comment added manually </sioc:content>
+    <rdf:type rdf:resource="http://rdfs.org/sioc/ns#Post"/>
+    <baetle:updated rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-10T00:33:30Z</baetle:updated>
+    <dct:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-10T00:33:30Z</dct:created>
+  </rdf:Description>
+</rdf:RDF>

@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:xsd ="http://www.w3.org/2001/XMLSchema#"
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"  
+  xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+  xmlns:owl="http://www.w3.org/2002/07/owl#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:pb="http://ld2sd.deri.org/pb/ns#"
+>
+<head>
+	<title>RDForms Home - Twitter pushback bookmarklets</title>
+</head>
+<body>
+	<h2>RDForms Home - Twitter pushback bookmarklets</h2>
+
+	<table border="1px" cellspacing="5px" cellpadding="5px">
+		<tr>
+			<th>Purpose</th><th>Bookmarklet</th><th>Comment</th>
+		</tr>
+		<tr>
+			<td>Twit (add status to Twitter)</td>
+			<td><a	onclick="alert('Please drag the pushback bookmarklet into your bookmarks bar, don\'t click it here directly');return false;"
+				href="javascript:(function(){if(document.getElementById('__pushback-bookmarklet_v0')){alert('only once!');}else{s=document.createElement('script');s.type='text/javascript';s.id='__pushback-bookmarklet_v0';s.src='http://ld2sd.deri.org/pushback/rdforms/twitter-rdform.js';document.getElementsByTagName('head')[0].appendChild(s);}})();">inline add pushback</a></td>
+			<td>creates a dynamic, inline RDForm but works only under certain conditions (for example, not with Tabulator, etc.)</td>
+		</tr>	
+		<tr>
+			<td>Twit (add status to Twitter)</td>
+			<td><a	href="javascript:(function(){if(frames.length>1)alert('Sorry,%20 can not handle frames.');else{w=open('http://ld2sd.deri.org/pushback/rdforms/rdform2.html','rdformwindow','width=600,height=400,top=0,left=0,scrollbars,resizable');}})()">standalone add pushback</a></td>
+			<td>opens the RDForm in a new window</td>
+		</tr>
+		<tr>
+			<td>Untwit (delete a status from Twitter)</td>
+			<td><a	href="javascript:(function(){if(frames.length>1)alert('Sorry,%20 can not handle frames.');else{w=open('http://localhost:8888/pushback/rdforms/rdform3.html','rdformwindow','width=600,height=400,top=0,left=0,scrollbars,resizable');}})()">standalone delete pushback</a></td>
+			<td>opens the RDForm in a new window</td>
+		</tr>
+	</table>
+</body>
+</html>

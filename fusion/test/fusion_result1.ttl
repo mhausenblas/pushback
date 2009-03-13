@@ -1,0 +1,24 @@
+@prefix pb: <http://ld2sd.deri.org/pb/ns#>.
+@prefix dcterm: <http://purl.org/dc/terms/>.
+@prefix r: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+
+<http://localhost:8888/pushback/rdforms/test.html#doingForm>
+    pb:field
+       <http://localhost:8888/pushback/rdforms/test.html#field1>;
+    pb:operation
+       <http://localhost:8888/pushback/rdforms/test.html#crud_delete>;
+    a    pb:RDForm.
+<http://localhost:8888/pushback/rdforms/test.html#crud_delete>
+    pb:onField
+       <http://localhost:8888/pushback/rdforms/test.html#field1>;
+    a    pb:CRUDOperationDELETE.
+<http://localhost:8888/pushback/rdforms/test.html#field1>
+    pb:key
+       <http://localhost:8888/pushback/rdforms/test.html#field1.key>;
+    pb:value
+       <http://localhost:8888/pushback/rdforms/test.html#field1.val>;
+    dcterm:title
+       "LABEL";
+    a    pb:UpdateableField.
+<http://localhost:8888/pushback/rdforms/test.html#field1.val>
+   a pb:FieldValue; r:value "".

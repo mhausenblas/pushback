@@ -10,17 +10,20 @@ WRAPPER = new Object();
 
 WRAPPER.createRDForm = function() {
 
-	var dir = "http://localhost:8081/pushback/rdformscontainer/";
-
+	var baseUri = "http://localhost:8081/pushback/";
+	
+	// include css
 	includeCSS("http://jqueryui.com/themes/base/ui.all.css");
 	includeCSS("http://jqueryui.com/demos/demos.css");	
+	
+	// include js
 	includeJS("http://jqueryui.com/jquery-1.3.2.js");
 	includeJS("http://jqueryui.com/ui/ui.core.js");
 	includeJS("http://jqueryui.com/ui/ui.draggable.js");
 	includeJS("http://jqueryui.com/ui/ui.resizable.js");
-	includeJS(dir + "ui.dialog.js");
+	includeJS(baseUri + "rdformscontainer/ui.dialog.js");
 	includeJS("http://jqueryui.com/external/bgiframe/jquery.bgiframe.js");
-	includeJS(dir + "rdform-container.js");
+	includeJS(baseUri + "rdformscontainer/rdform-container.js");
 	
 }
 

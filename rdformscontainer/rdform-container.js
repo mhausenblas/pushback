@@ -10,15 +10,19 @@ WRAPPER = new Object();
 
 WRAPPER.createRDForm = function() {
 
-	var loadForm = "http://localhost:8081/pushback/rdforms/rdform1.html";
+	var baseUri = "http://localhost:8081/pushback/";
+	
+	var loadForm = baseUri + "rdforms/rdform3.html";
+
+	var loadImage = baseUri + "rdformscontainer/image/pb-logo.png";
 
 	var rdformscript = $('<script>').attr('type', 'text/javascript')
-	.html('$(document).ready(function() { });$.ui.dialog.defaults.bgiframe = true;$("#twitter-pb").dialog();');
+	.html('$(document).ready(function() { });$.ui.dialog.defaults.bgiframe = true;$("#pb-container").dialog();');
 	
 	$('head').append(rdformscript);
 	
-	var contentdiv = $('<div title="&nbsp;Pb" img="http://localhost:8081/pushback/rdformscontainer/image/pb-logo.bmp"></div>')
-	.attr('id', 'twitter-pb');
+	var contentdiv = $('<div title="&nbsp;Pb" img=' + loadImage + '></div>')
+	.attr('id', 'pb-container');
 
 	var  rdform = $('<p>').load(loadForm);
 	contentdiv.append(rdform);

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns:doap="http://usefulinc.com/ns/doap#" 
+         xmlns:foaf="http://xmlns.com/foaf/0.1/" 
+         xmlns:admin="http://webns.net/mvcb/" 
+         xml:lang="en">
+
+  <foaf:Document rdf:about="http://ld2sd.deri.org/pushback/doap.rdf">
+    <rdfs:label>pushback's DOAP document</rdfs:label>
+    <foaf:primaryTopic rdf:resource="http://ld2sd.deri.ie/pushback/doap#pushback"/>
+  </foaf:Document>
+
+  <doap:Project rdf:about="http://ld2sd.deri.org/pushback/doap#pushback">
+    <doap:name>pushback</doap:name>
+    <doap:description>Writing Data Back From RDF to Non-RDF Sources such as Web 2.0 sites</doap:description>
+    <doap:homepage rdf:resource="http://esw.w3.org/topic/PushBackDataToLegacySources/"/>
+    <doap:created>2009-03-13</doap:created>
+    <doap:programming-language>Java Script</doap:programming-language>
+    <doap:programming-language>PHP</doap:programming-language>
+    <doap:license rdf:resource="http://www.gnu.org/licenses/lgpl.html"/>
+
+	<doap:repository> 
+		 <doap:SVNRepository rdf:about="http://code.google.com/p/pushback/" />
+	</doap:repository>
+    
+	<doap:developer>
+      <foaf:Person rdf:about="http://sw-app.org/mic.xhtml#i">
+        <foaf:name>Michael Hausenblas</foaf:name>
+      </foaf:Person>
+    </doap:developer>
+
+    <doap:developer>
+      <foaf:Person rdf:about="http://www.deri.ie/about/team/member/Szymon_Danielczyk#me">
+        <foaf:name>Szymon Danielczyk</foaf:name>
+      </foaf:Person>
+    </doap:developer>
+
+    <doap:developer>
+      <foaf:Person rdf:about="http://www.deri.ie/about/team/member/Aftab_Iqbal#me">
+        <foaf:name>Aftab Iqbal</foaf:name>
+      </foaf:Person>
+    </doap:developer>
+  </doap:Project>
+
+</rdf:RDF>
+

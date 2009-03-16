@@ -1,29 +1,25 @@
-/* RDForms field types */
-var RDFORMS_FIELD_TYPES = new Array();
-var RDFORMS_FIELD_XSD = new Array();
+/*
+<#this>	dcterms:creator [
+			owl:sameAs <http://sw-app.org/mic.xhtml#i> ;
+			foaf:name "Michael Hausenblas" ;
+			foaf:mbox <mailto:michael.hausenblas@deri.org> .
+		] ;
+		dcterms:isPartOf <http://ld2sd.deri.org/pushback/doap#pushback"> ;
+		rdfs:seeAlso <http://esw.w3.org/topic/PushBackDataToLegacySourcesFusion>.
+*/
 
-//////////////////////////////////////////////////////////////////////////////////////////////
-// <input type="text" id="status-id-val" property="rdf:value" content="" value="" size="60" />
-//////////////////////////////////////////////////////////////////////////////////////////////
-
-RDFORMS_FIELD_TYPES['HTML_FIELD_TEXT'] = "<input type=\"text\" id=\"ID\" property=\"rdf:value\" content=\"VALUE\" value=\"VALUE\" size=\"SIZE\" maxlength=\"MAXLENGTH\" />";
-
-RDFORMS_FIELD_XSD['HTML_FIELD_TEXT'] = "xsd:string";
-
-//////////////////////////////////////////////////////////////////////////////////////////////
-//textarea
-//checkbox
-//radio
-//file
-//select
+var DEBUG = false; // show more detailed status messages and halt on critical points
 
 function startFusion(debug) {
 	showStatus("Start fusion ...");
+	if ($("#debug").is(":checked")){
+		DEBUG = true;
+	}
 	rdfdoc.getRDFURL('relay.php?URI=' + mapInstanceData(false), fuse);
 }
 
 function fuse(){
-	var pbNS = "http://ld2sd.deri.org/pb/ns#";
+	var pbNS = "http://rdfs.org/ns/rdforms#";
 	var rdf_type = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type";
 	var pb_RDForm =  pbNS + "RDForm";
 	var pb_UpdateableField =  pbNS + "UpdateableField";
@@ -37,26 +33,27 @@ function fuse(){
 	$("#rdform").val("");
 	
 	rdformURI = rdforms[0].subject; // the URI of the RDForm
-
-	$(inputHTMLForm, "[id='" + rdformURI.slice(rdformURI.indexOf("#") + 1) + "']").each(function (i) {// look up in th input for the corresponding form 
+	formID = rdformURI.slice(rdformURI.indexOf("#") + 1);
+	
+	$(inputHTMLForm, "[id='"+formID+"']").each(function(i) {// look up in th input for the corresponding form 
 		rdformRDFaHTML += startForm(rdformURI, this.id, this.action, this.method);
 		var rdformfields = rdfdoc.Match(null, rdformURI, pb_field, null); // get fields of this RDForm
 		//alert(rdformfields.toNTriples());
 		for (rdformfield in rdformfields) {
 			var rdformfieldURI = rdformfields[rdformfield].object;
 			if(rdformfieldURI != undefined) {
-				//alert(rdformfieldURI);
 				var fieldID = rdformfieldURI.slice(rdformfieldURI.indexOf("#") + 1);
 
 				// select C(R)UD op here:
 				rdformRDFaHTML += addCRUDop(baseURI, rdformfieldURI, fieldID);
-
+				
 				// for each field set the according decorations
 				rdformRDFaHTML += startField(rdformfieldURI, fieldID);
 				// look up the correct label here:
-				rdformRDFaHTML += addFieldKey(rdformfieldURI + ".key", fieldID, "LABEL");
-				//make case distinction on field type here:
-				rdformRDFaHTML += startTextFieldValue(rdformfieldURI + ".val", fieldID);
+				rdformRDFaHTML += addFieldKey(rdformfieldURI + ".key", fieldID, getLabelForField(fieldID));// via <label for="ID" ...> 
+				// case distinction per field type (input, textarea, etc.)
+				rdformRDFaHTML += createFieldTypeValues(rdformfieldURI, fieldID);
+				// end of case distinction
 				rdformRDFaHTML += endFieldValue(fieldID);
 				rdformRDFaHTML += endField(fieldID);
 			}	
@@ -65,6 +62,64 @@ function fuse(){
 	});
 	$("#rdform").val(rdformRDFaHTML);
 	showStatus("Fusion done. RDForm created.");
+}
+
+function getLabelForField(fieldID){
+	var label = "LABEL_FOR_" + fieldID;
+	$($('#inputHTMLForm').val()).find("[for='status']").each(function() {
+		label = $(this).text();
+		showStatus("Label for element with id=" + fieldID + " is '" + label + "'" , DEBUG);
+	});	
+	return label;
+}
+
+function createFieldTypeValues(rdformfieldURI, fieldID) {
+	var ret = "";
+	var fieldTagName = "";
+	var fieldType = "";
+	var fieldSelector = "";
+	// look up the element's tag to drive case distinction
+	$($('#inputHTMLForm').val()).find("#"+fieldID).each(function() {
+		fieldTagName = this.tagName.toLowerCase(); 
+		fieldType = this.type;
+		if(fieldTagName === HTML_INPUT_FIELD) {
+			fieldSelector = fieldTagName + fieldType; // special treatment for all <input type="xxx" ... />
+			showStatus("Looking at an element with tag=" + fieldTagName.toLowerCase() + " with type=" + fieldType + " and id=" + this.id, DEBUG);
+		}
+		else {
+			fieldSelector = fieldTagName;
+			showStatus("Looking at an element with tag=" + fieldTagName.toLowerCase() + " and id=" + this.id, DEBUG);
+		}
+	});
+	
+	// following three lines are generic, hence independed of field type
+	ret += " \n   <!-- START OF SIMPLPE TEXT FIELD VALUE {" + fieldID + "} -->\n";
+	ret += "   <div rel=\"pb:value\">\n";
+	ret += "    <div about=\"" + rdformfieldURI + "\" typeof=\"pb:FieldValue\">";	
+	
+	// and here comes the actual case distinction
+	showStatus("About to add fielw with fieldSelector=" + fieldSelector, DEBUG);
+	switch (fieldSelector){
+		case (HTML_INPUT_FIELD+HTML_TYPE_TEXT): // <input type="text" ... />
+			ret = startTextFieldValue(rdformfieldURI + ".val", fieldID);//, value, size, maxlength);
+			showStatus("Added field tag=" + HTML_INPUT_FIELD + "/" + HTML_TYPE_TEXT +  " with id=" + fieldID, DEBUG);
+			break;
+		case (HTML_TEXT_AREA): // <textarea ... />
+			ret = startTextAreaValue(rdformfieldURI + ".val", fieldID);
+			showStatus("Added field tag=" + HTML_TEXT_AREA  + " with id=" + fieldID, DEBUG);
+			break;
+		default: handleUnknownFieldTypeValues(fieldSelector);
+	}
+	ret += "\n";
+	return ret;
+}
+
+function handleUnknownFieldTypeValues(tagName) {	
+	var info = "Dunno how to handle element with tag=" + tagName + " I only know: \n\n";
+	info += "+ " + HTML_INPUT_FIELD + "/" + HTML_TYPE_TEXT + "\n\n";
+	info += "+ " + HTML_TEXT_AREA + "\n\n";
+	info += "so far."
+	alert(info);
 }
 
 function viewInstanceData(){
@@ -133,8 +188,9 @@ function extractForm(html){
 	return html.substring(afterForm-1);
 }
 
-function showStatus(message) {
-	$("#status").html(message);     
+function showStatus(message, doStop) {
+	$("#pbfusion-status").html(message); 
+	if(doStop) 	alert('continue?');    
 }
 
 function dump(message) {
@@ -151,7 +207,7 @@ function decodexml(xml){
 /********** RDFORM CONSTRUCTION *************/
 function startForm(formURI, id, action, method){
 	var dctermsNS = "http://purl.org/dc/terms/";
-	var ret = "<div xmlns:xsd =\"http://www.w3.org/2001/XMLSchema#\" \n xmlns:dcterms=\"http://purl.org/dc/terms/\" \n xmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\" \n xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"  \n xmlns:pb=\"http://ld2sd.deri.org/pb/ns#\">\n\n";
+	var ret = "<div xmlns:xsd =\"http://www.w3.org/2001/XMLSchema#\" \n xmlns:dcterms=\"http://purl.org/dc/terms/\" \n xmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\" \n xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"  \n xmlns:pb=\"http://rdfs.org/ns/rdforms#\">\n\n";
 	
 	ret += "<!-- START OF FORM {" + id + "} -->\n";
 	ret += "<form id=\"" + id + "\" action=\"" + action + "\" method=\"" + method + "\" about=\""+formURI + "\" typeof=\"pb:RDForm\">";
@@ -191,15 +247,15 @@ function endField(id){
 
 function addFieldKey(fieldURI, id, label){
 	var ret = "   <!-- START OF FIELD KEY {" + id + "} -->\n";
-	ret += "   <label rel=\"pb:key\" resource=\"" + fieldURI + "\" property=\"dcterms:title\">" + label + "</label> :";
+	ret += "   <label rel=\"pb:key\" resource=\"" + fieldURI + "\" property=\"dcterms:title\">" + label + "</label>:<br />";
 	return ret;
 }
 
 
-function startTextFieldValue(fieldURI, id, value, size, maxlength){
+function startTextFieldValue(fieldURI, id, value, size, maxlength){	// first two parameter mandatory
 	var ret = "";
-	var htmlfield = RDFORMS_FIELD_TYPES["HTML_FIELD_TEXT"];
-	// for  <input type="text" id="ID" property="rdf:value" content="VALUE" value="VALUE" size="SIZE" maxlength="MAXLENGTH" /> the template fill is:
+	var htmlfield = HTML_FIELD_TYPES[HTML_INPUT_FIELD+HTML_TYPE_TEXT];
+	// for  <input type="text" id="$ID" property="rdf:value" content="$VALUE" value="$VALUE" size="$SIZE" maxlength="$MAXLENGTH" /> the template fill is:
 	htmlfield = htmlfield.replace("ID", id);
 	if(value != undefined) htmlfield = htmlfield.replace(/VALUE/g, value);
 	else htmlfield = htmlfield.replace(/VALUE/g, "");
@@ -207,13 +263,21 @@ function startTextFieldValue(fieldURI, id, value, size, maxlength){
 	else htmlfield = htmlfield.replace(/SIZE/g, "30");
 	if(maxlength != undefined) htmlfield = htmlfield.replace(/MAXLENGTH/g, maxlength);
 	else htmlfield = htmlfield.replace(/MAXLENGTH/g, "30");
-	// end of <input type="text" ... handling
-	ret += " \n   <!-- START OF SIMPLPE TEXT FIELD VALUE {" + id + "} -->\n";
-	ret += "   <div rel=\"pb:value\">\n";
-	ret += "    <div about=\"" + fieldURI + "\" typeof=\"pb:FieldValue\">";	
-	ret += "     \n     " + htmlfield;
-	ret += "\n";
-	return ret;
+	return "     \n     " + htmlfield;
+}
+
+function startTextAreaValue(fieldURI, id, value, cols, rows, wrap){ // first two parameter mandatory
+	var ret = "";
+	var htmlfield = HTML_FIELD_TYPES[HTML_TEXT_AREA];
+	// for  <textarea id="$ID" property="rdf:value" cols="$COLS" rows="$ROWS" />$VALUE</textarea> the template fill is:
+	htmlfield = htmlfield.replace("ID", id);
+	if(value != undefined) htmlfield = htmlfield.replace(/VALUE/g, value);
+	else htmlfield = htmlfield.replace(/VALUE/g, "");
+	if(cols != undefined) htmlfield = htmlfield.replace(/COLS/g, cols);
+	else htmlfield = htmlfield.replace(/COLS/g, "10");
+	if(rows != undefined) htmlfield = htmlfield.replace(/ROWS/g, rows);
+	else htmlfield = htmlfield.replace(/ROWS/g, "5");
+	return "     \n     " + htmlfield;
 }
 
 function endFieldValue(id){

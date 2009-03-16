@@ -16,6 +16,7 @@
 	<script type="text/javascript" src="ui.core.js"></script>
 	<script type="text/javascript" src="php.js"></script>
 	<script type="text/javascript" src="rdf-parser.js"></script>
+	<script type="text/javascript" src="RDFORMS_DEF.js"></script>
 	<script type="text/javascript" src="fusion.js"></script>
 	<script type="text/javascript">
 		var instanceDefaultURI = "http://linkeddata.uriburner.com/sparql?default-graph-uri=http://twitter.com/pushback_demo&query=DESCRIBE%20%3Chttp://twitter.com/pushback_demo%3E&output=rdf";
@@ -45,11 +46,15 @@
 			$("#loadHTMLform").click(function() {
 				showStatus("Loading HTML form ... ");
 				loadHTMLForm();
-			});			
+			});
+			$("#htmlview").click(function() {
+				showStatus("HTML View active");
+				$("#preview").html($("#inputHTMLForm").val());
+				$("#previewwindow").fadeIn("slow");
+			});
 			// RDForms actions
 			$("#rdformhtmlview").click(function() {
 				showStatus("HTML View active");
-				//alert($("#rdform").val());
 				$("#preview").html($("#rdform").val());
 				$("#previewwindow").fadeIn("slow");
 			});
@@ -57,11 +62,19 @@
 				showStatus(">");
 				$("#previewwindow").fadeOut("slow");
 			});
+			// hover effect for buttons
+			$(".btn").hover(function () {
+				$(this).addClass("btnHighlight");
+				$(this).removeClass("btn");
+			}, function () {
+				$(this).addClass("btn");
+				$(this).removeClass("btnHighlight");
+			});
 		});
 	</script>
 </head>
 <body>
-	<div id="menu"><a href="http://esw.w3.org/topic/PushBackDataToLegacySourcesRDForms"><img src="img/pb-logo.png" border="0" /></a> <a href="">reset</a></div>
+	<div id="menu"><a href="http://esw.w3.org/topic/PushBackDataToLegacySourcesRDForms"><img src="img/pb-logo.png" border="0" /></a> <a href="">reset</a> <input type="checkbox" id="debug" /> show debug messages</div>
 	<h1>RDForms Generator</h1>
 		<form id="generatorForm" action="">
 			<div><span id="generateRDForms" class="btn">Generate RDForm</span></div>
@@ -88,22 +101,27 @@
 &lt;/form&gt;
 							</textarea>
 							<div id="inputHTMLfield">
-								HTML Form URI: <input id="inputHTMLfieldURI" type="text" size="30" value="http://www.google.ie" /> <span id="loadHTMLform" class="btn">Load</span>
+								HTML Form URI: <input id="inputHTMLfieldURI" type="text" size="30" value="http://www.google.ie" /> <span id="loadHTMLform" class="btn">Load</span> <span id="htmlview" class="btn">Preview</span>
 							</div>
 						</fieldset>
 						<fieldset id="mappingfield">
 							<legend>Mapping</legend>
 							<textarea cols="60" rows="15" id="mapping">
-PREFIX pb:    &lt;http://ld2sd.deri.org/pb/ns#&gt; 
+PREFIX pb:    &lt;http://rdfs.org/ns/rdforms#&gt; 
 PREFIX sioc: &lt;http://rdfs.org/sioc/ns#&gt;
 PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
 PREFIX : &lt;http://localhost:8888/pushback/rdforms/test.html#&gt;
 
 CONSTRUCT { 
 :doingForm a pb:RDForm ;
-       pb:field :field1 .
-:field1 rdf:type pb:UpdateableField ;
-        pb:key ?status .
+           pb:field :status ;
+           pb:operation :addPost .
+:status rdf:type pb:UpdateableField ;
+        pb:key  :status.key;
+        pb:value :status.val .
+:status.val a pb:FieldValue ;
+           rdf:value ?status .
+:addPost a pb:CRUDOperationCREATE .
 }
 WHERE {
  &lt;http://twitter.com/pushback_demo&gt; sioc:container_of ?status .
@@ -117,7 +135,7 @@ WHERE {
 					<fieldset>
 						<legend>RDForm</legend>
 						<textarea cols="90" rows="30" id="rdform"></textarea>
-						<span id="rdformhtmlview" class="btn">preview</span>
+						<span id="rdformhtmlview" class="btn">Preview</span>
 						<div id="baseURIfield">
 							Base URI: <input id="baseURI" type="text" size="60" value="http://localhost:8888/pushback/rdforms/test.html#" />
 						</div>
@@ -131,7 +149,7 @@ WHERE {
 				</div>
 			</fieldset>
 		</form>	
-		<div id="status">&gt;</div>
+		<div id="pbfusion-status">&gt;</div>
 		<div id="previewwindow">
 			<h3  id="previewwindowclose" class="btn">Preview</h3>
 			<div id="preview">

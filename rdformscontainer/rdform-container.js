@@ -12,7 +12,7 @@ WRAPPER.createRDForm = function() {
 
 	var baseUri = "http://localhost:8081/pushback/";
 	
-	var loadForm = baseUri + "rdforms/rdform3.html";
+	var loadForm = baseUri + "demo/jira/rdforms/index.html";
 
 	var loadImage = baseUri + "rdformscontainer/image/pb-logo.png";
 

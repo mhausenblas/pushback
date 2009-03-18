@@ -21,6 +21,7 @@
 	<script type="text/javascript">
 		var instanceDefaultURI = "http://linkeddata.uriburner.com/sparql?default-graph-uri=http://twitter.com/pushback_demo&query=DESCRIBE%20%3Chttp://twitter.com/pushback_demo%3E&output=rdf";
 		var rdfdoc = new RDF();	
+		var genBaseUIR = "http://localhost:8888/pushback/fusion/";
 			
 		$(document).ready(function() {	
 			rdfinstanceURI = $("#rdfinstanceURI").val(instanceDefaultURI);
@@ -28,7 +29,7 @@
 				showStatus("Starting fusion ... ");
 				startFusion(true);
 			});	
-			// dump actions
+			// menu actions
 			$("#viewinstancedata").click(function() {
 				showStatus("Performing preview ... ");
 				viewInstanceData();
@@ -41,6 +42,19 @@
 			$("#dumpwindowclose").click(function() {
 				showStatus(">");
 				$("#dumpwindow").fadeOut("slow");
+			});
+			$("#showTC").click(function() {
+				$("#testcases").fadeIn("slow");
+			});
+			$("#closeTC").click(function() {
+				$("#testcases").fadeOut("slow");
+			});
+			$("#selectTC").change(function() {
+				var TC = genBaseUIR + "testcases/" + $("#selectTC option:selected").val();
+				$("#inputHTMLfieldURI").val(TC+".html");
+				$("#mappingdocURI").val(TC+".sparql");
+				loadHTMLForm();
+				loadMapping();
 			});
 			// HTML form actions
 			$("#loadHTMLform").click(function() {
@@ -74,39 +88,55 @@
 	</script>
 </head>
 <body>
-	<div id="menu"><a href="http://esw.w3.org/topic/PushBackDataToLegacySourcesRDForms"><img src="img/pb-logo.png" border="0" /></a> <a href="">reset</a> <input type="checkbox" id="debug" /> show debug messages</div>
-	<h1>RDForms Generator</h1>
-		<form id="generatorForm" action="">
-			<div><span id="generateRDForms" class="btn">Generate RDForm</span></div>
-			<fieldset>
-				<legend>Fusion</legend>
-					<div class="leftnext">
-						<fieldset id="htmlformtemplatefield">
-							<legend>HTML Form Template</legend>
-							<textarea cols="60" rows="10" id="inputHTMLForm">&lt;form action="http://twitter.com/status/update" id="doingForm" method="post"&gt;
+	<div>
+		<a href="http://esw.w3.org/topic/PushBackDataToLegacySourcesRDForms"><img src="img/pb-logo.png" alt="pushback logo" border="0px" /></a>
+		<h1>RDForms Generator</h1>
+	</div>
+	<div id="menu">
+		<div class="menuitem"><span id="generateRDForms" class="btn">Generate RDForm</span></div>
+		<div class="menuitem"><span id="showTC" class="btn">Show test cases ...</span></div>
+		<div class="menuitem"><input type="checkbox" id="debug" /> Show debug messages</div>
+		<div class="menuitem"><a href="" class="btn">reset</a></div>	
+	</div>
+	<div id="testcases">
+		<span id="closeTC" class="btn">x</span>
+		<select id="selectTC">
+			<option>choose a test case here</option>
+			<option value="input-text">&lt;input type='text' ... /&gt;</option>
+			<option value="radio">&lt;input type='radio' ... /&gt;</option>
+			<option value="textarea">&lt;textarea ... /&gt;</option>
+		</select>
+	</div>
+	
+
+	<form id="generatorForm" action="">
+		
+		<fieldset>
+			<legend>Fusion</legend>
+				<div class="leftnext">
+					<fieldset id="htmlformtemplatefield">
+						<legend>HTML Form Template</legend>
+						<textarea cols="60" rows="10" id="inputHTMLForm">&lt;form action="http://twitter.com/status/update" id="doingForm" method="post"&gt;
 &lt;fieldset class="common-form standard-form"&gt;
- &lt;div class="bar"&gt;
-  &lt;h3&gt;&lt;label for="status" class="doing"&gt;What are you doing?&lt;/label&gt;&lt;/h3&gt;
-   &lt;span id="chars_left_notice" class="numeric"&gt;
-    &lt;strong id="status-field-char-counter" class="char-counter"&gt;&lt;/strong&gt;
-   &lt;/span&gt;
+&lt;div class="bar"&gt;
+ &lt;h3&gt;&lt;label for="status" class="doing"&gt;What are you doing?&lt;/label&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class="info"&gt;
+ &lt;textarea cols="40" rows="2" id="status" name="status" accesskey="u"&gt;&lt;/textarea&gt;
+ &lt;div class="status-btn"&gt;
+  &lt;input type="submit" name="update" value="update" id="update-submit" class="status-btn round-btn"/&gt;
  &lt;/div&gt;
- &lt;div class="info"&gt;
-  &lt;textarea cols="40" rows="2" id="status" name="status" accesskey="u"&gt;&lt;/textarea&gt;
-  &lt;div class="status-btn"&gt;
-   &lt;input type="submit" name="update" value="update" id="update-submit" class="status-btn round-btn"/&gt;
-  &lt;/div&gt;
- &lt;/div&gt;
+&lt;/div&gt;
 &lt;/fieldset&gt;
 &lt;/form&gt;
-							</textarea>
-							<div id="inputHTMLfield">
-								HTML Form URI: <input id="inputHTMLfieldURI" type="text" size="30" value="http://www.google.ie" /> <span id="loadHTMLform" class="btn">Load</span> <span id="htmlview" class="btn">Preview</span>
-							</div>
-						</fieldset>
-						<fieldset id="mappingfield">
-							<legend>Mapping</legend>
-							<textarea cols="60" rows="15" id="mapping">
+						</textarea>
+						<div id="inputHTMLfield">
+							HTML Form URI: <input id="inputHTMLfieldURI" type="text" size="30" value="http://localhost:8888/pushback/fusion/testcases/input-text.html" /> <span id="loadHTMLform" class="btn">Load</span> <span id="htmlview" class="btn">Preview</span>
+						</div>
+					</fieldset>
+					<fieldset id="mappingfield">
+						<legend>Mapping</legend>
+						<textarea cols="60" rows="15" id="mapping">
 PREFIX pb:    &lt;http://rdfs.org/ns/rdforms#&gt; 
 PREFIX sioc: &lt;http://rdfs.org/sioc/ns#&gt;
 PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
@@ -114,53 +144,54 @@ PREFIX : &lt;http://localhost:8888/pushback/rdforms/test.html#&gt;
 
 CONSTRUCT { 
 :doingForm a pb:RDForm ;
-           pb:field :status ;
-           pb:operation :addPost .
+          pb:field :status ;
+          pb:operation :addPost .
 :status rdf:type pb:UpdateableField ;
-        pb:key  :status.key;
-        pb:value :status.val .
+       pb:key  :status.key;
+       pb:value :status.val .
 :status.val a pb:FieldValue ;
-           rdf:value ?status .
+          rdf:value ?status .
 :addPost a pb:CRUDOperationCREATE .
 }
 WHERE {
- &lt;http://twitter.com/pushback_demo&gt; sioc:container_of ?status .
- FILTER regex(str(?status), "1288526803", "i") 
+&lt;http://twitter.com/pushback_demo&gt; sioc:container_of ?status .
+FILTER regex(str(?status), "1288526803", "i") 
 }</textarea>
-							<div id="rdfinstanceURIfield">
-								Instance Data URI: <input id="rdfinstanceURI" type="text" size="30" value="" /> <span id="viewinstancedata" class="btn">View</span> <span id="mapinstancedata" class="btn">Map</span>
-							</div>	
-						</fieldset> 
-					</div>
-					<fieldset>
-						<legend>RDForm</legend>
-						<textarea cols="90" rows="30" id="rdform"></textarea>
-						<span id="rdformhtmlview" class="btn">Preview</span>
-						<div id="baseURIfield">
-							Base URI: <input id="baseURI" type="text" size="60" value="http://localhost:8888/pushback/rdforms/test.html#" />
-						</div>
-					</fieldset>
-			</fieldset>
-			<fieldset>
-				<legend>Options</legend>
-				<div>
-				Authentication method:<br />
-				Deployment base URI:
+						<div id="rdfinstanceURIfield">
+							Mapping Document URI: <input id="mappingdocURI" type="text" size="30" value="" /> <span id="mapinstancedata" class="btn">Map</span><br />
+							Instance Data URI: <input id="rdfinstanceURI" type="text" size="30" value="" /> <span id="viewinstancedata" class="btn">View</span> 
+						</div>	
+					</fieldset> 
 				</div>
-			</fieldset>
-		</form>	
-		<div id="pbfusion-status">&gt;</div>
-		<div id="previewwindow">
-			<h3  id="previewwindowclose" class="btn">Preview</h3>
-			<div id="preview">
-				...
+				<fieldset>
+					<legend>RDForm</legend>
+					<textarea cols="90" rows="30" id="rdform"></textarea>
+					<span id="rdformhtmlview" class="btn">Preview</span>
+					<div id="baseURIfield">
+						Base URI: <input id="baseURI" type="text" size="60" value="http://localhost:8888/pushback/rdforms/test.html#" />
+					</div>
+				</fieldset>
+		</fieldset>
+		<fieldset>
+			<legend>Options</legend>
+			<div>
+			Authentication method:<br />
+			Deployment base URI:
 			</div>
+		</fieldset>
+	</form>	
+	<div id="pbfusion-status">&gt;</div>
+	<div id="previewwindow">
+		<h3  id="previewwindowclose" class="btn">Preview</h3>
+		<div id="preview">
+			...
 		</div>
-		<div id="dumpwindow">
-			<h3  id="dumpwindowclose" class="btn">Dump</h3>
-			<div id="dump">
-				...
-			</div>
-		</div>		
+	</div>
+	<div id="dumpwindow">
+		<h3  id="dumpwindowclose" class="btn">Dump</h3>
+		<div id="dump">
+			...
+		</div>
+	</div>		
 </body>
 </html>

@@ -38,6 +38,31 @@ fieldset {
 	font-size: 12px;
 	font-weight: normal;
 }
+#menu {
+	position:fixed; 
+	padding: 0px; 
+	top: 0px;
+	right: 0px; 
+	background: #f0f0f0; 
+	border: 1px solid #e0e0e0;
+}
+#testcases{
+	display:none;
+	position:fixed; 
+	padding: 10px; 
+	top: 51px;
+	right: 0px; 
+	background: #f0f0f0; 
+	border: 1px solid #e0e0e0;
+}
+.menuitem {
+	font-size: 14px;
+	vertical-align: middle;
+	float: left;
+	border-right: 1px solid #e0e0e0;
+	margin: 5px;
+	padding: 10px;
+}
 .btn {
 	cursor: pointer;
 	font-size: 12px;

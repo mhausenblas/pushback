@@ -43,19 +43,12 @@ function fuse(){
 			var rdformfieldURI = rdformfields[rdformfield].object;
 			if(rdformfieldURI != undefined) {
 				var fieldID = rdformfieldURI.slice(rdformfieldURI.indexOf("#") + 1);
-
+				showStatus("Looking at field with id=" + fieldID, DEBUG);
 				// select C(R)UD op here:
 				rdformRDFaHTML += addCRUDop(baseURI, rdformfieldURI, fieldID);
-				
-				// for each field set the according decorations
-				rdformRDFaHTML += startField(rdformfieldURI, fieldID);
-				// look up the correct label here:
-				rdformRDFaHTML += addFieldKey(rdformfieldURI + ".key", fieldID, getLabelForField(fieldID));// via <label for="ID" ...> 
 				// case distinction per field type (input, textarea, etc.)
 				rdformRDFaHTML += createFieldTypeValues(rdformfieldURI, fieldID);
 				// end of case distinction
-				rdformRDFaHTML += endFieldValue(fieldID);
-				rdformRDFaHTML += endField(fieldID);
 			}	
 		}
 		rdformRDFaHTML += endForm(this.id);
@@ -92,30 +85,50 @@ function createFieldTypeValues(rdformfieldURI, fieldID) {
 		}
 	});
 	
-	// following three lines are generic, hence independed of field type
-	ret += " \n   <!-- START OF SIMPLPE TEXT FIELD VALUE {" + fieldID + "} -->\n";
-	ret += "   <div rel=\"pb:value\">\n";
-	ret += "    <div about=\"" + rdformfieldURI + "\" typeof=\"pb:FieldValue\">";	
+	if(isKnownFieldType(fieldSelector)) {
+		// for each field set the according decorations
+		ret += startField(rdformfieldURI, fieldID);
+		// look up the correct label here:
+		ret += addFieldKey(rdformfieldURI + ".key", fieldID, getLabelForField(fieldID));// via <label for="ID" ...> 
+
+		// following three lines are generic, hence independed of field type
+		ret += " \n   <!-- START OF SIMPLPE TEXT FIELD VALUE {" + fieldID + "} -->\n";
+		ret += "   <div rel=\"pb:value\">\n";
+		ret += "    <div about=\"" + rdformfieldURI + "\" typeof=\"pb:FieldValue\">";	
 	
-	// and here comes the actual case distinction
-	showStatus("About to add fielw with fieldSelector=" + fieldSelector, DEBUG);
-	switch (fieldSelector){
-		case (HTML_INPUT_FIELD+HTML_TYPE_TEXT): // <input type="text" ... />
-			ret = startTextFieldValue(rdformfieldURI + ".val", fieldID);//, value, size, maxlength);
-			showStatus("Added field tag=" + HTML_INPUT_FIELD + "/" + HTML_TYPE_TEXT +  " with id=" + fieldID, DEBUG);
-			break;
-		case (HTML_TEXT_AREA): // <textarea ... />
-			ret = startTextAreaValue(rdformfieldURI + ".val", fieldID);
-			showStatus("Added field tag=" + HTML_TEXT_AREA  + " with id=" + fieldID, DEBUG);
-			break;
-		default: handleUnknownFieldTypeValues(fieldSelector);
+		// and here comes the actual case distinction
+		showStatus("About to add field with fieldSelector=" + fieldSelector, DEBUG);
+		switch (fieldSelector){
+			case (HTML_INPUT_FIELD+HTML_TYPE_TEXT): // <input type="text" ... />
+				ret = startTextFieldValue(rdformfieldURI + ".val", fieldID);//, value, size, maxlength);
+				showStatus("Added field tag=" + HTML_INPUT_FIELD + "/" + HTML_TYPE_TEXT +  " with id=" + fieldID, DEBUG);
+				break;
+			case (HTML_TEXT_AREA): // <textarea ... />
+				ret = startTextAreaValue(rdformfieldURI + ".val", fieldID);
+				showStatus("Added field tag=" + HTML_TEXT_AREA  + " with id=" + fieldID, DEBUG);
+				break;
+		}
+		ret += "\n";
+		ret += endFieldValue(fieldID);
+		ret += endField(fieldID);
 	}
-	ret += "\n";
+	else handleUnknownFieldTypeValues(fieldSelector);
 	return ret;
 }
 
-function handleUnknownFieldTypeValues(tagName) {	
-	var info = "Dunno how to handle element with tag=" + tagName + " I only know: \n\n";
+function isKnownFieldType(fieldSelector) {
+	switch (fieldSelector){
+		case (HTML_INPUT_FIELD+HTML_TYPE_TEXT): // <input type="text" ... />
+			return true;
+		case (HTML_TEXT_AREA): // <textarea ... />
+			return true;
+		default: 
+			return false;
+	}
+}
+
+function handleUnknownFieldTypeValues(fieldSelector) {	
+	var info = "Dunno how to handle element " + fieldSelector + ". I only know: \n\n";
 	info += "+ " + HTML_INPUT_FIELD + "/" + HTML_TYPE_TEXT + "\n\n";
 	info += "+ " + HTML_TEXT_AREA + "\n\n";
 	info += "so far."
@@ -179,6 +192,21 @@ function loadHTMLForm(){
 		},
 		error:  function(XMLHttpRequest, status, errorThrown){
 			showStatus("Error loading HTML form.");
+		}
+	 });	
+}
+
+function loadMapping(){
+	var mappingdocURI = $("#mappingdocURI").val();
+	$.ajax({
+	   url: "relay.php",
+	   data: "URI=" + escape(mappingdocURI),
+	   success: function(data, status){
+			$("#mapping").val(data);
+			showStatus("Load mapping done.");	 
+		},
+		error:  function(XMLHttpRequest, status, errorThrown){
+			showStatus("Error loading mapping form.");
 		}
 	 });	
 }

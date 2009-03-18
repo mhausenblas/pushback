@@ -1,0 +1,20 @@
+PREFIX pb:    <http://rdfs.org/ns/rdforms#> 
+PREFIX sioc: <http://rdfs.org/sioc/ns#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX : <http://localhost:8888/pushback/rdforms/test.html#>
+
+CONSTRUCT { 
+:t1 a pb:RDForm ;
+      pb:field :status ;
+      pb:operation :deletePost .
+:status rdf:type pb:UpdateableField ;
+       pb:key  :status.key;
+       pb:value :status.val .
+:status.val a pb:FieldValue ;
+          rdf:value ?status .
+:deletePost a pb:CRUDOperationDELETE .
+}
+WHERE {
+ <http://twitter.com/pushback_demo> sioc:container_of ?status .
+ FILTER regex(str(?status), "1288526803", "i") 
+}

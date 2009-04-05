@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:xsd ="http://www.w3.org/2001/XMLSchema#"
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"  
+  xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+  xmlns:owl="http://www.w3.org/2002/07/owl#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:pb="http://ld2sd.deri.org/pb/ns#"
+>
+<head>
+	<title>pac - profile auto-complete</title>
+	<link type="text/css" href="pac.css" rel="stylesheet" />
+	<script type="text/javascript" src="jquery-1.3.2.js"></script>
+	<script type="text/javascript" src="ui.core.js"></script>
+	<script type="text/javascript" src="php.js"></script>
+	<script type="text/javascript" src="rdf-parser.js"></script>
+	<script type="text/javascript" src="RDFORMS_DEF.js"></script>
+	<script type="text/javascript" src="pac.js"></script>
+	<script type="text/javascript">
+
+		var rdfdoc = new RDF();	
+		var genBaseUIR = "http://localhost:8888/pushback/pac/";
+		var foafURI = "http://ld2sd.deri.org/pac/myfoaf.rdf";
+			
+		$(document).ready(function() {	
+
+			rdfinstanceURI = $("#rdfinstanceURI").val(foafURI);
+			$("#inputHTMLfieldURI").val(genBaseUIR + "my_profile_form.html"); // default HTML form for pac demo
+			loadHTMLForm();
+						
+			$("#generateRDForms").click(function() {
+				showStatus("Starting fusion ... ");
+				startFusion(true);
+			});	
+			// menu actions
+			$("#viewinstancedata").click(function() {
+				showStatus("Performing preview ... ");
+				viewInstanceData();
+				$("#dumpwindow").fadeIn("slow");
+			});
+			$("#loadSPARQLMapping").click(function() {
+				showStatus("Loading mapping ... ");
+				loadMapping();
+			});
+			$("#mapinstancedata").click(function() {
+				showStatus("Performing mapping ... ");
+				mapInstanceData(true);//show dump
+			});
+			$("#dumpwindowclose").click(function() {
+				showStatus(">");
+				$("#dumpwindow").fadeOut("slow");
+			});
+			$("#showExamples").click(function() {
+				$("#examples").fadeIn("slow");
+			});
+			$("#closeExamples").click(function() {
+				$("#examples").fadeOut("slow");
+			});
+			$("#selectExamples").change(function() {
+				var TC = genBaseUIR + $("#selectExamples option:selected").val();
+				$("#inputHTMLfieldURI").val(TC+".html");
+				$("#mappingdocURI").val(TC+".sparql");
+				loadHTMLForm();
+				loadMapping();
+				$("#rdfinstanceURI").val("http://sw-app.org/mic.rdf");
+			});
+
+			// HTML form actions
+			$("#loadHTMLform").click(function() {
+				showStatus("Loading HTML form ... ");
+				loadHTMLForm();
+			});
+			$("#htmlview").click(function() {
+				showStatus("HTML View active");
+				$("#preview").html($("#inputHTMLForm").val());
+				$("#previewwindow").fadeIn("slow");
+			});
+			// RDForms actions
+			$("#rdformhtmlview").click(function() {
+				showStatus("HTML View active");
+				$("#preview").html($("#rdform").val());
+				$("#previewwindow").fadeIn("slow");
+			});
+			$("#previewwindowclose").click(function() {
+				showStatus(">");
+				$("#previewwindow").fadeOut("slow");
+			});
+			// hover effect for buttons
+			$(".btn").hover(function () {
+				$(this).addClass("btnHighlight");
+				$(this).removeClass("btn");
+			}, function () {
+				$(this).addClass("btn");
+				$(this).removeClass("btnHighlight");
+			});
+		});
+	</script>
+</head>
+<body>
+	<div>
+		<a href="http://esw.w3.org/topic/PushBackDataToLegacySources"><img src="img/pb-logo.png" alt="pushback logo" border="0px" /></a>
+		<h1>pac - profile auto-complete</h1>
+	</div>
+	<div id="menu">
+		<div class="menuitem"><span id="generateRDForms" class="btn">Fill in ...</span></div>
+		<div class="menuitem"><span id="showExamples" class="btn">Examples</span></div>
+		<div class="menuitem"><input type="checkbox" id="debug" /> Show debug messages</div>
+		<div class="menuitem"><a href="" class="btn">Reset</a></div>	
+	</div>
+	<div id="examples">
+		<span id="closeExamples" class="btn">x</span>
+		<select id="selectExamples">
+			<option>choose an example</option>
+			<option value="mhausenblas-example">mhausenblas' FOAF file and mapping</option>
+		</select>
+	</div>
+
+	<form id="generatorForm" action="">
+		<fieldset>
+			<legend>Profile Information</legend>
+				<div class="leftnext">
+					<fieldset id="htmlformtemplatefield">
+						<textarea cols="70" rows="10" id="inputHTMLForm"></textarea>
+						<div id="inputHTMLfield">
+							HTML Form URI: <input id="inputHTMLfieldURI" type="text" size="30" /> 
+							<span id="loadHTMLform" class="btn">Load</span> <span id="htmlview" class="btn">Preview</span>
+						</div>
+					</fieldset>
+					<fieldset id="mappingfield">
+						<legend>Mapping</legend>
+						<textarea cols="70" rows="15" id="mapping">
+PREFIX pb:    &lt;http://rdfs.org/ns/rdforms#&gt;
+PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
+PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+PREFIX : &lt;http://ld2sd.deri.org/pac/exampleform#&gt;
+
+CONSTRUCT { 
+:pacForm a pb:RDForm ;
+          pb:field :first_name ;
+          pb:field :last_name ;
+          pb:operation :addFN .
+:first_name rdf:type pb:UpdateableField ;
+       pb:key  :first_name.key;
+       pb:value :first_name.val .
+:first_name.val a pb:FieldValue ;
+          rdf:value ?first_name .
+:last_name rdf:type pb:UpdateableField ;
+       pb:key  :last_name.key;
+       pb:value :last_name.val .
+:last_name.val a pb:FieldValue ;
+          rdf:value ?last_name .
+:addFN a pb:CRUDOperationCREATE ;
+       pb:onField :first_name .
+}
+WHERE {
+&lt;http://ld2sd.deri.org/pac/myfoaf.rdf#me&gt;
+ foaf:givenname  ?first_name ;
+ foaf:family_name ?last_name .
+}</textarea>
+						<div id="rdfinstanceURIfield">
+							Mapping Document URI: <input id="mappingdocURI" type="text" size="30" value="" /> <span id="loadSPARQLMapping" class="btn">Load</span>
+							<span id="mapinstancedata" class="btn">Test</span><br />
+							<br /> 
+							FOAF Document URI: <input id="rdfinstanceURI" type="text" size="30" value="" /> <span id="viewinstancedata" class="btn">View FOAF</span> 
+						</div>
+					</fieldset> 
+				</div>
+				<fieldset>
+					<legend>Result: Filled In Form</legend>
+					<textarea cols="80" rows="30" id="rdform"></textarea>
+					<span id="rdformhtmlview" class="btn">Preview</span>
+					<div id="baseURIfield">
+						Base URI: <input id="baseURI" type="text" size="60" value="http://ld2sd.deri.org/pac/exampleform#" />
+					</div>
+				</fieldset>
+		</fieldset>
+	</form>	
+	<div id="pbfusion-status">&gt;</div>
+	<div id="previewwindow">
+		<h3>Preview</h3>
+		<span id="previewwindowclose" class="btn">close</span>
+		<div id="preview">
+			...
+		</div>
+	</div>
+	<div id="dumpwindow">
+		<h3>Dump</h3>
+		<span id="dumpwindowclose" class="btn">close</span>		
+		<div id="dump">
+			...
+		</div>
+	</div>		
+</body>
+</html>

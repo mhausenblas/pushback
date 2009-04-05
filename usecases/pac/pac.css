@@ -1,0 +1,148 @@
+body {
+	font-family: Verdana;
+	font-size: 10px;
+}
+h1 {
+	font-size: 20px;
+}
+
+h2 {
+	font-size: 16px;
+}
+
+h3 {
+	font-size: 14px;
+}
+
+fieldset {
+	font-size: 14px;
+	font-weight: bold;
+	margin: 10px;
+	padding: 5px;
+	background: #f0f0f0;
+}
+.leftnext {
+	padding: 0px;
+	float: left;
+}
+#generatorForm {
+}
+#mappingfield {
+	padding: 3px;
+	clear: left;
+}
+#htmlformtemplatefield {
+	padding: 3px;
+	float: left;			
+}
+#inputHTMLfield, #rdfinstanceURIfield, #baseURIfield{
+	padding: 5px;
+	font-size: 12px;
+	font-weight: normal;
+}
+#menu {
+	position:fixed; 
+	padding: 0px; 
+	top: 0px;
+	right: 0px; 
+	background: #f0f0f0; 
+	border: 1px solid #e0e0e0;
+}
+#examples{
+	display:none;
+	position:fixed; 
+	padding: 10px; 
+	top: 51px;
+	right: 0px; 
+	background: #f0f0f0; 
+	border: 1px solid #e0e0e0;
+}
+.menuitem {
+	font-size: 14px;
+	vertical-align: middle;
+	float: left;
+	border-right: 1px solid #e0e0e0;
+	margin: 5px;
+	padding: 10px;
+}
+.btn {
+	cursor: pointer;
+	font-size: 12px;
+	font-weight: normal;
+	border: solid 1px lightgray;
+	padding: 2px;
+	padding-left: 5px;
+	padding-right: 5px;
+    background: black;
+    color: white;
+    opacity: .70;    
+    filter: alpha(opacity="70");    
+}
+
+.btnHighlight {
+	cursor: pointer;
+	font-size: 12px;
+	border: solid 1px #d0d0d0;
+	padding: 2px;
+	padding-left: 5px;
+	padding-right: 5px;
+    background: white;
+    color: black;
+}
+#pbfusion-status {
+	font-size: 10px;
+    position: fixed;
+    bottom: 5px;
+    left: 0px;
+    right: 0px;
+    height: 15px;    
+    padding: 2px;
+    background: black;
+    color: white;
+    opacity: .70;    
+    filter: alpha(opacity="70");    
+    border: solid 1px lightgray;
+    z-index: 200;
+    overflow: hidden;
+    overflow-y: auto; 
+}
+#dumpwindow {
+	display:none;
+    position: fixed;
+    bottom: 25px;
+    left: 0px;
+    height: 600px; 
+    width: 800px;   
+    padding: 5px;
+    background: black;
+    color: white;
+    opacity: .70;    
+    filter: alpha(opacity="70");    
+    border: solid 1px lightgray;
+    z-index: 300;
+    overflow: hidden;
+    overflow-y: auto; 
+}
+#dump{
+    padding: 20px;	
+}
+#previewwindow {
+	display:none;
+    position: fixed;
+    bottom: 25px;
+    left: 0px;
+    height: 600px; 
+    width: 800px;   
+    padding: 5px;
+    background: black;
+    color: white;
+    border: solid 1px lightgray;
+    z-index: 300;
+    overflow: hidden;
+    overflow-y: auto; 
+}
+#preview{
+    padding: 20px;	
+    background: white;
+    color: black;
+}

@@ -1,0 +1,18 @@
+PREFIX pb:    <http://rdfs.org/ns/rdforms#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX : <http://sw-app.org/#>
+
+CONSTRUCT { 
+:pacForm a pb:RDForm ;
+          pb:field :name .
+:name rdf:type pb:UpdateableField ;
+       pb:key  :name.key;
+       pb:value :name.val .
+:name.val a pb:FieldValue ;
+          rdf:value ?name .
+}
+WHERE {
+<http://sw-app.org/mic.xhtml#i>
+ foaf:name  ?name .
+}

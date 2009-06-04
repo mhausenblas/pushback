@@ -45,6 +45,7 @@
  * be handled and the online code samples for additional information.
  */
 
+
 /**
  * @see Zend_Loader
  */
@@ -157,7 +158,10 @@ function getAuthSubUrl()
 function requestUserLogin($linkText) 
 {
   $authSubUrl = getAuthSubUrl();
-  echo "<a href=\"{$authSubUrl}\">{$linkText}</a>"; 
+  echo "<a href=\""; 
+  echo str_replace("amp%3B", "", $authSubUrl);
+  echo "\">{$linkText}</a>"; 
+ 
 }
 
 /**
@@ -194,28 +198,52 @@ function getAuthSubHttpClient()
  *
  * @return void
  */
-function processPageLoad($id, $field, $newValue) 
+ 
+function processPageLoad($id, $newValue, $field) 
 {
+  
   global $_SESSION, $_GET;
+   
   if (!isset($_SESSION['sessionToken']) && !isset($_GET['token'])) {
     requestUserLogin('Please login to your Google Account.');
   } else {
     $client = getAuthSubHttpClient();
 	switch ($field) {
 		case "SUMMARY":
-			updateEventWithTitle($client, $id, $newValue);
+	      	updateEventWithTitle($client, $id, $newValue);
 			break;
 		case "DTSTART":
-			updateEventWithStartTime($client, $id, $newValue); //this is tricky: the newValue has to be in the form: yyyy-mm-ddThh:mm, like 2009-05-26T10:00
+		    $time = getFormattedTime($newValue);
+			updateEventWithStartTime($client, $id, $time); //this is tricky: the newValue has to be in the form: yyyy-mm-ddThh:mm, like 2009-05-26T10:00
 			break;
 		case "DTEND":
-			updateEventWithEndTime($client, $id, $newValue); //see DTSTART
+			$time = getFormattedTime($newValue);
+			updateEventWithEndTime($client, $id, $time); //see DTSTART
 			break;
 		case "LOCATION":
 			updateEventWithLocation($client, $id, $newValue); 
 			break;
 	}
   }
+}
+
+/*inserts a symbol in a string
+for example:
+insertSymbol("helloworld", 5, "-") return "hello-world"
+*/
+function insertSymbol($string, $position, $symbol) {
+    $length=strlen($string);
+    $temp1=substr($string,0,$position); //yyyy
+	$temp2=substr($string,$position,$length);
+    $rest=$temp1.$symbol.$temp2; 
+	return $rest;
+}
+
+//for a time in format yyymmddThhmmssZ it returns yyyy-mm-ddThh:mm => what Google API understands
+function getFormattedTime($time){
+	return substr($time, 0, -4);
+	//$rest = substr($time, 0, -3); //yyymmddThhmm
+    //return insertSymbol(insertSymbol(insertSymbol($rest,4,"-"), 7, "-"), 13, ":");
 }
 
 /**
@@ -280,7 +308,6 @@ function updateEventWithStartTime ($client, $eventId, $startTime)
   if ($eventOld = getEvent($client, $eventId)) {
   	foreach ($eventOld->when as $when) {
 	  echo "Old start time: " . $when->startTime . "<br />\n";
-	  
 	  $when->startTime = "{$startTime}:00.000{$tzOffset}:00"; //start time changes
       $eventOld->when = array($when);
 	  
@@ -340,6 +367,3 @@ function updateEventWithLocation ($client, $eventId, $location)
    }
      
 }
-
-processPageLoad("001vkgr616n2k990nrcnv9c04o", "DTSTART", "2009-05-26T18:00") ;
-processPageLoad("001vkgr616n2k990nrcnv9c04o", "DTEND", "2009-05-26T19:00") ;

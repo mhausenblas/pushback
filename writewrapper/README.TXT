@@ -1,15 +1,23 @@
-This is the readme file from the google calendar demo.
+This is the readme file from the Google calendar demo.
 In order to use it, you must have a Google account and some events in the Google calendar.
-Export your Google calendar to an ics file.
-If you want to modify an event from your calendar, open the ics file(it's a text file) and write down the event's ID.
-You should write that ID in the CalendarRDForm.html.
-Open CalendarRDForm.html in you web bowser, write the ID of the event in the ID box and something in the title box.
-Leave the startime, endtime, location like they are.
-The demo is for only modifying the title/summary.
-Then click update. You should be prompted to log to google. 
+
+1) Export your Google calendar to an ics file.
+2) Open the ICS file with a text editor
+3) Write down the ID of the event you want to modify
+	You will find a line like this: UID:91frcv11a84sbm2t80bj59kkgg@google.com
+	The event ID should be 91frcv11a84sbm2t80bj59kkgg
+   Note: an event is located between the BEGIN:VEVENT line and the END:VEVENT line
+
+4) Run CalendarRDForm.html (sample inputs are provided in the text boxes)
+5) Write the ID of your event in the ID text input box
+6) Change start time, end time, title, location, whatever suits you
+7) Click update. You should be prompted to log in to Google. 
+
 If everything goes write you should see:
 
 Old title: Your old title
-New title: Your new title.
+New title: Your new title
+.......................
+.......................
 
 If it doesn't work contact me at oana.ureche@deri.org.

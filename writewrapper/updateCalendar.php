@@ -8,6 +8,6 @@ $starttime = $_GET["starttime"];
 $endtime = $_GET["endtime"];
 $location = $_GET["location"];
 
-processPageLoad($id, $summary, "SUMMARY"); 
+processPageLoad($id, $summary, $starttime, $endtime, $location);
 
 ?>

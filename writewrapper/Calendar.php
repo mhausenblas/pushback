@@ -199,7 +199,7 @@ function getAuthSubHttpClient()
  * @return void
  */
  
-function processPageLoad($id, $newValue, $field) 
+function processPageLoad($id, $newSummary, $newStarttime, $newEndtime, $newLocation) 
 {
   
   global $_SESSION, $_GET;
@@ -208,21 +208,15 @@ function processPageLoad($id, $newValue, $field)
     requestUserLogin('Please login to your Google Account.');
   } else {
     $client = getAuthSubHttpClient();
-	switch ($field) {
-		case "SUMMARY":
-	      	updateEventWithTitle($client, $id, $newValue);
-			break;
-		case "DTSTART":
-		    $time = getFormattedTime($newValue);
-			updateEventWithStartTime($client, $id, $time); //this is tricky: the newValue has to be in the form: yyyy-mm-ddThh:mm, like 2009-05-26T10:00
-			break;
-		case "DTEND":
-			$time = getFormattedTime($newValue);
-			updateEventWithEndTime($client, $id, $time); //see DTSTART
-			break;
-		case "LOCATION":
-			updateEventWithLocation($client, $id, $newValue); 
-			break;
+	if (updateEventWithTitle($client, $id, $newSummary) != null) {
+		$time = getFormattedTime($newStarttime);
+		updateEventWithStartTime($client, $id, $time); //this is tricky: the newValue has to be in the form: yyyy-mm-ddThh:mm, like 2009-05-26T10:00
+		$time = getFormattedTime($newEndtime);
+		updateEventWithEndTime($client, $id, $time); //this is tricky: the newValue has to be in the form: yyyy-mm-ddThh:mm, like 2009-05-26T10:00
+		updateEventWithLocation($client, $id, $newLocation); 
+	}
+	else {
+		return null;
 	}
   }
 }
@@ -266,7 +260,8 @@ function getEvent($client, $eventId)
     $eventEntry = $gdataCal->getCalendarEventEntry($query);
     return $eventEntry;
   } catch (Zend_Gdata_App_Exception $e) {
-    var_dump($e);
+    echo "<h2>Please check the ID of the event, we couldn't locate the event with ID " . $eventId . "</h2>"; 
+	//var_dump($e);
     return null;
   }
 }

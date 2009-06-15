@@ -260,8 +260,8 @@ function getEvent($client, $eventId)
     $eventEntry = $gdataCal->getCalendarEventEntry($query);
     return $eventEntry;
   } catch (Zend_Gdata_App_Exception $e) {
-    echo "<h2>Please check the ID of the event, we couldn't locate the event with ID " . $eventId . "</h2>"; 
-	//var_dump($e);
+    echo "<h2>Might be that the ID of the event: " . $eventId . " is not correct, </h2><br><h3>you can check the error_log.txt or contact oana.ureche@deri.org, attach the error_log.txt file </h3>"; 
+	error_log($e, 3, "error_log.txt");
     return null;
   }
 }
@@ -285,7 +285,8 @@ function updateEventWithTitle ($client, $eventId, $newTitle)
     try {
         $eventOld->save();
     } catch (Zend_Gdata_App_Exception $e) {
-        var_dump($e);
+        echo "<h2>Could not update event title</h2><br><h3>you can check the error_log.txt or contact oana.ureche@deri.org, attach the error_log.txt file </h3>"; 
+		error_log($e, 3, "error_log.txt");
         return null;
     }
     $eventNew = getEvent($client, $eventId);
@@ -309,7 +310,8 @@ function updateEventWithStartTime ($client, $eventId, $startTime)
 	  try {
         $eventOld->save();
       } catch (Zend_Gdata_App_Exception $e) {
-        var_dump($e);
+        echo "<h2>Could not update start time</h2><br><h3>you can check the error_log.txt or contact oana.ureche@deri.org, attach the error_log.txt file </h3>"; 
+		error_log($e, 3, "error_log.txt");
         return null;
       }
 	  $eventNew = getEvent($client, $eventId);
@@ -334,7 +336,8 @@ function updateEventWithEndTime ($client, $eventId, $endTime)
 	  try {
         $eventOld->save();
       } catch (Zend_Gdata_App_Exception $e) {
-        var_dump($e);
+        echo "<h2>Could not update event end time</h2><br><h3>you can check the error_log.txt or contact oana.ureche@deri.org, attach the error_log.txt file </h3>"; 
+        error_log($e, 3, "error_log.txt");
         return null;
       }
 	  $eventNew = getEvent($client, $eventId);
@@ -354,7 +357,8 @@ function updateEventWithLocation ($client, $eventId, $location)
 	  try {
         $eventOld->save();
       } catch (Zend_Gdata_App_Exception $e) {
-        var_dump($e);
+        echo "<h2>Could not update location</h2><br><h3>you can check the error_log.txt or contact oana.ureche@deri.org, attach the error_log.txt file </h3>"; 
+        error_log($e, 3, "error_log.txt");
         return null;
       }
 	  $eventNew = getEvent($client, $eventId);

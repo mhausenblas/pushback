@@ -1,4 +1,4 @@
-This is the readme file from the Google calendar demo.
+This is the readme file from the Google calendar demo, version 2: HTTP Post
 In order to use it, you must have a Google account and some events in the Google calendar.
 
 1) Export your Google calendar to an ics file.
@@ -13,7 +13,7 @@ In order to use it, you must have a Google account and some events in the Google
 6) Change start time, end time, title, location, whatever suits you
 7) Click update. You should be prompted to log in to Google. 
 
-If everything goes write you should see:
+If everything goes right you should see:
 
 Old title: Your old title
 New title: Your new title

@@ -199,7 +199,7 @@ function getAuthSubHttpClient()
  * @return void
  */
  
-function processPageLoad($id, $newSummary, $newStarttime, $newEndtime, $newLocation) 
+function processPageLoad($id, $newSummary, $newStarttime, $newEndtime, $newLocation, $operation) 
 {
   
   global $_SESSION, $_GET;
@@ -212,18 +212,55 @@ function processPageLoad($id, $newSummary, $newStarttime, $newEndtime, $newLocat
     requestUserLogin('Please login to your Google Account.');
   } else {
     $client = getAuthSubHttpClient();
-	if (updateEventWithTitle($client, $id, $newSummary) != null) {
-		$time = getFormattedTime($newStarttime);
-		updateEventWithStartTime($client, $id, $time); //this is tricky: the newValue has to be in the form: yyyy-mm-ddThh:mm, like 2009-05-26T10:00
-		$time = getFormattedTime($newEndtime);
-		updateEventWithEndTime($client, $id, $time); //this is tricky: the newValue has to be in the form: yyyy-mm-ddThh:mm, like 2009-05-26T10:00
-		updateEventWithLocation($client, $id, $newLocation); 
+	if ($operation == "update") {
+		if (updateEventWithTitle($client, $id, $newSummary) != null) {
+			$time = getFormattedTime($newStarttime);
+			updateEventWithStartTime($client, $id, $time); //this is tricky: the newValue has to be in the form: yyyy-mm-ddThh:mm, like 2009-05-26T10:00
+			$time = getFormattedTime($newEndtime);
+			updateEventWithEndTime($client, $id, $time); //this is tricky: the newValue has to be in the form: yyyy-mm-ddThh:mm, like 2009-05-26T10:00
+			updateEventWithLocation($client, $id, $newLocation); 
+		}
+		else {
+			return null;
+		}
+	}
+	else if ($operation == "delete") {
+		if ($event = getEvent($client, $id)) {
+			$event->delete();
+			echo "The event with id " . $id . " has been deleted";
+		}
 	}
 	else {
-		return null;
+		$startDate = substr($newStarttime, 0, 10);
+		$startTime = substr($newStarttime, 11, 5); 
+		$endDate = substr($newEndtime, 0, 10);
+		$endTime = substr($newEndtime, 11, 5);
+		echo "Created event with id= " . createEvent($client, $newSummary, $newLocation, 
+	    $startDate, $startTime, $endDate, $endTime, '+01' );
 	}
   }
 }
+
+function createEvent ($client, $title, $where,
+    $startDate, $startTime, $endDate, $endTime, $tzOffset)
+{
+  $gdataCal = new Zend_Gdata_Calendar($client);
+  $newEvent = $gdataCal->newEventEntry();
+  
+  $newEvent->title = $gdataCal->newTitle($title);
+  $newEvent->where = array($gdataCal->newWhere($where));
+  
+  $when = $gdataCal->newWhen();
+  $when->startTime = "{$startDate}T{$startTime}:00.000{$tzOffset}:00";
+  $when->endTime = "{$endDate}T{$endTime}:00.000{$tzOffset}:00";
+  $newEvent->when = array($when);
+
+  // Upload the event to the calendar server
+  // A copy of the event as it is recorded on the server is returned
+  $createdEvent = $gdataCal->insertEvent($newEvent);
+  return $createdEvent->id->text;
+}
+
 
 /*inserts a symbol in a string
 for example:
@@ -264,7 +301,8 @@ function getEvent($client, $eventId)
     $eventEntry = $gdataCal->getCalendarEventEntry($query);
     return $eventEntry;
   } catch (Zend_Gdata_App_Exception $e) {
-    echo "<h2>Might be that the ID of the event: " . $eventId . " is not correct, </h2><br><h3>you can check the <a href='error_log.txt'>error_log.txt</a> or contact oana.ureche@deri.org, attach the error_log.txt file </h3>"; 
+    header("HTTP/1.0 404 Not Found");
+	echo "<h2>Might be that the ID of the event: " . $eventId . " is not correct, </h2><br><h3>you can check the <a href='error_log.txt'>error_log.txt</a> or contact oana.ureche@deri.org, attach the error_log.txt file </h3>"; 
 	error_log($e, 3, "error_log.txt");
     return null;
   }

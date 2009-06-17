@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:xsd ="http://www.w3.org/2001/XMLSchema#"
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"  
+  xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+  xmlns:owl="http://www.w3.org/2002/07/owl#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:pb="http://ld2sd.deri.org/pb/ns#"
+>
+<head>
+	<title>RDForms - Caledar Demo</title>
+	<link type="text/css" href="http://jqueryui.com/themes/base/ui.all.css" rel="stylesheet" />
+	<script type="text/javascript" src="http://jqueryui.com/jquery-1.3.2.js"></script>
+	<script type="text/javascript" src="http://jqueryui.com/ui/ui.core.js"></script>	
+	<script type="text/javascript" src="http://jqueryui.com/ui/ui.progressbar.js"></script>
+	<script type="text/javascript" src="jquery/jquery.json-1.3.min.js"></script>
+	<script type="text/javascript" src="rdfquery/jquery.uri.js"></script>
+	<script type="text/javascript" src="rdfquery/jquery.xmlns.js"></script>
+	<script type="text/javascript" src="rdfquery/jquery.curie.js"></script>
+	<script type="text/javascript" src="rdfquery/jquery.datatype.js"></script>
+	<script type="text/javascript" src="rdfquery/jquery.rdf.js"></script>
+	<script type="text/javascript" src="rdfquery/jquery.rdfa.js"></script>
+	<script type="text/javascript" src="commons.js"></script>
+	<script type="text/javascript" src="rdf-parser.js"></script>	
+	<script type="text/javascript" src="interface3.js"></script>
+</head>
+<body>
+	<div>
+		<input type="checkbox" id="debug" /> show debug messages
+	</div>
+	<form id="calendarform" action="" about="http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm" typeof="pb:RDForm">
+		<div rel="pb:operation" style="margin:10px">
+			<div about="http://ld2sd.deri.org/pushback/rdforms/calendar.html#crud-op1" typeof="pb:CRUDOperationDELETE">
+				<span rel="pb:onField" resource="http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm" />
+			</div>
+		</div>
+		<div rel="pb:field" style="margin:10px">
+			<div about="http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.f1" typeof="pb:ImmutableField">
+				<label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.f1.key" property="dcterms:title" for="bugactive">ID</label>:
+				<div rel="pb:value">
+					<div about="http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.f1.val" typeof="pb:FieldValue">
+						<input type="text" id="id" property="rdf:value" content="" value="cf8gcg0didmcvdfkjqg8e31k1c" size="60" /><br />
+					</div>	
+				</div>
+			</div>
+		</div>
+		<div rel="pb:field" style="margin:10px">
+			<div about="http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.f2" typeof="pb:UpdateableField">
+				<label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.f2.key" property="dcterms:title" for="bugactive">Title</label>:
+				<div rel="pb:value">
+					<div about="http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.f2.val" typeof="pb:FieldValue">
+						<input type="text" id="title" property="rdf:value" content="" value="Buy school clothes" size="60" /><br />
+					</div>	
+				</div>
+			</div>
+		</div>
+		<div rel="pb:field" style="margin:10px">
+			<div about="http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.f3" typeof="pb:UpdateableField">
+				<label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.f3.key" property="dcterms:title" for="bugactive">Starttime</label>:
+				<div rel="pb:value">
+					<div about="http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.f3.val" typeof="pb:FieldValue">
+						<input type="text" id="starttime" property="rdf:value" content="" value="2009-06-16T10:00:00Z" size="60" /><br />
+						<span style="padding: 3px; font-size: 80%; color: #1e991e;">Note: the Start time must be in the form: yyyy-mm-ddThh:mm:ssZ </span>
+					</div>	
+				</div>
+			</div>
+		</div>
+		<div rel="pb:field" style="margin:10px">
+			<div about="http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.f4" typeof="pb:UpdateableField">
+				<label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.f4.key" property="dcterms:title" for="bugactive">End time</label>:
+				<div rel="pb:value">
+					<div about="http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.f4.val" typeof="pb:FieldValue">
+						<input type="text" id="endtime" property="rdf:value" content="" value="2009-06-16T11:00:00Z" size="60" /><br />
+						<span style="padding: 3px; font-size: 80%; color: #1e991e;">Note: the Start time must be in the form: yyyy-mm-ddThh:mm:ssZ </span>
+					</div>	
+				</div>
+			</div>
+		</div>
+		<div rel="pb:field" style="margin:10px">
+			<div about="http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.f5" typeof="pb:UpdateableField">
+				<label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.f5.key" property="dcterms:title" for="bugactive">Location</label>:
+				<div rel="pb:value">
+					<div about="http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.f5.val" typeof="pb:FieldValue">
+						<input type="text" id="location" property="rdf:value" content="" value="Mall" size="60" /><br />
+					</div>	
+				</div>
+			</div>
+		</div>
+		<p>
+			The data of the form gets push-backed via a pushback controller to the RDF wrapper that wraps the non-RDF data source (<a href="http://www.google.com/calendar/render">Google Calendar</a>, in our case).
+		</p>
+		<div>
+			<input type="button" value="Submit RDForm to RDF wrapper" onclick="pushback();" />
+		</div>
+	</form>
+	<div id="result" style="margin-top: 20px;"></div>
+</body>
+</html>

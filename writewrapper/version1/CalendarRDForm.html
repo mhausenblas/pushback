@@ -1,0 +1,132 @@
+<div xmlns:xsd ="http://www.w3.org/2001/XMLSchema#" 
+ xmlns:dcterms="http://purl.org/dc/terms/" 
+ xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"  
+ xmlns:pb="http://rdfs.org/ns/rdforms#">
+
+<!-- START OF FORM {calendarForm} -->
+<!-- <form id="calendarForm" action="http://ld2sd.deri.org/pushback/demo/calendar/version2/updateCalendar.php" method="GET" about="http://ld2sd.deri.org/pushback/rdforms/test.html#calendarForm" typeof="pb:RDForm"> -->
+<form id="calendarForm" action="updateCalendar.php" method="GET" about="http://ld2sd.deri.org/pushback/rdforms/test.html#calendarForm" typeof="pb:RDForm">
+
+<table cellpadding="5px">
+ <!-- START OF CRUD OPERATION FOR FIELD {updateEvent} -->
+ <div rel="pb:operation">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#updateEvent" typeof="http://rdfs.org/ns/rdforms#CRUDOperationUPDATE">
+   <span rel="pb:onField" resource="null" />
+  </div>
+ </div>
+ <!-- END OF CRUD OPERATION FOR FIELD {updateEvent} -->
+ 
+ <!-- START OF FIELD {IDevent} -->
+ <tr>
+ <div rel="pb:field">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#IDevent" typeof="pb:NonUpdateableField">
+   <!-- START OF FIELD KEY {IDevent} -->
+   <td><label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#IDevent.key" property="dcterms:title">IDevent</label>:<br /></td> 
+   <!-- START OF FIELD VALUE {IDevent} -->
+   <td>
+   <div rel="pb:value">
+    <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#IDevent" typeof="pb:FieldValue">     
+     <input type="text" id="IDevent" name="IDevent" property="rdf:value" content="" value="r15jplhnj8n907fcgeumpqnunc" size="0" maxlength="30" />
+    </div>
+   </div>
+   </td>
+ <!-- END OF FIELD VALUE {IDevent} -->  
+  </div>
+ </div>
+ </tr>
+ <!-- END OF FIELD {title} -->
+ 
+ 
+ <!-- START OF FIELD {title} -->
+ <tr>
+ <div rel="pb:field">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#title" typeof="pb:UpdateableField">
+   <!-- START OF FIELD KEY {title} -->
+   <td><label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#title.key" property="dcterms:title">Title</label>:<br /></td> 
+   <!-- START OF FIELD VALUE {title} -->
+   <td>
+   <div rel="pb:value">
+    <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#title" typeof="pb:FieldValue">     
+     <input type="text" id="summary" name="summary" property="rdf:value" content="" value="Meeting" size="0" maxlength="30" />
+    </div>
+   </div>
+   </td>
+ <!-- END OF FIELD VALUE {title} -->  
+  </div>
+ </div>
+ </tr>
+ <!-- END OF FIELD {title} -->
+ 
+ <!-- START OF FIELD {starttime} -->
+ <tr>
+ <div rel="pb:field">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#starttime" typeof="pb:UpdateableField">
+   <!-- START OF FIELD KEY {starttime} -->
+   <td><label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#starttime.key" property="dcterms:title">Start time</label>:<br /></td> 
+   <!-- START OF FIELD VALUE {starttime} -->
+   <td>
+   <div rel="pb:value">
+    <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#starttime" typeof="pb:FieldValue">     
+     <input type="text" id="starttime" name="starttime" property="rdf:value" content="" value="2009-06-15T07:00:00Z" size="0" maxlength="30" />
+    </div>
+   </div>
+   </td>
+   <td>
+   <label>(yyyy-mm-ddThh:mm:ssZ)</label>
+   </td>
+ <!-- END OF FIELD VALUE {starttime} -->  
+  </div>
+ </div>
+ </tr>
+ <!-- END OF FIELD {starttime} -->
+ 
+ <!-- START OF FIELD {endtime} -->
+ <tr>
+ <div rel="pb:field">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#endtime" typeof="pb:UpdateableField">
+   <!-- START OF FIELD KEY {endtime} -->
+   <td><label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#endtime.key" property="dcterms:title">End time</label>:<br /></td>
+   <!-- START OF FIELD VALUE {endtime} -->
+   <td>
+   <div rel="pb:value">
+    <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#endtime" typeof="pb:FieldValue">     
+     <input type="text" id="endtime" name="endtime" property="rdf:value" content="" value="2009-06-15T08:00:00Z" size="0" maxlength="30" />
+    </div>
+   </div>
+   </td>
+   <td>
+   <label>(yyyy-mm-ddThh:mm:ssZ)</label>
+   </td>
+ <!-- END OF FIELD VALUE {endtime} -->  
+  </div>
+ </div>
+ </tr>
+ <!-- END OF FIELD {endtime} -->
+ 
+ <!-- START OF FIELD {location} -->
+ <tr>
+ <div rel="pb:field">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#location" typeof="pb:UpdateableField">
+   <!-- START OF FIELD KEY {location} -->
+   <td><label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#location.key" property="dcterms:title">Location</label>:<br /></td>
+   <!-- START OF FIELD VALUE {location} -->
+   <td>
+   <div rel="pb:value">
+    <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#location" typeof="pb:FieldValue">     
+     <input type="text" id="location" name="location" property="rdf:value" content="" value="DERI seminar room" size="0" maxlength="30" />
+    </div>
+   </div>
+   </td>
+ <!-- END OF FIELD VALUE {location} -->  
+  </div>
+ </div>
+ </tr>
+ <!-- END OF FIELD {location} -->
+</table>
+ <input type="submit" name="update" value="update" id="update-submit"/>
+
+</form>
+<!-- END OF FORM {calendarForm} -->
+
+</div>

@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2002/12/cal/icaltzd#">
+	<Vcalendar xmlns:x-wr="http://www.w3.org/2002/12/cal/prod/Google_Inc_4ed21034d44ff76e#">
+		<prodid>-//Google Inc//Google Calendar 70.9054//EN</prodid>
+		<version>2.0</version>
+		<calscale>GREGORIAN</calscale>
+		<method>PUBLISH</method>
+		<component>
+			<Vevent rdf:about="#91frcv11a84sbm2t80bj59kkgg@google.com">
+				<dtstart rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-04T11:00:00Z</dtstart>
+				<dtend rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-04T12:00:00Z</dtend>
+				<dtstamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-05-27T14:08:36Z</dtstamp>
+				<uid>91frcv11a84sbm2t80bj59kkgg@google.com</uid>
+				<class>PRIVATE</class>
+				<created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-03T10:45:05Z</created>
+				<description/>
+				<lastModified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-03T10:45:05Z</lastModified>
+				<location/>
+				<sequence rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</sequence>
+				<status>CONFIRMED</status>
+				<summary>Induction - Infrastructure Ger Andrew</summary>
+				<transp>OPAQUE</transp>
+			</Vevent>
+		</component>
+		<component>
+			<Vevent rdf:about="#1b9b2158ol1un7odub2vsh7f0k@google.com">
+				<dtstart rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-09T18:00:00Z</dtstart>
+				<dtend rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-09T19:00:00Z</dtend>
+				<dtstamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-05-27T14:08:36Z</dtstamp>
+				<uid>1b9b2158ol1un7odub2vsh7f0k@google.com</uid>
+				<class>PRIVATE</class>
+				<created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-03T10:44:09Z</created>
+				<description/>
+				<lastModified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-03T10:44:09Z</lastModified>
+				<location/>
+				<sequence rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</sequence>
+				<status>CONFIRMED</status>
+				<summary>Zumba class, Kingfisher club</summary>
+				<transp>OPAQUE</transp>
+			</Vevent>
+		</component>
+		<component>
+			<Vevent rdf:about="#hbh8tqp5041vfgsk36kgk8tl0c@google.com">
+				<dtstart rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-05T11:00:00Z</dtstart>
+				<dtend rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-05T12:00:00Z</dtend>
+				<dtstamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-05-27T14:08:36Z</dtstamp>
+				<uid>hbh8tqp5041vfgsk36kgk8tl0c@google.com</uid>
+				<class>PRIVATE</class>
+				<created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-03T10:46:43Z</created>
+				<description/>
+				<lastModified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-03-03T10:46:43Z</lastModified>
+				<location/>
+				<sequence rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</sequence>
+				<status>CONFIRMED</status>
+				<summary>Induction - Best Practise</summary>
+				<transp>OPAQUE</transp>
+			</Vevent>
+		</component>
+		<component>
+			<Vevent rdf:about="#038au54i7cbs72gv40vebkdiek@google.com">
+				<dtstart rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-03-05T14:00:00Z</dtstart>
+				<dtend rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-03-05T16:00:00Z</dtend>
+				<dtstamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-05-27T14:08:36Z</dtstamp>
+				<uid>038au54i7cbs72gv40vebkdiek@google.com</uid>
+				<class>PRIVATE</class>
+				<created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-02-19T12:15:49Z</created>
+				<description/>
+				<lastModified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-05-25T16:18:38Z</lastModified>
+				<location>DERI Seminar Room</location>
+				<sequence rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</sequence>
+				<status>CONFIRMED</status>
+				<summary>Silicon Valley presentation</summary>
+				<transp>OPAQUE</transp>
+				<categories>http://schemas.google.com/g/2005#event</categories>
+			</Vevent>
+		</component>
+		<component>
+			<Vevent rdf:about="#7kftl56kpteke5ah8a8i1ohv2o@google.com">
+				<dtstart rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-04-07T15:30:00Z</dtstart>
+				<dtend rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-04-07T16:30:00Z</dtend>
+				<dtstamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-05-27T14:08:36Z</dtstamp>
+				<uid>7kftl56kpteke5ah8a8i1ohv2o@google.com</uid>
+				<class>PRIVATE</class>
+				<created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-04-05T16:36:46Z</created>
+				<lastModified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-04-05T16:38:39Z</lastModified>
+				<sequence rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</sequence>
+				<status>CONFIRMED</status>
+				<summary>Gymboy</summary>
+				<transp>TRANSPARENT</transp>
+			</Vevent>
+		</component>
+		<component>
+			<Vevent rdf:about="#1b70kkenlom8kg3rcbqfecahks@google.com">
+				<dtstart rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-04-09T13:00:00Z</dtstart>
+				<dtend rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-04-09T14:00:00Z</dtend>
+				<dtstamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-05-27T14:08:36Z</dtstamp>
+				<uid>1b70kkenlom8kg3rcbqfecahks@google.com</uid>
+				<class>PRIVATE</class>
+				<created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-04-07T14:00:28Z</created>
+				<description/>
+				<lastModified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-05-26T13:24:35Z</lastModified>
+				<sequence rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</sequence>
+				<status>CONFIRMED</status>
+				<summary>Eye check</summary>
+				<transp>OPAQUE</transp>
+				<categories>http://schemas.google.com/g/2005#event</categories>
+			</Vevent>
+		</component>
+		<component>
+			<Vevent rdf:about="#5htqqodk2g82c4tkc2u2u3kbsc@google.com">
+				<dtstart rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-02-25T07:00:00Z</dtstart>
+				<dtend rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-02-25T08:00:00Z</dtend>
+				<dtstamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-05-27T14:08:36Z</dtstamp>
+				<uid>5htqqodk2g82c4tkc2u2u3kbsc@google.com</uid>
+				<class>PRIVATE</class>
+				<created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-02-19T12:17:14Z</created>
+				<lastModified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-02-19T12:17:14Z</lastModified>
+				<sequence rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</sequence>
+				<status>CONFIRMED</status>
+				<summary>IADIS dead line</summary>
+				<transp>OPAQUE</transp>
+			</Vevent>
+		</component>
+		<component>
+			<Vevent rdf:about="#cvkkvu0lmqcsmrsr0bpt84aeck@google.com">
+				<dtstart rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-05-25T09:00:00Z</dtstart>
+				<dtend rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-05-25T10:00:00Z</dtend>
+				<dtstamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-05-27T14:08:36Z</dtstamp>
+				<uid>cvkkvu0lmqcsmrsr0bpt84aeck@google.com</uid>
+				<class>PRIVATE</class>
+				<created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-05-25T15:49:31Z</created>
+				<description>Meet for a quick lesson</description>
+				<lastModified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-05-25T16:47:02Z</lastModified>
+				<location>On the courts</location>
+				<sequence rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</sequence>
+				<status>CONFIRMED</status>
+				<summary>Basketball</summary>
+				<transp>OPAQUE</transp>
+				<categories>http://schemas.google.com/g/2005#event</categories>
+			</Vevent>
+		</component>
+		<component>
+			<Vevent rdf:about="#001vkgr616n2k990nrcnv9c04o@google.com">
+				<dtstart rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-05-26T17:00:00Z</dtstart>
+				<dtend rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-05-26T18:00:00Z</dtend>
+				<dtstamp rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-05-27T14:08:36Z</dtstamp>
+				<uid>001vkgr616n2k990nrcnv9c04o@google.com</uid>
+				<class>PRIVATE</class>
+				<created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-05-25T15:26:15Z</created>
+				<description>Let's do it!</description>
+				<lastModified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2009-05-26T16:09:22Z</lastModified>
+				<location>In front of DERI</location>
+				<sequence rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</sequence>
+				<status>CONFIRMED</status>
+				<summary>Tennis</summary>
+				<transp>OPAQUE</transp>
+				<categories>http://schemas.google.com/g/2005#event</categories>
+			</Vevent>
+		</component>
+	</Vcalendar>
+</rdf:RDF>

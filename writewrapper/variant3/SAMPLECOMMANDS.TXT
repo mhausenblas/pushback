@@ -1,0 +1,80 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX pb: <http://ld2sd.deri.org/pb/ns#>
+
+INSERT INTO <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm001vkgr616n2k990nrcnv9c04o>
+{
+    <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm> a pb:RDForm ;
+								    pb:field <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.eventid> ;
+								    pb:field <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.title> ;
+								    pb:field <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.starttime> ;
+								    pb:field <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.endtime> ;
+								    pb:field <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.location> .
+    <http://ld2sd.deri.org/pushback/rdforms/calendar.html#crud-op1> a pb:CRUDOperationUPDATE ;
+								pb:onField <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.title> ;
+								pb:onField <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.starttime> ;
+								pb:onField <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.endtime> ;
+								pb:onField <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.location> .
+    <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.eventid> pb:key  <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.eventid.key> ; 
+									  pb:value <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.eventid.value> .
+    <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.eventid.key> rdf:value "ID" .
+    <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.eventid.value> rdf:value "001vkgr616n2k990nrcnv9c04o" .
+    <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.title> pb:key  <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.title.key> ; 
+									  pb:value <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.title.value> .
+    <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.title.key> rdf:value "Title" .
+    <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.title.value> rdf:value "Rugby" .
+    <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.starttime> pb:key  <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.starttime.key> ; 
+									  pb:value <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.starttime.value> .
+    <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.starttime.key> rdf:value "Start time" .
+    <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.starttime.value> rdf:value "2009-05-26T15:00:00Z" .
+    <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.endtime> pb:key  <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.endtime.key> ; 
+									  pb:value <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.endtime.value> .
+    <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.endtime.key> rdf:value "End time" .
+    <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.endtime.value> rdf:value "2009-05-26T19:00:00Z" .
+    <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.location> pb:key  <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.location.key> ; 
+									  pb:value <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.location.value> .
+    <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.location.key> rdf:value "Location" .
+    <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.location.value> rdf:value "Croke park" .
+		 	
+}
+
+SELECT * WHERE {?x ?y ?z}
+
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+DELETE FROM <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForml6tfl2ubfjln9n1vtq4nn9rhks>
+{ <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.title.value> rdf:value "Tennis" . }
+
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX pb: <http://ld2sd.deri.org/pb/ns#>
+
+SELECT ?calendarForm ?eventid ?title ?starttime ?endtime ?location 
+WHERE {
+?calendarForm rdf:type pb:RDForm ;
+              pb:field ?eventidField ;
+              pb:field ?titleField ;
+              pb:field ?starttimeField ;
+              pb:field ?endtimeField ;
+              pb:field ?locationField .
+?eventidField pb:key ?eventidKey ;
+              pb:value ?eventidValue .
+?eventidValue rdf:value ?eventid .
+?eventidKey rdf:value "ID" .
+?titleField pb:key ?titleKey ;
+              pb:value ?titleValue .
+?titleValue rdf:value ?title .
+?titleKey rdf:value "Title" .
+?starttimeField pb:key ?starttimeKey ;
+              pb:value ?starttimeValue .
+?starttimeValue rdf:value ?starttime .
+?starttimeKey rdf:value "Start time" .
+?endtimeField pb:key ?endtimeKey ;
+              pb:value ?endtimeValue .
+?endtimeValue rdf:value ?endtime .
+?endtimeKey rdf:value "End time" .
+?locationField pb:value ?locationValue ; 
+               pb:key ?locationKey .
+?locationValue rdf:value ?location .
+?locationKey rdf:value "Location" .
+}

@@ -21,6 +21,7 @@ function deleteEventWithID($id) {
 	
 	$delete = 'DELETE FROM <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '>';
 	//delete first all triples from the context with the event id
+	echo "Deleted event with ID " . $id;
 	$store->query($delete);
 }
 
@@ -70,6 +71,7 @@ function insertEvent($id, $summary, $starttime, $endtime, $location)
 	
 	//update by inserting the new triples in the context with the event id
 	$store->query($insert);
+	echo "Inserted event with ID " . $id;
 }
 
 function viewTriples() {

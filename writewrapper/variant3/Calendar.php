@@ -214,17 +214,16 @@ function processPageLoad($events)
     requestUserLogin('Please login to your Google Account.');
   } else {
     $client = getAuthSubHttpClient();
-
-	print_r($events);
-
-	while (list($key1, $event) = each($events)) {
 	
+	$storeEventIDs = array();
+	while (list($key1, $event) = each($events)) {
  	  	if (updateEventWithTitle($client, $event["id"], $event["summary"]) != null) {
 			$time = getFormattedTime($event["starttime"]);
 			updateEventWithStartTime($client, $event["id"], $time); //this is tricky: the newValue has to be in the form: yyyy-mm-ddThh:mm, like 2009-05-26T10:00
 			$time = getFormattedTime($event["endtime"]);
 			updateEventWithEndTime($client, $event["id"], $time); //this is tricky: the newValue has to be in the form: yyyy-mm-ddThh:mm, like 2009-05-26T10:00
 			updateEventWithLocation($client, $event["id"], $event["location"]); 
+			array_push($storeEventIDs, trim($event["id"]));
 		}
 		else { //the id is not in the calendar, so create event
 			$startDate = substr($event["starttime"], 0, 10);
@@ -234,12 +233,50 @@ function processPageLoad($events)
 			$newID = createEvent($client, $event["summary"], $event["location"], 
 			$startDate, $startTime, $endDate, $endTime, '+01' );
 			echo "Created event with id= " . $newID; 
-			//update store
+			//update store, replace the old ID with new one (delete+insert)
 			deleteEventWithID($event["id"]);
 			insertEvent($newID, $event["summary"], $event["starttime"], $event["endtime"], $event["location"]);
+			array_push($storeEventIDs, trim(substr($newID, -26)));
 		} 
+		
+	}
+	
+	//delete events
+	$calEventIDs = getEventIDs($client);
+	
+	foreach ($calEventIDs as $calID) {
+		if (!in_array($calID, $storeEventIDs)){ //the event has been deleted from store
+			//delete from calendar
+			if ($event = getEvent($client, $calID)) {
+				$event->delete();
+				echo "<br>The event with id " . $calID . " has been deleted";
+			}
+		}
 	}
   }
+}
+
+function getEventIDs($client){
+	
+  $calEventIDs = array();
+  $gdataCal = new Zend_Gdata_Calendar($client);
+  $query = $gdataCal->newEventQuery();
+  $query->setUser('default');
+  $query->setVisibility('private');
+  $query->setProjection('full');
+
+  // Retrieve the event list from the calendar server
+  try {
+	  $eventFeed = $gdataCal->getCalendarEventFeed($query);
+  } catch (Zend_Gdata_App_Exception $e) {
+	  echo "Error: " . $e->getMessage();
+  }
+
+  // Iterate through the list of events, pushing them in array
+  foreach ($eventFeed as $event) {
+   	  array_push($calEventIDs, substr(trim($event->id), -26));
+  }
+  return $calEventIDs;
 }
 
 function createEvent ($client, $title, $where,

@@ -3,6 +3,9 @@
 include_once("arc/ARC2.php");
 include_once("Calendar.php");
 
+$webID =  trim($_GET["webID"]);
+$mbox = trim($_GET["mbox"]); 
+
 $config = array(
   /* db */
   'db_name' => 'pushback',
@@ -18,44 +21,51 @@ if (!$store->isSetUp()) {
 
 function getFieldValue($fieldKey, $calendarForm, $store) 
 {
-$select = '
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX pb: <http://ld2sd.deri.org/pb/ns#>
-
-SELECT DISTINCT ?value
-WHERE {
-' . $calendarForm . ' rdf:type pb:RDForm ;
-			  pb:field ?field . 
-?field pb:key ?fieldKey ;
-       pb:value ?fieldValue .
-?fieldKey rdf:value "' . $fieldKey . '" .
-?fieldValue rdf:value ?value .
+	global $webID;
+	$select = '
+	PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+	PREFIX pb: <http://ld2sd.deri.org/pb/ns#>
+	
+	SELECT DISTINCT ?value
+	WHERE {
+	GRAPH <' . $webID .'> {
+	' . $calendarForm . ' rdf:type pb:RDForm ;
+				  pb:field ?field . 
+	?field pb:key ?fieldKey ;
+		   pb:value ?fieldValue .
+	?fieldKey rdf:value "' . $fieldKey . '" .
+	?fieldValue rdf:value ?value .
+	}
+	}
+	';
+	
+	$r = '';
+	if ($rows = $store->query($select, 'rows')) {
+	  foreach ($rows as $row) {
+		return $row['value'];
+	  }
+	}
 }
-';
 
-$r = '';
-if ($rows = $store->query($select, 'rows')) {
-  foreach ($rows as $row) {
-    return $row['value'];
-  }
-}
-}
-
+$events = array();
+	
 $select = '
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX pb: <http://ld2sd.deri.org/pb/ns#>
 
 SELECT DISTINCT ?calendarForm
 WHERE {
+GRAPH <' . $webID . '> {
 ?calendarForm rdf:type pb:RDForm 
+FILTER regex(?calendarForm, "/mbox=' . $mbox . '/") 
+}
 }';
 
-$events = array();
 
 $r = '';
 if ($rows = $store->query($select, 'rows')) {
   foreach ($rows as $row) {
- 	$id = getFieldValue("ID", "<" . $row['calendarForm'] . ">", $store); 
+	$id = getFieldValue("ID", "<" . $row['calendarForm'] . ">", $store); 
 	$hash = array();
 	$newSummary = getFieldValue("Title", "<" . $row['calendarForm'] . ">", $store);
 	$newStarttime = getFieldValue("Start time", "<" . $row['calendarForm'] . ">", $store);
@@ -70,6 +80,6 @@ if ($rows = $store->query($select, 'rows')) {
   }
 }
 
-processPageLoad($events); 
+processPageLoad($events, $webID, $mbox); 
 
 ?>

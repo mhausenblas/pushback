@@ -201,7 +201,7 @@ function getAuthSubHttpClient()
  
 include_once("replaceIDinStore.php");
 
-function processPageLoad($events) 
+function processPageLoad($events, $webid, $mbox) 
 {
   
   global $_SESSION, $_GET;
@@ -232,10 +232,11 @@ function processPageLoad($events)
 			$endTime = substr($event["endtime"], 11, 5);
 			$newID = createEvent($client, $event["summary"], $event["location"], 
 			$startDate, $startTime, $endDate, $endTime, '+01' );
-			echo "Created event with id= " . $newID; 
+			//echo "Created event with id= " . $newID; 
+			
 			//update store, replace the old ID with new one (delete+insert)
-			deleteEventWithID($event["id"]);
-			insertEvent($newID, $event["summary"], $event["starttime"], $event["endtime"], $event["location"]);
+			deleteEventWithID($event["id"], $webid, $mbox);
+			insertEvent($newID, $webid, $mbox, $event["summary"], $event["starttime"], $event["endtime"], $event["location"]);
 			array_push($storeEventIDs, trim(substr($newID, -26)));
 		} 
 		
@@ -249,7 +250,7 @@ function processPageLoad($events)
 			//delete from calendar
 			if ($event = getEvent($client, $calID)) {
 				$event->delete();
-				echo "<br>The event with id " . $calID . " has been deleted";
+				//echo "<br>The event with id " . $calID . " has been deleted";
 			}
 		}
 	}

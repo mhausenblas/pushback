@@ -16,16 +16,48 @@ if (!$store->isSetUp()) {
   $store->setUp();
 }
 
-function deleteEventWithID($id) {
+function deleteEventWithID($id, $webID, $mbox) {
 	global $store;
+		
+	$delete = '
+	PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+	PREFIX pb: <http://ld2sd.deri.org/pb/ns#> .
 	
-	$delete = 'DELETE FROM <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '>';
-	//delete first all triples from the context with the event id
-	echo "Deleted event with ID " . $id;
+	DELETE FROM <' . $webID . '> 
+	{
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id .'> a pb:RDForm ;
+										pb:field <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.eventid> ;
+										pb:field <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.title> ;
+										pb:field <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.starttime> ;
+										pb:field <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.endtime> ;
+										pb:field <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.location> .
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.eventid> pb:key  <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.eventid.key> ; 
+										  pb:value <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.eventid.value> .
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.eventid.key> rdf:value "ID" .
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.eventid.value> rdf:value "' . $id . '" .
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.title> pb:key  <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.title.key> ; 
+										  pb:value <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.title.value> .
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.title.key> rdf:value "Title" .
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.title.value> rdf:value ?summary . 
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.starttime> pb:key  <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.starttime.key> ; 
+										  pb:value <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.starttime.value> .
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.starttime.key> rdf:value "Start time" .
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.starttime.value> rdf:value ?starttime .
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.endtime> pb:key  <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.endtime.key> ; 
+										  pb:value <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.endtime.value> .
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.endtime.key> rdf:value "End time" .
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.endtime.value> rdf:value ?endtime .
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.location> pb:key  <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.location.key> ; 
+										  pb:value <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.location.value> .
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.location.key> rdf:value "Location" .
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.location.value> rdf:value ?location .		 	
+	}';
+	
 	$store->query($delete);
+	//echo "<br>Event with id " . $id . " was deleted";
 }
 
-function insertEvent($id, $summary, $starttime, $endtime, $location)
+function insertEvent($id, $webID, $mbox, $summary, $starttime, $endtime, $location)
 {
 	global $store;
 	$id = substr($id, -26);
@@ -33,45 +65,39 @@ function insertEvent($id, $summary, $starttime, $endtime, $location)
 	PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 	PREFIX pb: <http://ld2sd.deri.org/pb/ns#> .
 	
-	INSERT INTO <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id .'>
+	INSERT INTO <' . $webID . '>
 	{
-		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id .'> a pb:RDForm ;
-										pb:field <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.eventid> ;
-										pb:field <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.title> ;
-										pb:field <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.starttime> ;
-										pb:field <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.endtime> ;
-										pb:field <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.location> .
-		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#crud-op1> a pb:CRUDOperationUPDATE ;
-									pb:onField <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.title> ;
-									pb:onField <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.starttime> ;
-									pb:onField <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.endtime> ;
-									pb:onField <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.location> .
-		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.eventid> pb:key  <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.eventid.key> ; 
-										  pb:value <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.eventid.value> .
-		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.eventid.key> rdf:value "ID" .
-		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.eventid.value> rdf:value "' . $id . '" .
-		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.title> pb:key  <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.title.key> ; 
-										  pb:value <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.title.value> .
-		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.title.key> rdf:value "Title" .
-		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.title.value> rdf:value "' . $summary . '" . 
-		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.starttime> pb:key  <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.starttime.key> ; 
-										  pb:value <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.starttime.value> .
-		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.starttime.key> rdf:value "Start time" .
-		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.starttime.value> rdf:value "' . $starttime . '" .
-		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.endtime> pb:key  <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.endtime.key> ; 
-										  pb:value <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.endtime.value> .
-		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.endtime.key> rdf:value "End time" .
-		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.endtime.value> rdf:value "' . $endtime . '" .
-		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.location> pb:key  <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.location.key> ; 
-										  pb:value <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.location.value> .
-		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.location.key> rdf:value "Location" .
-		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm' . $id . '.location.value> rdf:value "' . $location . '" .		 	
-	}
-	';
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id .'> a pb:RDForm ;
+										pb:field <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.eventid> ;
+										pb:field <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.title> ;
+										pb:field <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.starttime> ;
+										pb:field <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.endtime> ;
+										pb:field <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.location> .
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.eventid> pb:key  <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.eventid.key> ; 
+										  pb:value <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.eventid.value> .
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.eventid.key> rdf:value "ID" .
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.eventid.value> rdf:value "' . $id . '" .
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.title> pb:key  <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.title.key> ; 
+										  pb:value <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.title.value> .
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.title.key> rdf:value "Title" .
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.title.value> rdf:value "' . $summary . '" . 
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.starttime> pb:key  <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.starttime.key> ; 
+										  pb:value <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.starttime.value> .
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.starttime.key> rdf:value "Start time" .
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.starttime.value> rdf:value "' . $starttime . '" .
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.endtime> pb:key  <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.endtime.key> ; 
+										  pb:value <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.endtime.value> .
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.endtime.key> rdf:value "End time" .
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.endtime.value> rdf:value "' . $endtime . '" .
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.location> pb:key  <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.location.key> ; 
+										  pb:value <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.location.value> .
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.location.key> rdf:value "Location" .
+		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.location.value> rdf:value "' . $location . '" .		 	
+	}';
 	
 	//update by inserting the new triples in the context with the event id
 	$store->query($insert);
-	echo "Inserted event with ID " . $id;
+	//echo "Inserted event with ID " . $id;
 }
 
 function viewTriples() {

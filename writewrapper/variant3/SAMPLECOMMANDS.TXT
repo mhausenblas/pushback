@@ -42,7 +42,7 @@ SELECT * WHERE {?x ?y ?z}
 
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
-DELETE FROM <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForml6tfl2ubfjln9n1vtq4nn9rhks>
+DELETE FROM <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarFormusap5ul7ilqt5qunpfl7jhk9vg>
 { <http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm.title.value> rdf:value "Tennis" . }
 
 

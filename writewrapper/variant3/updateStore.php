@@ -1,11 +1,52 @@
 <?php
 
+/*
+This script provides functionality for updating an RDF triple store (via SPARQL Update) with Google Calendar events in RDF format.
+For the triple store the script utilizes the ARC2 library. The library can be downloaded from: http://arc.semsol.org/download
+
+There are 3 operation applied to Google calendar events:
+
+1) CREATE event - mapped to SPARQL INSERT query
+2) DELETE event - mapped to SPARQL DELETE query
+3) UPDATE event - mapped to SPARQL DELETE+INSERT query
+
+Parameters overview:
+
+Generally required:
+$operation - create, update or delete
+$webID - the agent's WebID (used to INSERT events in a particular context)
+$mbox - the Google account name of the agent (used to differentiate between calendars inside the same context)
+		For example: an agent with a WebID has two Google account and keeps 2 calendars, one for every Google account
+		
+Required for CREATE event:
+
+$summary - the title of the event (can be blank)
+$starttime - the start time of the event
+$endtime - the end time of the event
+$location - the location of the event (can be blank)
+
+Required for UPDATE event:
+
+$id - the id of the event that needs to be modified
+$summary - the new title of the event (can be remained unchanged)
+$starttime - the new start time of the event (can be remained unchanged)
+$endtime - the new end time of the event (can be remained unchanged)
+$location - the new location of the event (can be remained unchanged)
+
+Required for DELETE event:
+
+$id - the id of the event to delete
+*/
+
+
+//GET the generally required parameters from the client
 $operation = trim($_GET["operation"]);
 $webID =  trim($_GET["webID"]);
 $mbox = trim($_GET["mbox"]); 
 
-include_once("arc/ARC2.php");
+include_once("arc/ARC2.php"); //include the ARC2 library
 
+//connect to the triple store
 $config = array(
   /* db */
   'db_host' => 'localhost', /* optional, default is localhost */
@@ -20,6 +61,15 @@ if (!$store->isSetUp()) {
   $store->setUp();
 }
 
+/**
+ * This function generates a unique ID when an event is created
+ * the ID will be updated when the event will be saved through Google's specific API; 
+ * when saving an event using the Google API the Google event ID is returned
+ * 
+ * $length = the length of the random string
+ *
+ * @return string generated random string
+ */
 function generateID ($length = 8)
 {
   // start with a blank id
@@ -43,6 +93,22 @@ function generateID ($length = 8)
   return $id;
 }
 
+
+/**
+ * This function creates the triples to insert using the RDForms vocabulary, that can be found at:
+ * http://esw.w3.org/topic/PushBackDataToLegacySourcesRDForms
+ * 
+ * $id = the ID of the event
+ * $summary = the title of the event
+ * $starttime = the start time of the event
+ * $endtime = the end time of the event
+ * $location = the location of the event
+ * 
+ * Env variables used:
+ * $mbox = the Google account name
+ *
+ * @return string RDF triples to insert
+ */
 function create_triples($id, $summary, $starttime, $endtime, $location) {
 
 global $mbox;
@@ -78,6 +144,18 @@ return '
 	}';
 }
 
+/**
+ * This function creates the triples to delete
+ * NOTE: instead of specifying the attributes of the event (as done when creating an event, i.e. $location), 
+ * the deletion process doesn't care about the information stored, so it uses wildcards (i.e. ?location)
+ * 
+ * $id = the ID of the event to delete
+ * 
+ * Env variables used:
+ * $mbox = the Google account name
+ *
+ * @return string RDF triples to delete
+ */
 function delete_triples($id) {
 
 global $mbox;
@@ -113,6 +191,17 @@ return '
 	}';
 }
 
+/**
+ * This function reads the operation type (create, update or delete) and updates the ARC2 triple store.
+ * 
+ * Env variables used:
+ * $operation = the operation: create, update, delete
+ * $mbox = the Google account name
+ * $webID = the WebID of the agent
+ * $store - the ARC2 triple store
+ *
+ * @return void
+ */
 function updateStore() {
 	global $operation;
 	global $mbox;
@@ -125,8 +214,9 @@ function updateStore() {
 		$starttime = trim($_GET["starttime"]);
 		$endtime = trim($_GET["endtime"]);
 		$location = trim($_GET["location"]); //optional
-		$id = generateID();
+		$id = generateID(); //required for creating an event - will be updated with acurate ID received from the Google API
 	
+		//triples are inserted into the webID context
 		$insert = '
 		PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 		PREFIX pb: <http://ld2sd.deri.org/pb/ns#> .
@@ -134,14 +224,13 @@ function updateStore() {
 		INSERT INTO <' . $webID . '> 
 		' . create_triples($id, $summary, $starttime, $endtime, $location);
 		
-		//update by inserting the new triples in the context with the event id
 		$store->query($insert);
-		//echo "<br>New event was inserted";
 	}
 	else if ($operation == "delete"){
 		
 		$id = trim($_GET["IDevent"]);
 	
+		//deletes triples from webID context 
 		$delete = '
 		PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 		PREFIX pb: <http://ld2sd.deri.org/pb/ns#> .
@@ -165,7 +254,6 @@ function updateStore() {
 		' . delete_triples($id);
 		
 		$store->query($delete);
-		//echo "<br>Event with id " . $id . " was deleted";
 		
 		//create a new one with the new values
 		$summary = trim($_GET["summary"]); //optional
@@ -180,13 +268,13 @@ function updateStore() {
 		INSERT INTO <' . $webID . '> 
 		' . create_triples($id, $summary, $starttime, $endtime, $location);
 		
-		//update by inserting the new triples in the context with the event id
 		$store->query($insert);
-		//echo "<br>New event was inserted";
 	}
 }
 
 updateStore();
+
+//redirect to the Google authentication request page - the Google calendar will be updated
 header('Location:http://localhost/writewrapper/variant3/updateCalendar.php?webID=' . $webID . '&mbox=' . $mbox);
 
 ?>

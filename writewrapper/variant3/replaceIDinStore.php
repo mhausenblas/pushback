@@ -1,7 +1,14 @@
 <?php
 
+/**
+ * This script provides the functionality to update an event: DELETE + INSERT
+ * Its purpose was to replace an event ID value.
+ * 
+ */
+ 
 include_once("arc/ARC2.php");
 
+//connect to the triple store
 $config = array(
   /* db */
   'db_host' => 'localhost', /* optional, default is localhost */
@@ -16,6 +23,18 @@ if (!$store->isSetUp()) {
   $store->setUp();
 }
 
+/**
+ * This function deletes an event from the triple store
+ * 
+ * $id = the ID of the event to delete
+ * $mbox = the Google account name
+ * $webID = the agent's Web ID
+ * 
+ * Env variables used:
+ * $store = the triple store
+ *
+ * @return void
+ */
 function deleteEventWithID($id, $webID, $mbox) {
 	global $store;
 		
@@ -54,9 +73,25 @@ function deleteEventWithID($id, $webID, $mbox) {
 	}';
 	
 	$store->query($delete);
-	//echo "<br>Event with id " . $id . " was deleted";
 }
 
+/**
+ * This function inserts triples for a new event in the triple store, it uses the RDForms vocabulary, that can be found at:
+ * http://esw.w3.org/topic/PushBackDataToLegacySourcesRDForms
+ * 
+ * $id = the ID of the event
+ * $webID = the agent's web ID
+ * $summary = the title of the event
+ * $starttime = the start time of the event
+ * $endtime = the end time of the event
+ * $location = the location of the event
+ * 
+ * Env variables used:
+ * $mbox = the Google account name
+ * $store = the triple store
+ *
+ * @return void
+ */
 function insertEvent($id, $webID, $mbox, $summary, $starttime, $endtime, $location)
 {
 	global $store;
@@ -95,21 +130,7 @@ function insertEvent($id, $webID, $mbox, $summary, $starttime, $endtime, $locati
 		<http://ld2sd.deri.org/pushback/rdforms/calendar.html#calendarForm/mbox=' . $mbox . '/id=' .  $id . '.location.value> rdf:value "' . $location . '" .		 	
 	}';
 	
-	//update by inserting the new triples in the context with the event id
 	$store->query($insert);
-	//echo "Inserted event with ID " . $id;
-}
-
-function viewTriples() {
-	$q = 'SELECT * WHERE {?x ?y ?z}';
-	$r = '';
-	if ($rows = $store->query($q, 'rows')) {
-	  foreach ($rows as $row) {
-		$r .= '<li>' . $row['x'] . '  |||  ' . $row['y'] . '  |||  ' . $row['z'] . '</li>';
-	  }
-	}
-	
-	echo $r ? '<ul>' . $r . '</ul>' : 'no triples have been added';
 }
 
 ?>

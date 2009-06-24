@@ -191,21 +191,36 @@ function getAuthSubHttpClient()
   return $client;
 }
 
-/**
- * Processes loading of this sample code through a web browser.  Uses AuthSub
- * authentication and outputs a list of a user's calendars if succesfully 
- * authenticated.
- *
- * @return void
- */
  
 include_once("replaceIDinStore.php");
 
+
+/**
+ * Updates the Google calendar.
+ * Uses the events from the ARC2 triple store.
+ *
+ * $events = the array holding the events from the triple store, for a particular agent webID and Google account name
+ * $webid = the agent's webid
+ * $mbox = the agent's Google account name
+ *
+ * For every event in the $events array the code tries to update the calendar. 
+ * If the ID of the event to update does not exist then we make the assumption that the event is new, 
+ * so the code creates a new event using the Google API. The Google API thus returns the newly created event ID. 
+ * The information from the triple store will be updated with the new ID value.
+ * If the ID exists, the event's information is updated.
+ *
+ * To determine which events will be deleted (if any), the function gets all the ID event names 
+ * from the online calendar and compares them to the ID event names in the given $events array. If an event ID name cannot be found in $events
+ * then it'll be deleted from the online Google calendar.
+ *
+ * @return void
+ */
 function processPageLoad($events, $webid, $mbox) 
 {
   
   global $_SESSION, $_GET;
   
+  //file used to write the error logs
   if (file_exists("error_log.txt")) {
   	unlink("error_log.txt");
   }
@@ -257,6 +272,13 @@ function processPageLoad($events, $webid, $mbox)
   }
 }
 
+/**
+ * Returns an array with all event IDs
+ * 
+ * $client = Zend_Http_Client
+ *
+ * @return array of all event IDs
+ */
 function getEventIDs($client){
 	
   $calEventIDs = array();
@@ -280,6 +302,22 @@ function getEventIDs($client){
   return $calEventIDs;
 }
 
+/**
+ * Creates a new event.
+ *
+ * $client = Zend_Http_Client
+ * $title = the title of the event 
+ * $where = the location of the event
+ * 
+ * Set the date using RFC 3339 format.
+ * $startDate = the start date of the event, e.g. 20-10-2009 
+ * $startTime = the start time of the event, e.g. 10:00
+ * $endDate = the end date of the event, e.g. 21-10-2009 
+ * $endTime = the end time of the event, e.g. 12:00 
+ * $tzOffset = GMT offset e.g. +01
+ *
+ * @return event ID
+ */
 function createEvent ($client, $title, $where,
     $startDate, $startTime, $endDate, $endTime, $tzOffset)
 {
@@ -313,7 +351,7 @@ function insertSymbol($string, $position, $symbol) {
 	return $rest;
 }
 
-//for a time in format yyymmddThhmmssZ it returns yyyy-mm-ddThh:mm => what Google API understands
+//for a time in format yyymmddThhmmssZ it returns yyyy-mm-ddThh:mm => Google API uses RFC 3339 format
 function getFormattedTime($time){
 	return substr($time, 0, -4);
 	//$rest = substr($time, 0, -3); //yyymmddThhmm
@@ -347,8 +385,7 @@ function getEvent($client, $eventId)
 
 /**
  * Updates the title of the event with the specified ID to be
- * the title specified.  Also outputs the new and old title
- * with HTML br elements separating the lines
+ * the title specified.  
  *
  * @param  Zend_Http_Client $client   The authenticated client object
  * @param  string           $eventId  The event ID string
@@ -374,6 +411,15 @@ function updateEventWithTitle ($client, $eventId, $newTitle)
   }
 }
 
+/**
+ * Updates the start time of the event with the specified ID to be
+ * the start time specified.  
+ *
+ * @param  Zend_Http_Client $client   The authenticated client object
+ * @param  string           $eventId  The event ID string
+ * @param  string           $startTime The new start time to set on this event 
+ * @return Zend_Gdata_Calendar_EventEntry|null The updated entry
+ */
 function updateEventWithStartTime ($client, $eventId, $startTime)
 {
   $tzOffset = "+01";
@@ -398,7 +444,16 @@ function updateEventWithStartTime ($client, $eventId, $startTime)
     }
   } 
 }
-  
+ 
+/**
+ * Updates the end time of the event with the specified ID to be
+ * the end time specified. 
+ *
+ * @param  Zend_Http_Client $client   The authenticated client object
+ * @param  string           $eventId  The event ID string
+ * @param  string           $endTime The new end time to set on this event 
+ * @return Zend_Gdata_Calendar_EventEntry|null The updated entry
+ */
 function updateEventWithEndTime ($client, $eventId, $endTime)
 {
   $tzOffset = "+01";
@@ -425,6 +480,15 @@ function updateEventWithEndTime ($client, $eventId, $endTime)
   } 
 }
 
+/**
+ * Updates the location of the event with the specified ID to be
+ * the location specified.  
+ *
+ * @param  Zend_Http_Client $client   The authenticated client object
+ * @param  string           $eventId  The event ID string
+ * @param  string           $location The new location to set on this event 
+ * @return Zend_Gdata_Calendar_EventEntry|null The updated entry
+ */
 function updateEventWithLocation ($client, $eventId, $location)
 {
   $gdataCal = new Zend_Gdata_Calendar($client);

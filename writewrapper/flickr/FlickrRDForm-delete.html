@@ -1,0 +1,104 @@
+<div xmlns:xsd ="http://www.w3.org/2001/XMLSchema#" 
+ xmlns:dcterms="http://purl.org/dc/terms/" 
+ xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"  
+ xmlns:pb="http://rdfs.org/ns/rdforms#">
+
+<!-- START OF FORM {flickrForm} -->
+<form id="flickrForm" action="delete_photos.php" method="GET" about="http://ld2sd.deri.org/pushback/rdforms/test.html#flickrForm" typeof="pb:RDForm">
+
+<table cellpadding="5px">
+ <!-- START OF CRUD OPERATION FOR FIELD {deletePhoto} -->
+ <div rel="pb:operation">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#deletePhoto" typeof="http://rdfs.org/ns/rdforms#CRUDOperationDELETE">
+   <span rel="pb:onField" resource="null" />
+  </div>
+ </div>
+ <!-- END OF CRUD OPERATION FOR FIELD {deletePhoto} -->
+ 
+ <!-- START OF FIELD {photoID} -->
+ <tr>
+ <div rel="pb:field">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#photoID" typeof="pb:UpdateableField">
+   <!-- START OF FIELD KEY {photoID} -->
+   <td><label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#photoID.key" property="dcterms:title">Photo ID</label>:<br /></td> 
+   <!-- START OF FIELD VALUE {photoID} -->
+   <td>
+   <div rel="pb:value">
+    <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#photoID" typeof="pb:FieldValue">     
+     <input type="text" id="photoID" name="photoID" property="rdf:value" content="" value="289706384" size="0" maxlength="30" />
+    </div>
+   </div>
+   </td>
+ <!-- END OF FIELD VALUE {photoID} -->  
+  </div>
+ </div>
+ </tr>
+ <!-- END OF FIELD {photoID} -->
+ 
+ <!-- START OF FIELD {webid} -->
+ <tr>
+ <div rel="pb:field">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#webid" typeof="pb:UpdateableField">
+   <!-- START OF FIELD KEY {webid} -->
+   <td><label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#webid.key" property="dcterms:title">webID</label>:<br /></td>
+   <!-- START OF FIELD VALUE {webid} -->
+   <td>
+   <div rel="pb:value">
+    <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#webid" typeof="pb:FieldValue">     
+     <input type="text" id="webID" name="webID" property="rdf:value" content="" value="oanawebid" size="0" maxlength="30" />
+    </div>
+   </div>
+   </td>
+ <!-- END OF FIELD VALUE {webid} -->  
+  </div>
+ </div>
+ </tr>
+ <!-- END OF FIELD {webid} -->
+ 
+ <!-- START OF FIELD {Flickr account} -->
+ <tr>
+ <div rel="pb:field">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#account" typeof="pb:UpdateableField">
+   <!-- START OF FIELD KEY {Flickr account} -->
+   <td><label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#account.key" property="dcterms:title">Flickr account</label>:<br /></td>
+   <!-- START OF FIELD VALUE {Flickr account} -->
+   <td>
+   <div rel="pb:value">
+    <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#account" typeof="pb:FieldValue">     
+     <input type="text" id="account" name="account" property="rdf:value" content="" value="oana_ureche2000@yahoo.com" size="0" maxlength="30" />
+    </div>
+   </div>
+   </td>
+ <!-- END OF FIELD VALUE {Flickr account} -->  
+  </div>
+ </div>
+ </tr>
+ <!-- END OF FIELD {Flickr account} -->
+ 
+ <!-- START OF FIELD {operation} -->
+ <tr>
+ <div rel="pb:field">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#operation" typeof="pb:UpdateableField">
+   <!-- START OF FIELD KEY {operation} -->
+   <td><label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#operation.key" property="dcterms:title">Operation</label>:<br /></td>
+   <!-- START OF FIELD VALUE {operation} -->
+   <td>
+   <div rel="pb:value">
+    <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#operation" typeof="pb:FieldValue">     
+     <input type="text" id="operation" name="operation" property="rdf:value" content="" value="delete" size="0" maxlength="30" />
+    </div>
+   </div>
+   </td>
+ <!-- END OF FIELD VALUE {operation} -->  
+  </div>
+ </div>
+ </tr>
+ <!-- END OF FIELD {operation} -->
+</table>
+ <input type="submit" name="update" value="update" id="update-submit"/>
+
+</form>
+<!-- END OF FORM {flickrForm} -->
+
+</div>

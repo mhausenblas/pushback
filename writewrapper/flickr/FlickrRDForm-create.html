@@ -1,0 +1,233 @@
+<div xmlns:xsd ="http://www.w3.org/2001/XMLSchema#" 
+ xmlns:dcterms="http://purl.org/dc/terms/" 
+ xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"  
+ xmlns:pb="http://rdfs.org/ns/rdforms#">
+
+<!-- START OF FORM {flickrForm} -->
+<form id="flickrForm" action="create_photos.php" method="GET" about="http://ld2sd.deri.org/pushback/rdforms/test.html#flickrForm" typeof="pb:RDForm">
+
+<table cellpadding="5px">
+ <!-- START OF CRUD OPERATION FOR FIELD {uploadPhoto} -->
+ <div rel="pb:operation">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#uploadPhoto" typeof="http://rdfs.org/ns/rdforms#CRUDOperationCREATE">
+   <span rel="pb:onField" resource="null" />
+  </div>
+ </div>
+ <!-- END OF CRUD OPERATION FOR FIELD {uploadPhoto} -->
+ 
+ <!-- START OF FIELD {photo} -->
+ <tr>
+ <div rel="pb:field">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#photo" typeof="pb:UpdateableField">
+   <!-- START OF FIELD KEY {photo} -->
+   <td><label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#photo.key" property="dcterms:title">Photo</label>:<br /></td> 
+   <!-- START OF FIELD VALUE {photo} -->
+   <td>
+   <div rel="pb:value">
+    <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#photo" typeof="pb:FieldValue">     
+     <input type="file" id="photo" name="photo" property="rdf:value" content="" value="andrei.jpg" size="0" maxlength="30" />
+    </div>
+   </div>
+   </td>
+ <!-- END OF FIELD VALUE {photo} -->  
+  </div>
+ </div>
+ </tr>
+ <!-- END OF FIELD {photo} -->
+ 
+ <!-- START OF FIELD {title} -->
+ <tr>
+ <div rel="pb:field">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#title" typeof="pb:UpdateableField">
+   <!-- START OF FIELD KEY {title} -->
+   <td><label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#title.key" property="dcterms:title">Title</label>:<br /></td> 
+   <!-- START OF FIELD VALUE {title} -->
+   <td>
+   <div rel="pb:value">
+    <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#title" typeof="pb:FieldValue">     
+     <input type="text" id="title" name="title" property="rdf:value" content="" value="Andrei" size="0" maxlength="30" />
+    </div>
+   </div>
+   </td>
+ <!-- END OF FIELD VALUE {title} -->  
+  </div>
+ </div>
+ </tr>
+ <!-- END OF FIELD {title} -->
+ 
+ <!-- START OF FIELD {description} -->
+ <tr>
+ <div rel="pb:field">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#description" typeof="pb:UpdateableField">
+   <!-- START OF FIELD KEY {description} -->
+   <td><label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#description.key" property="dcterms:title">Description</label>:<br /></td>
+   <!-- START OF FIELD VALUE {description} -->
+   <td>
+   <div rel="pb:value">
+    <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#description" typeof="pb:FieldValue">     
+     <input type="text" id="description" name="description" property="rdf:value" content="" value="Andrei at 6 months" size="0" maxlength="30" />
+    </div>
+   </div>
+   </td>
+ <!-- END OF FIELD VALUE {description} -->  
+  </div>
+ </div>
+ </tr>
+ <!-- END OF FIELD {description} -->
+ 
+ <!-- START OF FIELD {tags} -->
+ <tr>
+ <div rel="pb:field">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#tags" typeof="pb:UpdateableField">
+   <!-- START OF FIELD KEY {tags} -->
+   <td><label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#tags.key" property="dcterms:title">Tags</label>:<br /></td>
+   <!-- START OF FIELD VALUE {tags} -->
+   <td>
+   <div rel="pb:value">
+    <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#tags" typeof="pb:FieldValue">     
+     <input type="text" id="tags" name="tags" property="rdf:value" content="" value="nephew, boy, 6 months" size="0" maxlength="30" />
+    </div>
+   </div>
+   </td>
+ <!-- END OF FIELD VALUE {tags} -->  
+  </div>
+ </div>
+ </tr>
+ <!-- END OF FIELD {tags} -->
+
+ <!-- START OF FIELD {is_public} -->
+ <tr>
+ <div rel="pb:field">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#is_public" typeof="pb:UpdateableField">
+   <!-- START OF FIELD KEY {is_public} -->
+   <td><label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#is_public.key" property="dcterms:title">Is public</label>:<br /></td>
+   <!-- START OF FIELD VALUE {is_public} -->
+   <td>
+   <div rel="pb:value">
+    <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#is_public" typeof="pb:FieldValue">     
+	 <select id="is_public" name="is_public" property="rdf:value">
+	  <option>0</option>
+	  <option>1</option>
+     </select> 
+    </div>
+   </div>
+   </td>
+ <!-- END OF FIELD VALUE {is_public} -->  
+  </div>
+ </div>
+ </tr>
+ <!-- END OF FIELD {is_public} -->
+ 
+ <!-- START OF FIELD {is_friend} -->
+ <tr>
+ <div rel="pb:field">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#is_friend" typeof="pb:UpdateableField">
+   <!-- START OF FIELD KEY {is_friend} -->
+   <td><label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#is_friend.key" property="dcterms:title">Is friend</label>:<br /></td>
+   <!-- START OF FIELD VALUE {is_friend} -->
+   <td>
+   <div rel="pb:value">
+    <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#is_friend" typeof="pb:FieldValue">     
+     <select id="is_friend" name="is_friend" property="rdf:value">
+	  <option>0</option>
+	  <option>1</option>
+     </select> 
+    </div>
+   </div>
+   </td>
+ <!-- END OF FIELD VALUE {is_friend} -->  
+  </div>
+ </div>
+ </tr>
+ <!-- END OF FIELD {is_friend} -->
+ 
+ <!-- START OF FIELD {is_family} -->
+ <tr>
+ <div rel="pb:field">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#is_family" typeof="pb:UpdateableField">
+   <!-- START OF FIELD KEY {is_family} -->
+   <td><label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#is_family.key" property="dcterms:title">Is family</label>:<br /></td>
+   <!-- START OF FIELD VALUE {is_family} -->
+   <td>
+   <div rel="pb:value">
+    <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#is_family" typeof="pb:FieldValue">     
+     <select id="is_family" name="is_family" property="rdf:value">
+	  <option>0</option>
+	  <option>1</option>
+     </select> 
+    </div>
+   </div>
+   </td>
+ <!-- END OF FIELD VALUE {is_family} -->  
+  </div>
+ </div>
+ </tr>
+ <!-- END OF FIELD {is_family} -->
+ 
+ <!-- START OF FIELD {webid} -->
+ <tr>
+ <div rel="pb:field">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#webid" typeof="pb:UpdateableField">
+   <!-- START OF FIELD KEY {webid} -->
+   <td><label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#webid.key" property="dcterms:title">webID</label>:<br /></td>
+   <!-- START OF FIELD VALUE {webid} -->
+   <td>
+   <div rel="pb:value">
+    <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#webid" typeof="pb:FieldValue">     
+     <input type="text" id="webID" name="webID" property="rdf:value" content="" value="oanawebid" size="0" maxlength="30" />
+    </div>
+   </div>
+   </td>
+ <!-- END OF FIELD VALUE {webid} -->  
+  </div>
+ </div>
+ </tr>
+ <!-- END OF FIELD {webid} -->
+ 
+ <!-- START OF FIELD {Flickr account} -->
+ <tr>
+ <div rel="pb:field">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#account" typeof="pb:UpdateableField">
+   <!-- START OF FIELD KEY {Flickr account} -->
+   <td><label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#account.key" property="dcterms:title">Flickr account</label>:<br /></td>
+   <!-- START OF FIELD VALUE {Flickr account} -->
+   <td>
+   <div rel="pb:value">
+    <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#account" typeof="pb:FieldValue">     
+     <input type="text" id="account" name="account" property="rdf:value" content="" value="oana_ureche2000@yahoo.com" size="0" maxlength="30" />
+    </div>
+   </div>
+   </td>
+ <!-- END OF FIELD VALUE {Flickr account} -->  
+  </div>
+ </div>
+ </tr>
+ <!-- END OF FIELD {Flickr account} -->
+ 
+ <!-- START OF FIELD {operation} -->
+ <tr>
+ <div rel="pb:field">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#operation" typeof="pb:UpdateableField">
+   <!-- START OF FIELD KEY {operation} -->
+   <td><label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#operation.key" property="dcterms:title">Operation</label>:<br /></td>
+   <!-- START OF FIELD VALUE {operation} -->
+   <td>
+   <div rel="pb:value">
+    <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#operation" typeof="pb:FieldValue">     
+     <input type="text" id="operation" name="operation" property="rdf:value" content="" value="upload" size="0" maxlength="30" />
+    </div>
+   </div>
+   </td>
+ <!-- END OF FIELD VALUE {operation} -->  
+  </div>
+ </div>
+ </tr>
+ <!-- END OF FIELD {operation} -->
+</table>
+ <input type="submit" name="update" value="update" id="update-submit"/>
+
+</form>
+<!-- END OF FORM {flickrForm} -->
+
+</div>

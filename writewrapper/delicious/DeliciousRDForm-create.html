@@ -1,0 +1,209 @@
+<div xmlns:xsd ="http://www.w3.org/2001/XMLSchema#" 
+ xmlns:dcterms="http://purl.org/dc/terms/" 
+ xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"  
+ xmlns:pb="http://rdfs.org/ns/rdforms#">
+
+<!-- START OF FORM {deliciousForm} -->
+<form id="deliciousForm" action="create_bookmark.php" method="GET" about="http://ld2sd.deri.org/pushback/rdforms/test.html#flickrForm" typeof="pb:RDForm">
+
+<table cellpadding="5px">
+ <!-- START OF CRUD OPERATION FOR FIELD {createBookmark} -->
+ <div rel="pb:operation">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#createBookmark" typeof="http://rdfs.org/ns/rdforms#CRUDOperationCREATE">
+   <span rel="pb:onField" resource="null" />
+  </div>
+ </div>
+ <!-- END OF CRUD OPERATION FOR FIELD {createBookmark} -->
+ 
+ <!-- START OF FIELD {url} -->
+ <tr>
+ <div rel="pb:field">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#url" typeof="pb:UpdateableField">
+   <!-- START OF FIELD KEY {url} -->
+   <td><label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#url.key" property="dcterms:title">URL</label>:<br /></td> 
+   <!-- START OF FIELD VALUE {url} -->
+   <td>
+   <div rel="pb:value">
+    <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#url" typeof="pb:FieldValue">     
+     <input type="text" id="url" name="url" property="rdf:value" content="" value="http://example.org" size="0" maxlength="30" />
+    </div>
+   </div>
+   </td>
+ <!-- END OF FIELD VALUE {url} -->  
+  </div>
+ </div>
+ </tr>
+ <!-- END OF FIELD {url} -->
+ 
+ <!-- START OF FIELD {description} -->
+ <tr>
+ <div rel="pb:field">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#description" typeof="pb:UpdateableField">
+   <!-- START OF FIELD KEY {description} -->
+   <td><label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#description.key" property="dcterms:title">Decription</label>:<br /></td> 
+   <!-- START OF FIELD VALUE {description} -->
+   <td>
+   <div rel="pb:value">
+    <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#description" typeof="pb:FieldValue">     
+     <input type="text" id="description" name="description" property="rdf:value" content="" value="An example site" size="0" maxlength="30" />
+    </div>
+   </div>
+   </td>
+ <!-- END OF FIELD VALUE {description} -->  
+  </div>
+ </div>
+ </tr>
+ <!-- END OF FIELD {description} -->
+ 
+ <!-- START OF FIELD {notes} -->
+ <tr>
+ <div rel="pb:field">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#notes" typeof="pb:UpdateableField">
+   <!-- START OF FIELD KEY {notes} -->
+   <td><label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#notes.key" property="dcterms:title">Notes (optional)</label>:<br /></td>
+   <!-- START OF FIELD VALUE {notes} -->
+   <td>
+   <div rel="pb:value">
+    <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#notes" typeof="pb:FieldValue">     
+     <input type="text" id="notes" name="notes" property="rdf:value" content="" value="" size="0" maxlength="30" />
+    </div>
+   </div>
+   </td>
+ <!-- END OF FIELD VALUE {notes} -->  
+  </div>
+ </div>
+ </tr>
+ <!-- END OF FIELD {notes} -->
+ 
+ <!-- START OF FIELD {tags} -->
+ <tr>
+ <div rel="pb:field">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#tags" typeof="pb:UpdateableField">
+   <!-- START OF FIELD KEY {tags} -->
+   <td><label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#tags.key" property="dcterms:title">Tags (optional)</label>:<br /></td>
+   <!-- START OF FIELD VALUE {tags} -->
+   <td>
+   <div rel="pb:value">
+    <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#tags" typeof="pb:FieldValue">     
+     <input type="text" id="tags" name="tags" property="rdf:value" content="" value="" size="0" maxlength="30" />
+    </div>
+   </div>
+   </td>
+ <!-- END OF FIELD VALUE {tags} -->  
+   <td><label>space delimited</label></td>
+  </div>
+ </div>
+ </tr>
+ <!-- END OF FIELD {tags} -->
+
+ <!-- START OF FIELD {datestamp} -->
+ <tr>
+ <div rel="pb:field">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#datestamp" typeof="pb:UpdateableField">
+   <!-- START OF FIELD KEY {datestamp} -->
+   <td><label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#datestamp.key" property="dcterms:title">Date Stamp (optional)</label>:<br /></td>
+   <!-- START OF FIELD VALUE {datestamp} -->
+   <td>
+   <div rel="pb:value">
+    <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#datestamp" typeof="pb:FieldValue">     
+	  <input type="text" id="datestamp" name="datestamp" property="rdf:value" content="" value="" size="0" maxlength="30" />
+    </div>
+   </div>
+   </td>
+ <!-- END OF FIELD VALUE {datestamp} -->  
+   <td><label>(CCYY-MM-DDThh:mm:ssZ)</label></td> 
+  </div>
+ </div>
+ </tr>
+ <!-- END OF FIELD {datestamp} -->
+ 
+ <!-- START OF FIELD {shared} -->
+ <tr>
+ <div rel="pb:field">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#shared" typeof="pb:UpdateableField">
+   <!-- START OF FIELD KEY {shared} -->
+   <td><label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#shared.key" property="dcterms:title">Shared</label>:<br /></td>
+   <!-- START OF FIELD VALUE {shared} -->
+   <td>
+   <div rel="pb:value">
+    <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#shared" typeof="pb:FieldValue">     
+     <select id="shared" name="shared" property="rdf:value">
+	  <option>no</option>
+	  <option>yes</option>
+     </select> 
+    </div>
+   </div>
+   </td>
+ <!-- END OF FIELD VALUE {shared} -->  
+  </div>
+ </div>
+ </tr>
+ <!-- END OF FIELD {shared} -->
+ 
+ <!-- START OF FIELD {webid} -->
+ <tr>
+ <div rel="pb:field">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#webid" typeof="pb:UpdateableField">
+   <!-- START OF FIELD KEY {webid} -->
+   <td><label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#webid.key" property="dcterms:title">webID</label>:<br /></td>
+   <!-- START OF FIELD VALUE {webid} -->
+   <td>
+   <div rel="pb:value">
+    <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#webid" typeof="pb:FieldValue">     
+     <input type="text" id="webID" name="webID" property="rdf:value" content="" value="oanawebid" size="0" maxlength="30" />
+    </div>
+   </div>
+   </td>
+ <!-- END OF FIELD VALUE {webid} -->  
+  </div>
+ </div>
+ </tr>
+ <!-- END OF FIELD {webid} -->
+ 
+ <!-- START OF FIELD {Delicious account} -->
+ <tr>
+ <div rel="pb:field">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#account" typeof="pb:UpdateableField">
+   <!-- START OF FIELD KEY {Delicious account} -->
+   <td><label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#account.key" property="dcterms:title">Delicious account</label>:<br /></td>
+   <!-- START OF FIELD VALUE {Delicious account} -->
+   <td>
+   <div rel="pb:value">
+    <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#account" typeof="pb:FieldValue">     
+     <input type="text" id="account" name="account" property="rdf:value" content="" value="oanure" size="0" maxlength="30" />
+    </div>
+   </div>
+   </td>
+ <!-- END OF FIELD VALUE {Delicious account} -->  
+  </div>
+ </div>
+ </tr>
+ <!-- END OF FIELD {Delicious account} -->
+ 
+ <!-- START OF FIELD {operation} -->
+ <tr>
+ <div rel="pb:field">
+  <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#operation" typeof="pb:UpdateableField">
+   <!-- START OF FIELD KEY {operation} -->
+   <td><label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#operation.key" property="dcterms:title">Operation</label>:<br /></td>
+   <!-- START OF FIELD VALUE {operation} -->
+   <td>
+   <div rel="pb:value">
+    <div about="http://ld2sd.deri.org/pushback/rdforms/test.html#operation" typeof="pb:FieldValue">     
+     <input type="text" id="operation" name="operation" property="rdf:value" content="" value="upload" size="0" maxlength="30" />
+    </div>
+   </div>
+   </td>
+ <!-- END OF FIELD VALUE {operation} -->  
+  </div>
+ </div>
+ </tr>
+ <!-- END OF FIELD {operation} -->
+</table>
+ <input type="submit" name="update" value="create" id="update-submit"/>
+
+</form>
+<!-- END OF FORM {deliciousForm} -->
+
+</div>

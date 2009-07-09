@@ -1,0 +1,71 @@
+<?xml version ='1.0' encoding ='UTF-8' ?>
+<definitions name='DeliciousCreateBookmark'
+  targetNamespace='http://example.org/DeliciousCreateBookmark'
+  xmlns:tns='http://example.org/DeliciousCreateBookmark'
+  xmlns:soap='http://schemas.xmlsoap.org/wsdl/soap/'
+  xmlns:xsd='http://www.w3.org/2001/XMLSchema'
+  xmlns:soapenc='http://schemas.xmlsoap.org/soap/encoding/'
+  xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'
+  xmlns='http://schemas.xmlsoap.org/wsdl/'>
+
+<message name='createBookmarkRequest'>
+  <part name='url' type='xsd:string'/>
+  <part name='title' type='xsd:string'/>
+  <part name='notes' type='xsd:string'/>
+  <part name='tags' type='xsd:string'/>
+  <part name='shared' type='xsd:string'/>
+</message>
+<message name='createBookmarkResponse'>
+  <part name='Result' type='xsd:string'/>
+</message>
+
+<message name='deleteBookmarkRequest'>
+  <part name='url' type='xsd:string'/>
+</message>
+<message name='deleteBookmarkResponse'>
+  <part name='Result' type='xsd:string'/>
+</message>
+
+<portType name='DeliciousServicePortType'>
+  <operation name='create'>
+    <input message='createBookmarkRequest'/>
+    <output message='createBookmarkResponse'/>
+  </operation>
+  <operation name='deleteb'>
+    <input message='deleteBookmarkRequest'/>
+    <output message='deleteBookmarkResponse'/>
+  </operation>
+</portType>
+
+<binding name='DeliciousServiceBinding' type='DeliciousServicePortType'>
+  <soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http'/>
+  <operation name='create'>
+    <soap:operation soapAction='http://example.org/create'/>
+    <input>
+      <soap:body use='encoded' namespace='http://example.org/'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </input>
+    <output>
+      <soap:body use='encoded' namespace='http://example.org/'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </output>
+  </operation>
+  <operation name='deleteb'>
+    <soap:operation soapAction='http://example.org/deleteb'/>
+    <input>
+      <soap:body use='encoded' namespace='http://example.org/'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </input>
+    <output>
+      <soap:body use='encoded' namespace='http://example.org/'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </output>
+  </operation>
+</binding>
+
+<service name='DeliciousService'>
+  <port name='DeliciousServicePort' binding='DeliciousServiceBinding'>
+    <soap:address location='http://localhost/writewrapper/ws_soap_wsdl/DeliciousService/server.php'/>
+  </port>
+</service>
+</definitions>

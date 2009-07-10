@@ -18,6 +18,21 @@ class DeliciousService {
 	return $status;
   }
   
+  function update($url, $title, $notes, $tags, $shared) {
+	
+	$dlc = &new Services_Delicious("oanure", "del1c10us");
+
+	$result = $dlc->addPost($url, $title, $notes, $tags, null, "yes", $shared);
+	
+	if (PEAR::isError($result)) {
+		$status = "Failed";
+		die($result->getMessage());
+	} else {
+    	$status = "Success";
+	}
+	return $status;
+  }
+  
   function deleteb($url) {
 	
 	$dlc = &new Services_Delicious("oanure", "del1c10us");

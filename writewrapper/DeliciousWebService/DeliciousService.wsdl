@@ -8,14 +8,14 @@
   xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'
   xmlns='http://schemas.xmlsoap.org/wsdl/'>
 
-<message name='createBookmarkRequest'>
+<message name='createupdateBookmarkRequest'>
   <part name='url' type='xsd:string'/>
   <part name='title' type='xsd:string'/>
   <part name='notes' type='xsd:string'/>
   <part name='tags' type='xsd:string'/>
   <part name='shared' type='xsd:string'/>
 </message>
-<message name='createBookmarkResponse'>
+<message name='createupdateBookmarkResponse'>
   <part name='Result' type='xsd:string'/>
 </message>
 
@@ -28,8 +28,12 @@
 
 <portType name='DeliciousServicePortType'>
   <operation name='create'>
-    <input message='createBookmarkRequest'/>
-    <output message='createBookmarkResponse'/>
+    <input message='createupdateBookmarkRequest'/>
+    <output message='createupdateBookmarkResponse'/>
+  </operation>
+  <operation name='update'>
+    <input message='createupdateBookmarkRequest'/>
+    <output message='createupdateBookmarkResponse'/>
   </operation>
   <operation name='deleteb'>
     <input message='deleteBookmarkRequest'/>
@@ -41,6 +45,17 @@
   <soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http'/>
   <operation name='create'>
     <soap:operation soapAction='http://example.org/create'/>
+    <input>
+      <soap:body use='encoded' namespace='http://example.org/'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </input>
+    <output>
+      <soap:body use='encoded' namespace='http://example.org/'
+        encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>
+    </output>
+  </operation>
+  <operation name='update'>
+    <soap:operation soapAction='http://example.org/update'/>
     <input>
       <soap:body use='encoded' namespace='http://example.org/'
         encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'/>

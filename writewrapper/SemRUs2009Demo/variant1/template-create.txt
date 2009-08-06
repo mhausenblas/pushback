@@ -1,0 +1,36 @@
+INSERT INTO <$$webid$$> 
+ {
+<http://ld2sd.deri.org/pushback/rdforms/test.html#deliciousFormxxx> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ld2sd.deri.org/pb/ns#RDForm> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#deliciousFormxxx> <http://ld2sd.deri.org/pb/ns#operation> <http://ld2sd.deri.org/pushback/rdforms/test.html#crud-op1xxx> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#crud-op1xxx> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ld2sd.deri.org/pb/ns#CRUDOperationCREATE> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#deliciousFormxxx> <http://ld2sd.deri.org/pb/ns#field> <http://ld2sd.deri.org/pushback/rdforms/test.html#urlxxx> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#urlxxx> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ld2sd.deri.org/pb/ns#UpdateableField> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#urlxxx> <http://ld2sd.deri.org/pb/ns#key> <http://ld2sd.deri.org/pushback/rdforms/test.html#url.keyxxx> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#url.keyxxx> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> "URL" . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#urlxxx> <http://ld2sd.deri.org/pb/ns#value> <http://ld2sd.deri.org/pushback/rdforms/test.html#url.valxxx> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#url.valxxx> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> "$$url$$" . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#deliciousFormxxx> <http://ld2sd.deri.org/pb/ns#field> <http://ld2sd.deri.org/pushback/rdforms/test.html#titlexxx> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#titlexxx> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ld2sd.deri.org/pb/ns#UpdateableField> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#titlexxx> <http://ld2sd.deri.org/pb/ns#key> <http://ld2sd.deri.org/pushback/rdforms/test.html#title.keyxxx> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#title.keyxxx> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> "Title" . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#titlexxx> <http://ld2sd.deri.org/pb/ns#value> <http://ld2sd.deri.org/pushback/rdforms/test.html#title.valxxx> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#title.valxxx> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> "$$description$$" . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#deliciousFormxxx> <http://ld2sd.deri.org/pb/ns#field> <http://ld2sd.deri.org/pushback/rdforms/test.html#notesxxx> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#notesxxx> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ld2sd.deri.org/pb/ns#UpdateableField> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#notesxxx> <http://ld2sd.deri.org/pb/ns#key> <http://ld2sd.deri.org/pushback/rdforms/test.html#notes.keyxxx> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#notes.keyxxx> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> "Notes" . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#notesxxx> <http://ld2sd.deri.org/pb/ns#value> <http://ld2sd.deri.org/pushback/rdforms/test.html#notes.valxxx> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#notes.valxxx> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> "$$extended$$" . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#deliciousFormxxx> <http://ld2sd.deri.org/pb/ns#field> <http://ld2sd.deri.org/pushback/rdforms/test.html#tagsxxx> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#tagsxxx> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ld2sd.deri.org/pb/ns#UpdateableField> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#tagsxxx> <http://ld2sd.deri.org/pb/ns#key> <http://ld2sd.deri.org/pushback/rdforms/test.html#tags.keyxxx> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#tags.keyxxx> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> "Tags" . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#tagsxxx> <http://ld2sd.deri.org/pb/ns#value> <http://ld2sd.deri.org/pushback/rdforms/test.html#tags.valxxx> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#tags.valxxx> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> "$$tags$$" . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#deliciousFormxxx> <http://ld2sd.deri.org/pb/ns#field> <http://ld2sd.deri.org/pushback/rdforms/test.html#sharedxxx> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#sharedxxx> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ld2sd.deri.org/pb/ns#UpdateableField> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#sharedxxx> <http://ld2sd.deri.org/pb/ns#key> <http://ld2sd.deri.org/pushback/rdforms/test.html#shared.keyxxx> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#shared.keyxxx> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> "Shared" . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#sharedxxx> <http://ld2sd.deri.org/pb/ns#value> <http://ld2sd.deri.org/pushback/rdforms/test.html#shared.valxxx> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#shared.valxxx> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> "$$shared$$" . 
+}

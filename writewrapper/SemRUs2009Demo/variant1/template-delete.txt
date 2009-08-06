@@ -1,0 +1,12 @@
+DELETE FROM <$$webid$$> 
+ {
+<http://ld2sd.deri.org/pushback/rdforms/test.html#deliciousFormxxx> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ld2sd.deri.org/pb/ns#RDForm> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#deliciousFormxxx> <http://ld2sd.deri.org/pb/ns#operation> <http://ld2sd.deri.org/pushback/rdforms/test.html#crud-op1xxx> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#crud-op1xxx> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ld2sd.deri.org/pb/ns#CRUDOperationDELETE> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#deliciousFormxxx> <http://ld2sd.deri.org/pb/ns#field> <http://ld2sd.deri.org/pushback/rdforms/test.html#urlxxx> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#urlxxx> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ld2sd.deri.org/pb/ns#UpdateableField> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#urlxxx> <http://ld2sd.deri.org/pb/ns#key> <http://ld2sd.deri.org/pushback/rdforms/test.html#url.keyxxx> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#url.keyxxx> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> "URL" . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#urlxxx> <http://ld2sd.deri.org/pb/ns#value> <http://ld2sd.deri.org/pushback/rdforms/test.html#url.valxxx> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#url.valxxx> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> "$$url$$" . 
+}

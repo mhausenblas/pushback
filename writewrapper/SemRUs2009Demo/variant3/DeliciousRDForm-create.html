@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:xsd ="http://www.w3.org/2001/XMLSchema#"
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"  
+  xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+  xmlns:owl="http://www.w3.org/2002/07/owl#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:pb="http://ld2sd.deri.org/pb/ns#"
+>
+<head>
+	<title>RDForms - Delicious Demo</title>
+	<link type="text/css" href="http://jqueryui.com/themes/base/ui.all.css" rel="stylesheet" />
+	<script type="text/javascript" src="http://jqueryui.com/jquery-1.3.2.js"></script>
+	<script type="text/javascript" src="http://jqueryui.com/ui/ui.core.js"></script>	
+	<script type="text/javascript" src="http://jqueryui.com/ui/ui.progressbar.js"></script>
+	<script type="text/javascript" src="jquery/jquery.json-1.3.min.js"></script>
+	<script type="text/javascript" src="rdfquery/jquery.uri.js"></script>
+	<script type="text/javascript" src="rdfquery/jquery.xmlns.js"></script>
+	<script type="text/javascript" src="rdfquery/jquery.curie.js"></script>
+	<script type="text/javascript" src="rdfquery/jquery.datatype.js"></script>
+	<script type="text/javascript" src="rdfquery/jquery.rdf.js"></script>
+	<script type="text/javascript" src="rdfquery/jquery.rdfa.js"></script>
+	<script type="text/javascript" src="commons.js"></script>
+	<script type="text/javascript" src="rdf-parser.js"></script>	
+	<script type="text/javascript" src="interface3.js"></script>
+</head>
+<body>
+	<div>
+		<input type="checkbox" id="debug" /> show debug messages
+	</div>
+	<form id="deliciousForm" about="http://ld2sd.deri.org/pushback/rdforms/test.html#deliciousForm" typeof="pb:RDForm">
+		<div rel="pb:operation" style="margin:10px">
+			<div about="http://ld2sd.deri.org/pushback/rdforms/test.html#crud-op1" typeof="pb:CRUDOperationCREATE">
+				<span rel="pb:onField" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#deliciousForm" />
+			</div>
+		</div>
+		<div rel="pb:field" style="margin:10px">
+			<div about="http://ld2sd.deri.org/pushback/rdforms/test.html#url" typeof="pb:ImmutableField">
+				<label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#url.key" property="dcterms:title" for="bugactive">URL</label>:
+				<div rel="pb:value">
+					<div about="http://ld2sd.deri.org/pushback/rdforms/test.html#url.val" typeof="pb:FieldValue">
+						<input type="text" id="url" property="rdf:value" content="" value="http://example.org" size="60" /><br />
+					</div>	
+				</div>
+			</div>
+		</div>
+		<div rel="pb:field" style="margin:10px">
+			<div about="http://ld2sd.deri.org/pushback/rdforms/test.html#title" typeof="pb:UpdateableField">
+				<label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#title.key" property="dcterms:title" for="bugactive">Title</label>:
+				<div rel="pb:value">
+					<div about="http://ld2sd.deri.org/pushback/rdforms/test.html#title.val" typeof="pb:FieldValue">
+						<input type="text" id="title" property="rdf:value" content="" value="An example site" size="60" /><br />
+					</div>	
+				</div>
+			</div>
+		</div>
+		<div rel="pb:field" style="margin:10px">
+			<div about="http://ld2sd.deri.org/pushback/rdforms/test.html#notes" typeof="pb:UpdateableField">
+				<label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#notes.key" property="dcterms:title" for="bugactive">Notes</label>:
+				<div rel="pb:value">
+					<div about="http://ld2sd.deri.org/pushback/rdforms/test.html#notes.val" typeof="pb:FieldValue">
+						<input type="text" id="notes" property="rdf:value" content="" value="Some notes about the site" size="60" /><br />
+					</div>	
+				</div>
+			</div>
+		</div>
+		<div rel="pb:field" style="margin:10px">
+			<div about="http://ld2sd.deri.org/pushback/rdforms/test.html#tags" typeof="pb:UpdateableField">
+				<label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#tags.key" property="dcterms:title" for="bugactive">Tags</label>:
+				<div rel="pb:value">
+					<div about="http://ld2sd.deri.org/pushback/rdforms/test.html#tags.val" typeof="pb:FieldValue">
+						<input type="text" id="tags" property="rdf:value" content="" value="test example" size="60" /><br />
+						<span style="padding: 3px; font-size: 80%; color: #1e991e;">Note: space delimited</span>
+					</div>	
+				</div>
+			</div>
+		</div>
+		<div rel="pb:field" style="margin:10px">
+			<div about="http://ld2sd.deri.org/pushback/rdforms/test.html#shared" typeof="pb:UpdateableField">
+				<label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#shared.key" property="dcterms:title" for="bugactive">Shared</label>:
+				<div rel="pb:value">
+					<div about="http://ld2sd.deri.org/pushback/rdforms/test.html#shared.val" typeof="pb:FieldValue">     
+					 <input type="text" id="shared" property="rdf:value" content="" value="no" size="60" /><br />
+					 <span style="padding: 3px; font-size: 80%; color: #1e991e;">Note: yes/no</span>
+					</div>
+			   </div>
+			</div>
+		</div>
+		<p>
+			The data of the form gets push-backed via a pushback controller to the RDF wrapper that wraps the non-RDF data source (<a href="http://delicious.com/">Delicious Bookmarks</a>, in our case).
+		</p>
+		<div>
+			<input type="button" value="Submit RDForm to RDF wrapper" onclick="pushback();" />
+		</div>
+	</form>
+	<div id="result" style="margin-top: 20px;"></div>
+</body>
+</html>

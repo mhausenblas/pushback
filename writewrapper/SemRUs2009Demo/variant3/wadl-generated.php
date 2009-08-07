@@ -24,8 +24,8 @@
 abstract class RestRequest { 
 
   // provide user and password for HTTP AUTH 
-  private $_user = 'oanure';
-  private $_password = 'del1c10us';
+  private $_user;
+  private $_password;
 
   // constructor 
   public function __construct() { 
@@ -60,7 +60,7 @@ abstract class RestRequest {
   }
 
   // the GET function 
-  public function doGetCall($request) { 
+  public function doGetCall($request, $user, $password) { 
 
     // initialize the session 
     $ch = curl_init($request); 
@@ -70,9 +70,8 @@ abstract class RestRequest {
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
     // provide credentials if they're established 
-    if(!empty($this->_user) && !empty($this->_password)) { 
-      curl_setopt($ch, CURLOPT_USERPWD, $this->_user . ':' . $this->_password); 
-    }
+    curl_setopt($ch, CURLOPT_USERPWD, $user . ':' . $password); 
+    
 
     // do the GET and then close the session 
     $response = curl_exec($ch); 
@@ -908,10 +907,14 @@ class Add extends RestRequest {
       $_tags = NULL,
       $_dt = NULL,
       $_replace = NULL,
-      $_shared = NULL) { 
+      $_shared = NULL,
+	  $_user,
+	  $_password) { 
 
     // assign class variables 
-    $this->_url = $_url;
+    $this->_user = $_user;
+	$this->_password = $_password;
+	$this->_url = $_url;
     $this->_description = $_description;
     $this->_extended = $_extended;
     $this->_tags = $_tags;
@@ -957,7 +960,7 @@ class Add extends RestRequest {
   public function submit() { 
 
     $requestUri = 'https://api.del.icio.us/v1/posts/add';
-	$response = $this->doGetCall($requestUri . '?' . $this->prepareParams()); 
+	$response = $this->doGetCall($requestUri . '?' . $this->prepareParams(), $this->_user, $this->_password); 
     return $response; 
 
   } 
@@ -1004,10 +1007,15 @@ class Delete extends RestRequest {
   private $_url; // required 
 
   // constructor 
-  public function __construct($_url) { 
+  public function __construct(
+      $_url,
+	  $_user,
+	  $_password) { 
 
     // assign class variables 
     $this->_url = $_url;
+	$this->_user = $_user;
+	$this->_password = $_password;
  
   } 
 
@@ -1034,7 +1042,7 @@ class Delete extends RestRequest {
 
     $requestUri = 'https://api.del.icio.us/v1/posts/delete';
 
-    $response = $this->doGetCall($requestUri . '?' . $this->prepareParams()); 
+    $response = $this->doGetCall($requestUri . '?' . $this->prepareParams(), $this->_user, $this->_password); 
 
     return $response; 
 

@@ -65,12 +65,12 @@ SELECT ?url ?descr ?notes ?tags ?datestamp ?shared WHERE {
 
 if ($rows = $store->query($q, 'rows')) {
   foreach ($rows as $row) {
-	$request = new Add($row['url'], $row['descr'], $row['notes'], $row['tags'], $row['datestamp'], "no", $row['shared']);
+	$request = new Add($row['url'], $row['descr'], $row['notes'], $row['tags'], $row['datestamp'], "no", $row['shared'], $_POST["username"], $_POST["password"]);
 
 	$response = $request->submit();
   
-	header("Content-Type:text/xml");
-	echo $response;
+	//header("Content-Type:text/xml");
+	//echo $response;
 	
   }
 }
@@ -169,12 +169,12 @@ if ($rows = $store->query($q, 'rows')) {
 	$store->query(delete_triples_clause(substr($row['form'],-3)));
     
 	//delete from Delicious
-	$request = new Delete($row['url']);
+	$request = new Delete($row['url'], $_POST["username"], $_POST["password"]);
   
 	$response = $request->submit();
   
-	header("Content-Type:text/xml");
-	echo $response;
+	//header("Content-Type:text/xml");
+	//echo $response;
 	
 	//delete the the actual created bookmark triples
 	$q = "SELECT ?form WHERE {

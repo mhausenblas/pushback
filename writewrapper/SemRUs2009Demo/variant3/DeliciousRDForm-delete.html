@@ -25,12 +25,68 @@
 	<script type="text/javascript" src="commons.js"></script>
 	<script type="text/javascript" src="rdf-parser.js"></script>	
 	<script type="text/javascript" src="interface3.js"></script>
+	<script type="text/javascript">
+	<!--
+	
+	
+	function validate_form ()
+	{
+		var d = new Date();
+		var curr_hour = d.getHours();
+		var curr_min = d.getMinutes();
+
+		var curr_sec = d.getSeconds();
+		var curr_msec = d.getMilliseconds();
+	  
+		var	starttime = curr_hour + ":" + curr_min + ":" + curr_sec + ":" + curr_msec;
+		
+		valid = true;
+	
+		if ( document.deliciousForm.url.value == "" )
+		{
+			alert ( "Please fill in the 'URL' box." );
+			valid = false;
+		}
+		
+		
+		if (valid == true) {
+			for (var i = 0; i < 10 ; i++) {
+				pushback(i);
+			}
+			var d = new Date();
+			var curr_hour = d.getHours();
+			var curr_min = d.getMinutes();
+
+			var curr_sec = d.getSeconds();
+			var curr_msec = d.getMilliseconds();
+	  
+			var	endtime = curr_hour + ":" + curr_min + ":" + curr_sec + ":" + curr_msec;
+			document.write("Start time=" + starttime);
+			document.write("<br>");
+			document.write("End time=" + endtime);
+			document.close();
+		}
+		
+	}
+	
+	//-->
+	</script>
 </head>
 <body>
 	<div>
 		<input type="checkbox" id="debug" /> show debug messages
 	</div>
-	<form id="deliciousForm" about="http://ld2sd.deri.org/pushback/rdforms/test.html#deliciousForm" typeof="pb:RDForm">
+	<hr>
+	<h3>Input your Delicious credentials:</h3>
+	<div>
+		<label>Username: </label> <input type="text" id="username" /> 
+	</div>
+	<br>
+	<div>
+		<label>Password: </label> <input type="password" id="password" /> 
+	</div>
+	<hr>
+	<form name="deliciousForm" id="deliciousForm" about="http://ld2sd.deri.org/pushback/rdforms/test.html#deliciousForm" typeof="pb:RDForm">
 		<div rel="pb:operation" style="margin:10px">
 			<div about="http://ld2sd.deri.org/pushback/rdforms/test.html#crud-op1" typeof="pb:CRUDOperationDELETE">
 				<span rel="pb:onField" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#deliciousForm" />
@@ -41,7 +97,7 @@
 				<label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#url.key" property="dcterms:title" for="bugactive">URL</label>:
 				<div rel="pb:value">
 					<div about="http://ld2sd.deri.org/pushback/rdforms/test.html#url.val" typeof="pb:FieldValue">
-						<input type="text" id="url" property="rdf:value" content="" value="http://example.org" size="60" /><br />
+						<input type="text" name="url" id="url" property="rdf:value" content="" value="http://example.org" size="60" /><br />
 					</div>	
 				</div>
 			</div>
@@ -50,7 +106,7 @@
 			The data of the form gets push-backed via a pushback controller to the RDF wrapper that wraps the non-RDF data source (<a href="http://delicious.com/">Delicious Bookmarks</a>, in our case).
 		</p>
 		<div>
-			<input type="button" value="Submit RDForm to RDF wrapper" onclick="pushback();" />
+			<input type="button" value="Submit RDForm to RDF wrapper" onclick="validate_form();" />
 		</div>
 	</form>
 	<div id="result" style="margin-top: 20px;"></div>

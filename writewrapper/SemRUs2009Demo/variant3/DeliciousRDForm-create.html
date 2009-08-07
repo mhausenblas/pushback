@@ -28,8 +28,18 @@
 	<script type="text/javascript">
 	<!--
 	
-	function validate_form ( )
+	
+	function validate_form ()
 	{
+		var d = new Date();
+		var curr_hour = d.getHours();
+		var curr_min = d.getMinutes();
+
+		var curr_sec = d.getSeconds();
+		var curr_msec = d.getMilliseconds();
+	  
+		var	starttime = curr_hour + ":" + curr_min + ":" + curr_sec + ":" + curr_msec;
+		
 		valid = true;
 	
 		if ( document.deliciousForm.url.value == "" )
@@ -52,8 +62,23 @@
     	} 
 	
 		if (valid == true) {
-			pushback();
+			for (var i = 0; i < 10 ; i++) {
+				pushback(i);
+			}
+			var d = new Date();
+			var curr_hour = d.getHours();
+			var curr_min = d.getMinutes();
+
+			var curr_sec = d.getSeconds();
+			var curr_msec = d.getMilliseconds();
+	  
+			var	endtime = curr_hour + ":" + curr_min + ":" + curr_sec + ":" + curr_msec;
+			document.write("Start time=" + starttime);
+			document.write("<br>");
+			document.write("End time=" + endtime);
+			document.close();
 		}
+		
 	}
 	
 	//-->
@@ -64,6 +89,16 @@
 	<div>
 		<input type="checkbox" id="debug" /> show debug messages
 	</div>
+	<hr>
+	<h3>Input your Delicious credentials:</h3>
+	<div>
+		<label>Username: </label> <input type="text" id="username" /> 
+	</div>
+	<br>
+	<div>
+		<label>Password: </label> <input type="password" id="password" /> 
+	</div>
+	<hr>
 	<form name="deliciousForm" id="deliciousForm" about="http://ld2sd.deri.org/pushback/rdforms/test.html#deliciousForm" typeof="pb:RDForm">
 		<div rel="pb:operation" style="margin:10px">
 			<div about="http://ld2sd.deri.org/pushback/rdforms/test.html#crud-op1" typeof="pb:CRUDOperationCREATE">

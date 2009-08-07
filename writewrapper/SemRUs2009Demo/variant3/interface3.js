@@ -46,7 +46,10 @@ function randomPassword(length)
   return pass;
 }
 
-function pushback() {
+function pushback(index) {
+	var username = $("#username").val();
+	var password = $("#password").val();
+	
 	var debug = false;
 	var verbosedebug  = false;
 	var randomnumber = randomPassword(3);
@@ -125,6 +128,7 @@ function pushback() {
 			// make sure to flag that field so that it gets processed only once
 			isFieldProcessed[this.field.value] = true;
 			uniquerdformvalue = this.rdform.value + randomnumber;
+			newval = newval + index.toString();
 			SPARQLquery = addFieldGraph(SPARQLquery, outgraph, uniquerdformvalue, this.crudop.value, this.crudoptype.value, this.field.value, this.key.value, this.val.value, this.title.value, newval, verbosedebug, randomnumber);
 	
 			if(debug) addStatus('Gonna pushback value of field with label "' + this.title.value + '" and key=' + this.key.value);
@@ -135,9 +139,8 @@ function pushback() {
 	
 	if(debug) addStatus('scanned all fields and ready to submit RDF diff graph.');
 	SPARQLquery += "}";
-	alert(SPARQLquery);
 	postFieldValues1 = "";
-	postFieldValues1 = postFieldValues1 + "SPARQLquery=" + SPARQLquery;
+	postFieldValues1 = postFieldValues1 + "SPARQLquery=" + SPARQLquery + "&" + "username=" + username + "&" + "password=" + password;
 	$.ajax({
 	   type: "POST",
 	   url: "http://localhost/writewrapper/SemRUs/version3/mapping.php",
@@ -161,18 +164,6 @@ function pushback() {
 	if(debug) alert((debug) ? 'pushing back changes in debug mode.' : 'pushing back changes.');
 	var jsonoutgraph = $.toJSON(outgraph.dump());
 	
-	
-	$.post("http://localhost:8888/pushback/pbcontroler/demo3.php", 
-			{	
-				ing:  jsoningraph,
-				outg: jsonoutgraph,
-				debug: debug
-			} , 
-			function(data){
-				var result = data;
-				document.getElementById('result').innerHTML = result;
-			}
-	);
 }
 
 function initSPARQLquery(rdf, randomnumber, debug) {

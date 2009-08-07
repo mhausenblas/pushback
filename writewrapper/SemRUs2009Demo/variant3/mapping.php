@@ -21,7 +21,7 @@ if (!$store->isSetUp()) {
 function create_bookmark($id){
 	global $store;
 	$q = '
-SELECT ?url ?descr ?notes ?tags ?shared WHERE {
+SELECT ?url ?descr ?notes ?tags ?datestamp ?shared WHERE {
 <http://ld2sd.deri.org/pushback/rdforms/test.html#deliciousForm' . $id . '> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ld2sd.deri.org/pb/ns#RDForm> . 
 <http://ld2sd.deri.org/pushback/rdforms/test.html#deliciousForm' . $id . '> <http://ld2sd.deri.org/pb/ns#operation> <http://ld2sd.deri.org/pushback/rdforms/test.html#crud-op1' . $id . '> . 
 <http://ld2sd.deri.org/pushback/rdforms/test.html#crud-op1' . $id . '> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ld2sd.deri.org/pb/ns#CRUDOperationCREATE> . 
@@ -49,6 +49,12 @@ SELECT ?url ?descr ?notes ?tags ?shared WHERE {
 <http://ld2sd.deri.org/pushback/rdforms/test.html#tags.key' . $id . '> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> "Tags" . 
 <http://ld2sd.deri.org/pushback/rdforms/test.html#tags' . $id . '> <http://ld2sd.deri.org/pb/ns#value> <http://ld2sd.deri.org/pushback/rdforms/test.html#tags.val' . $id . '> . 
 <http://ld2sd.deri.org/pushback/rdforms/test.html#tags.val' . $id . '> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> ?tags . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#deliciousForm' . $id . '> <http://ld2sd.deri.org/pb/ns#field> <http://ld2sd.deri.org/pushback/rdforms/test.html#dt' . $id . '> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#dt' . $id . '> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ld2sd.deri.org/pb/ns#UpdateableField> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#dt' . $id . '> <http://ld2sd.deri.org/pb/ns#key> <http://ld2sd.deri.org/pushback/rdforms/test.html#dt.key' . $id . '> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#dt.key' . $id . '> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> "Date" . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#dt' . $id . '> <http://ld2sd.deri.org/pb/ns#value> <http://ld2sd.deri.org/pushback/rdforms/test.html#dt.val' . $id . '> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#dt.val' . $id . '> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> ?datestamp . 
 <http://ld2sd.deri.org/pushback/rdforms/test.html#deliciousForm' . $id . '> <http://ld2sd.deri.org/pb/ns#field> <http://ld2sd.deri.org/pushback/rdforms/test.html#shared' . $id . '> . 
 <http://ld2sd.deri.org/pushback/rdforms/test.html#shared' . $id . '> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ld2sd.deri.org/pb/ns#UpdateableField> . 
 <http://ld2sd.deri.org/pushback/rdforms/test.html#shared' . $id . '> <http://ld2sd.deri.org/pb/ns#key> <http://ld2sd.deri.org/pushback/rdforms/test.html#shared.key' . $id . '> . 
@@ -59,7 +65,7 @@ SELECT ?url ?descr ?notes ?tags ?shared WHERE {
 
 if ($rows = $store->query($q, 'rows')) {
   foreach ($rows as $row) {
-	$request = new Add($row['url'], $row['descr'], $row['notes'], $row['tags'], null, "no", $row['shared']);
+	$request = new Add($row['url'], $row['descr'], $row['notes'], $row['tags'], $row['datestamp'], "no", $row['shared']);
 
 	$response = $request->submit();
   
@@ -122,6 +128,12 @@ return
 <http://ld2sd.deri.org/pushback/rdforms/test.html#tags.key' . $id . '> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> "Tags" . 
 <http://ld2sd.deri.org/pushback/rdforms/test.html#tags' . $id . '> <http://ld2sd.deri.org/pb/ns#value> <http://ld2sd.deri.org/pushback/rdforms/test.html#tags.val' . $id . '> . 
 <http://ld2sd.deri.org/pushback/rdforms/test.html#tags.val' . $id . '> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> ?tags . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#deliciousForm' . $id . '> <http://ld2sd.deri.org/pb/ns#field> <http://ld2sd.deri.org/pushback/rdforms/test.html#dt' . $id . '> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#dt' . $id . '> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ld2sd.deri.org/pb/ns#UpdateableField> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#dt' . $id . '> <http://ld2sd.deri.org/pb/ns#key> <http://ld2sd.deri.org/pushback/rdforms/test.html#dt.key' . $id . '> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#dt.key' . $id . '> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> "Date" . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#dt' . $id . '> <http://ld2sd.deri.org/pb/ns#value> <http://ld2sd.deri.org/pushback/rdforms/test.html#dt.val' . $id . '> . 
+<http://ld2sd.deri.org/pushback/rdforms/test.html#dt.val' . $id . '> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> ?datestamp . 
 <http://ld2sd.deri.org/pushback/rdforms/test.html#deliciousForm' . $id . '> <http://ld2sd.deri.org/pb/ns#field> <http://ld2sd.deri.org/pushback/rdforms/test.html#shared' . $id . '> . 
 <http://ld2sd.deri.org/pushback/rdforms/test.html#shared' . $id . '> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ld2sd.deri.org/pb/ns#UpdateableField> . 
 <http://ld2sd.deri.org/pushback/rdforms/test.html#shared' . $id . '> <http://ld2sd.deri.org/pb/ns#key> <http://ld2sd.deri.org/pushback/rdforms/test.html#shared.key' . $id . '> . 

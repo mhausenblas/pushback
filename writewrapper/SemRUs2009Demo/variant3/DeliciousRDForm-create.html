@@ -25,12 +25,46 @@
 	<script type="text/javascript" src="commons.js"></script>
 	<script type="text/javascript" src="rdf-parser.js"></script>	
 	<script type="text/javascript" src="interface3.js"></script>
+	<script type="text/javascript">
+	<!--
+	
+	function validate_form ( )
+	{
+		valid = true;
+	
+		if ( document.deliciousForm.url.value == "" )
+		{
+			alert ( "Please fill in the 'URL' box." );
+			valid = false;
+		}
+		if ( document.deliciousForm.title.value == "" )
+		{
+			alert ( "Please fill in the 'Title' box." );
+			valid = false;
+		}
+		
+		var re = /(\d{4})-(\d{2})-(\d{2})(T(\d{2}):(\d{2}):(\d{2})(\.\d+)?)Z/;
+		if ( (document.deliciousForm.dt.value.match(re)) && (document.deliciousForm.dt.value!='') ) {
+        	//
+	    } else {
+			alert('Please enter valid date format');
+			valid = false;
+    	} 
+	
+		if (valid == true) {
+			pushback();
+		}
+	}
+	
+	//-->
+	</script>
+
 </head>
 <body>
 	<div>
 		<input type="checkbox" id="debug" /> show debug messages
 	</div>
-	<form id="deliciousForm" about="http://ld2sd.deri.org/pushback/rdforms/test.html#deliciousForm" typeof="pb:RDForm">
+	<form name="deliciousForm" id="deliciousForm" about="http://ld2sd.deri.org/pushback/rdforms/test.html#deliciousForm" typeof="pb:RDForm">
 		<div rel="pb:operation" style="margin:10px">
 			<div about="http://ld2sd.deri.org/pushback/rdforms/test.html#crud-op1" typeof="pb:CRUDOperationCREATE">
 				<span rel="pb:onField" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#deliciousForm" />
@@ -41,7 +75,7 @@
 				<label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#url.key" property="dcterms:title" for="bugactive">URL</label>:
 				<div rel="pb:value">
 					<div about="http://ld2sd.deri.org/pushback/rdforms/test.html#url.val" typeof="pb:FieldValue">
-						<input type="text" id="url" property="rdf:value" content="" value="http://example.org" size="60" /><br />
+						<input type="text" id="url" property="rdf:value" name="url" content="" value="http://example.org" size="60" /><br />
 					</div>	
 				</div>
 			</div>
@@ -51,7 +85,7 @@
 				<label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#title.key" property="dcterms:title" for="bugactive">Title</label>:
 				<div rel="pb:value">
 					<div about="http://ld2sd.deri.org/pushback/rdforms/test.html#title.val" typeof="pb:FieldValue">
-						<input type="text" id="title" property="rdf:value" content="" value="An example site" size="60" /><br />
+						<input type="text" id="title" property="rdf:value" name="title" content="" value="An example site" size="60" /><br />
 					</div>	
 				</div>
 			</div>
@@ -78,6 +112,17 @@
 			</div>
 		</div>
 		<div rel="pb:field" style="margin:10px">
+			<div about="http://ld2sd.deri.org/pushback/rdforms/test.html#dt" typeof="pb:UpdateableField">
+				<label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#dt.key" property="dcterms:title" for="bugactive">Date</label>:
+				<div rel="pb:value">
+					<div about="http://ld2sd.deri.org/pushback/rdforms/test.html#dt.val" typeof="pb:FieldValue">
+						<input type="text" id="dt" property="rdf:value" name="dt" content="" value="2009-08-07T14:21:31Z" size="60" /><br />
+						<span style="padding: 3px; font-size: 80%; color: #1e991e;">Note: format "CCYY-MM-DDThh:mm:ssZ"</span>
+					</div>	
+				</div>
+			</div>
+		</div>
+		<div rel="pb:field" style="margin:10px">
 			<div about="http://ld2sd.deri.org/pushback/rdforms/test.html#shared" typeof="pb:UpdateableField">
 				<label rel="pb:key" resource="http://ld2sd.deri.org/pushback/rdforms/test.html#shared.key" property="dcterms:title" for="bugactive">Shared</label>:
 				<div rel="pb:value">
@@ -92,7 +137,7 @@
 			The data of the form gets push-backed via a pushback controller to the RDF wrapper that wraps the non-RDF data source (<a href="http://delicious.com/">Delicious Bookmarks</a>, in our case).
 		</p>
 		<div>
-			<input type="button" value="Submit RDForm to RDF wrapper" onclick="pushback();" />
+			<input type="button" value="Submit RDForm to RDF wrapper" onclick="validate_form();" />
 		</div>
 	</form>
 	<div id="result" style="margin-top: 20px;"></div>
